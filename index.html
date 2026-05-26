@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>角色网络星图</title>
+  <link rel="stylesheet" href="style/common.css">
+  <link rel="stylesheet" href="style/graph.css">
+  <link rel="stylesheet" href="style/team.css">
+</head>
+<body>
+  <div id="tab-bar">
+    <button class="tab-btn active" data-mode="graph">角色图鉴</button>
+    <button class="tab-btn" data-mode="team">阵容摆放</button>
+  </div>
+  <div id="main-row">
+    <div id="graph-container">
+    <svg id="graph-svg">
+      <defs>
+        <radialGradient id="normal-star-grad" cx="35%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#c8e0ff" stop-opacity="1"/>
+          <stop offset="60%" stop-color="#6a8ae0" stop-opacity="1"/>
+          <stop offset="100%" stop-color="#3a5ab0" stop-opacity="1"/>
+        </radialGradient>
+        <radialGradient id="solo-star-grad" cx="35%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#fff4c0" stop-opacity="1"/>
+          <stop offset="50%" stop-color="#ffd700" stop-opacity="1"/>
+          <stop offset="100%" stop-color="#e09020" stop-opacity="1"/>
+        </radialGradient>
+        <radialGradient id="expert-star-grad" cx="35%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#c0fff0" stop-opacity="1"/>
+          <stop offset="50%" stop-color="#4ad0b0" stop-opacity="1"/>
+          <stop offset="100%" stop-color="#3080a0" stop-opacity="1"/>
+        </radialGradient>
+        <linearGradient id="solo-expert-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#f0a030" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#20c0a0" stop-opacity="0.6"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <button id="init-btn" title="恢复初始状态">⟲</button>
+    <div id="detail-box" class="hidden">
+      <div class="detail-header">
+        <span id="detail-name"></span>
+        <button id="detail-close">&times;</button>
+      </div>
+      <div id="detail-bonds"></div>
+    </div>
+  </div>
+  <button id="sidebar-toggle" title="折叠侧边栏">&#9654;</button>
+  <div id="sidebar">
+    <div class="sidebar-header">
+      <div class="nav-btn-wrapper">
+        <button id="nav-sidebar-btn" class="nav-menu-btn" title="切换列表">☰</button>
+        <div id="sidebar-menu" class="menu-dropdown">
+          <div class="menu-item active" data-mode="bond">羁绊列表</div>
+          <div class="menu-item" data-mode="expert">专家顾问列表</div>
+          <div class="menu-item" data-mode="spend">费用列表</div>
+          <div class="menu-item" data-mode="position">站位列表</div>
+        </div>
+      </div>
+      <h2 id="sidebar-title">羁绊列表</h2>
+      <button id="reset-btn">显示全部</button>
+      <button id="sidebar-search-btn" class="nav-menu-btn" title="搜索">🔍</button>
+    </div>
+    <div id="search-box">
+      <div class="search-row">
+        <input type="text" id="search-input" placeholder="搜索角色或羁绊…" autocomplete="off">
+        <button id="search-btn" title="搜索">🔍</button>
+      </div>
+      <span id="search-result"></span>
+    </div>
+    <div id="bond-list" class="sidebar-list"></div>
+    <div id="expert-list" class="sidebar-list"></div>
+    <div id="spend-list" class="sidebar-list"></div>
+    <div id="position-list" class="sidebar-list"></div>
+  </div>
+  <div id="team-builder">
+    <div id="left-panel">
+      <h3>场上羁绊</h3>
+      <div id="team-search-box">
+        <div class="team-search-row">
+          <input type="text" id="team-search-input" placeholder="搜索角色、装备或羁绊…" autocomplete="off">
+          <button id="team-search-btn" title="搜索">🔍</button>
+        </div>
+        <span id="team-search-result"></span>
+      </div>
+      <div id="field-bonds"></div>
+      <div id="recycle-zone" title="拖至此处删除">🗑 拖至此处删除</div>
+      <button id="clear-all-btn" title="清空全部">✕ 清空</button>
+    </div>
+    <div id="slot-area">
+      <div id="slot-grid">
+        <div class="slot-row" id="top-row"></div>
+        <div class="slot-row" id="bottom-row"></div>
+      </div>
+    </div>
+    <div id="compendium-panel">
+      <button id="compendium-toggle" title="折叠图鉴">&#9654;</button>
+      <div class="compendium-header">
+        <div class="nav-btn-wrapper">
+          <button id="compendium-nav-btn" class="nav-menu-btn" title="切换列表">☰</button>
+          <div id="compendium-menu" class="menu-dropdown">
+            <div class="menu-item active" data-panel="character">角色列表</div>
+            <div class="menu-item" data-panel="weapon">装备列表</div>
+          </div>
+        </div>
+        <h3 id="compendium-title">角色列表</h3>
+      </div>
+      <div id="compendium-list"></div>
+      <div id="weapon-list"></div>
+
+    </div>
+  </div>
+  </div>
+  <script src="script/d3.v7.min.js"></script>
+  <script src="data/camp_data.js"></script>
+  <script src="script/game_state.js"></script>
+  <script src="script/search.js"></script>
+  <script src="script/weapon_ui.js"></script>
+  <script src="script/aha_mechanics.js"></script>
+  <script src="script/buli_mechanics.js"></script>
+  <script src="script/yese_mechanics.js"></script>
+  <script src="script/mmg_mechanics.js"></script>
+  <script src="script/graph.js"></script>
+  <script src="data/equipments.js"></script>
+  <script src="script/team_builder.js"></script>
+</body>
+</html>

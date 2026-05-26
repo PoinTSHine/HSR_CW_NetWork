@@ -1,0 +1,242 @@
+/* ============================================================
+   graph.css — 角色图鉴模式专用样式
+   包括：图形容器、节点、连线、详情弹窗
+   ============================================================ */
+
+/* ===== Graph Container ===== */
+#graph-container {
+  flex: 1;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 50% 35%, rgba(200, 210, 225, 0.5) 0%, transparent 55%),
+    radial-gradient(ellipse at center, #dfe4ea 0%, #c8d0d8 70%);
+  cursor: grab;
+}
+#graph-container.grabbing { cursor: grabbing; }
+
+#graph-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== Nodes ===== */
+.node circle {
+  stroke: #c8d0d8;
+  stroke-width: 1.5;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+.node text {
+  font-size: 11px;
+  fill: #2a2a3a;
+  pointer-events: none;
+  text-anchor: middle;
+  dominant-baseline: central;
+  transition: opacity 0.25s ease;
+}
+
+/* Solo character — gold, rotating dashed ring, pulsing aura */
+.node.solo circle:first-of-type {
+  fill: #f0a030;
+  stroke: #f0a030;
+  stroke-width: 2.5;
+}
+.node.solo .solo-aura {
+  animation: solo-glow 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(240, 160, 48, 0.7));
+}
+.node.solo .solo-ring {
+  animation: solo-rotate 2.5s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(240, 160, 48, 0.6));
+}
+.node.solo text { fill: #b8700a; }
+.node.expert text { fill: #0d6b58; }
+.node.solo text, .node.expert text {
+  font-weight: bold;
+  paint-order: stroke;
+  stroke: rgba(255, 255, 255, 0.75);
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Expert — teal, breathing ring */
+.node.expert circle:first-of-type {
+  fill: #20c0a0;
+  stroke: #20c0a0;
+  stroke-width: 2.5;
+}
+.node.expert .expert-ring {
+  animation: expert-breathe 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(32, 192, 160, 0.7));
+}
+
+/* Normal node */
+.node.normal circle {
+  fill: #4a90d9;
+}
+.node.normal text {
+  fill: #2a4a6a;
+}
+
+/* Dimmed state */
+.node.dimmed circle,
+.node.dimmed text { opacity: 0.06; }
+.link.dimmed { opacity: 0.03; }
+
+/* ===== Links ===== */
+line.link {
+  stroke: #8899aa;
+  stroke-width: 0.8;
+  stroke-opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+/* Tinted links for special nodes */
+line.link.link-solo {
+  stroke: #f0a030;
+  stroke-opacity: 0.35;
+}
+line.link.link-expert {
+  stroke: #20c0a0;
+  stroke-opacity: 0.35;
+}
+line.link.link-solo.link-expert {
+  stroke: url(#solo-expert-gradient);
+  stroke-opacity: 0.45;
+}
+
+/* ===== Detail Box ===== */
+#detail-box {
+  position: absolute;
+  min-width: 200px;
+  max-width: 280px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(180, 190, 200, 0.6);
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+#detail-box.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #d0d4da;
+}
+#detail-name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #1a1a2e;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Type badges */
+.detail-type-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: bold;
+}
+.detail-type-badge.solo-badge {
+  background: rgba(240, 160, 48, 0.15);
+  border: 1px solid rgba(240, 160, 48, 0.4);
+  color: #b8700a;
+}
+.detail-type-badge.expert-badge {
+  background: rgba(32, 192, 160, 0.15);
+  border: 1px solid rgba(32, 192, 160, 0.4);
+  color: #0d7a60;
+}
+
+#detail-close {
+  background: none;
+  border: none;
+  color: #8899aa;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+#detail-close:hover { color: #f0a030; }
+
+/* Detail meta */
+#detail-meta {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 10px;
+  font-size: 11px;
+  color: #889;
+}
+.detail-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.detail-meta-item .meta-value {
+  color: #556;
+  font-weight: bold;
+}
+
+/* Position indicator in detail box */
+.detail-pos {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* Detail bonds */
+#detail-bonds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.detail-bond-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: #e4e9f0;
+  border: none;
+  border-radius: 10px;
+  font-size: 12px;
+  color: #3a6aaa;
+  cursor: pointer;
+  transition: box-shadow 0.15s, color 0.15s;
+  box-shadow:
+    2px 2px 4px #c8cdd4,
+    -2px -2px 4px #ffffff;
+}
+.detail-bond-tag:hover {
+  color: #4a90d9;
+  box-shadow:
+    3px 3px 5px #c0c8d0,
+    -3px -3px 5px #ffffff;
+}
+.detail-bond-tag.solo-bond {
+  background: #ece4d8;
+  color: #b8700a;
+}
+.detail-bond-tag.solo-bond:hover {
+  color: #d49020;
+  box-shadow:
+    3px 3px 5px #c8c0b8,
+    -3px -3px 5px #fff8f0;
+}
