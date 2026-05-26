@@ -1,8 +1,8 @@
 // ===== Team Builder =====
 (function () {
-  const campData = window.__CAMP_DATA;
-  const spendData = window.__SPEND || {};
-  const posData = window.__POSITION || {};
+  const campData = window.__CAMP_MEM;
+  const spendData = window.__CHR_SPEND || {};
+  const posData = window.__CHR_POSITION || {};
   const campNum = window.__CAMP_NUM || {};
   const campColors = window.__CAMP_COLORS || {};
 

@@ -69,7 +69,7 @@ function processData(raw, experts, spendData, posData) {
 
 // ===== Main =====
 (function () {
-  const { nodes, links, nodeMap, bondChars } = processData(window.__CAMP_DATA, window.__EXPERTS, window.__SPEND, window.__POSITION);
+  const { nodes, links, nodeMap, bondChars } = processData(window.__CAMP_MEM, window.__CHR_EXPERTS, window.__CHR_SPEND, window.__CHR_POSITION);
 
 
 
@@ -570,7 +570,7 @@ function toggleBondSection(header, body) {
 function buildExpertSidebar() {
   const expertList = document.getElementById('expert-list');
   expertList.innerHTML = '';
-  const experts = window.__EXPERTS || [];
+  const experts = window.__CHR_EXPERTS || [];
 
   experts.sort((a, b) => a.localeCompare(b[0], 'zh')).forEach(name => {
     const node = nodeMap[name];
@@ -663,11 +663,11 @@ function toggleGroup(attr, value) {
 
 function buildSpendSidebar() {
   const labels = { '1': '1费', '2': '2费', '3': '3费', '4': '4费', '5': '5费', 'special': '特殊' };
-  buildGroupSidebar('spend-list', window.__SPEND || {}, ['1', '2', '3', '4', '5', 'special'], 'spend', labels);
+  buildGroupSidebar('spend-list', window.__CHR_SPEND || {}, ['1', '2', '3', '4', '5', 'special'], 'spend', labels);
 }
 
 function buildPositionSidebar() {
-  buildGroupSidebar('position-list', window.__POSITION || {}, ['前台', '后台', '前后台'], 'position');
+  buildGroupSidebar('position-list', window.__CHR_POSITION || {}, ['前台', '后台', '前后台'], 'position');
 }
 
 const SIDEBAR_MODES = ['bond', 'expert', 'spend', 'position'];
