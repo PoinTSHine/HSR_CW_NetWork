@@ -445,6 +445,7 @@ body {
 /* Expert item in sidebar */
 .bond-item.expert-item {
   color: #0d7a60;
+  margin: 4px 0;
 }
 .bond-item.expert-item:hover {
   background: rgba(32, 192, 160, 0.08);
