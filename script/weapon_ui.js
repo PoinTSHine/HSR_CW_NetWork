@@ -10,6 +10,7 @@ window.__dismissWeaponInfoPopup = function() {
 
 window.__showWeaponInfoPopup = function(weaponName, anchorEl, slotIndex) {
   window.__dismissWeaponInfoPopup();
+  if (window.__dismissBondInfoPopup) window.__dismissBondInfoPopup();
   var asIngredient = window.__weaponAsIngredient[weaponName] || [];
   var asResult = window.__weaponAsResult[weaponName] || [];
   var limits = window.__LIMITS?.[weaponName] || null;

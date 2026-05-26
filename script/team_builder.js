@@ -1278,6 +1278,14 @@
 
   function dismissBondInfoPopup() {
     if (window.__bondInfoPopupEl) { window.__bondInfoPopupEl.remove(); window.__bondInfoPopupEl = null; window.__bondInfoPopupBond = null; }
+    dismissWeaponInfoPopup();
+  }
+  window.__dismissBondInfoPopup = dismissBondInfoPopup;
+
+  function dismissAllPopups() {
+    dismissBondInfoPopup();
+    dismissWeaponInfoPopup();
+    dismissMergePopups();
   }
 
   function fmt(s) { return s.replace(/\n/g, '<br>'); }
@@ -1341,6 +1349,11 @@
   };
 
   function showBondInfoPopup(bond, anchorEl) {
+    // Toggle: if popup already open for this bond, close it
+    if (window.__bondInfoPopupEl && window.__bondInfoPopupEl.getAttribute('data-bond') === bond) {
+      dismissBondInfoPopup();
+      return;
+    }
     dismissBondInfoPopup();
     const stats = window.__CAMP_STATS?.[bond];
     if (!stats) return;
