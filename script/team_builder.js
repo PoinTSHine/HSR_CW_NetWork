@@ -69,6 +69,10 @@
   window.__slotWeapons = new Array(TOTAL_FIXED_TOP + INITIAL_BOTTOM).fill(null).map(() => []);
   window.__slotDiceWeapons = new Array(TOTAL_FIXED_TOP + INITIAL_BOTTOM).fill(null).map(() => new Set());
   window.__maxSlots = window.__slotCards.length;
+  window.__slotPlaceOrder = window.__slotCards.map(() => 0);
+  window.__slotEquipOrder = window.__slotCards.map(() => 0);
+  window.__placeOrderSeq = 0;
+  window.__equipOrderSeq = 0;
 
   // 阿哈 state
   const BASIC_EQUIPS = window.__EQUIPMENTS?.['简易装备'] || [];
@@ -82,6 +86,9 @@
   window.__ahaSynthR = [null, null, null];
   window.__prevHYTier = 0;
   window.__prevLSTier = 0;
+
+  // 星核猎手猎星人
+  window.__starHunters = [];
 
   function initAhaWeapons() { window.__initAhaWeapons(BASIC_EQUIPS); }
 
@@ -695,12 +702,13 @@
     card.draggable = true;
     card.setAttribute('data-char', ch);
 
-    card.innerHTML = '<span class="card-name">' + (ch === window.__superstar ? '⭐ ' : '') + ch + '</span>';
+    card.innerHTML = '<span class="card-name">' + (ch === window.__superstar ? '⭐ ' : '') + (window.__starHunters.indexOf(ch) >= 0 ? '⚔ ' : '') + ch + '</span>';
 
     const inTracked = info.bonds.some(b => window.__trackedBonds.includes(b)) || info.bonds.includes(window.__searchedBond);
     card.classList.toggle('tracked-char', (window.__trackedBonds.length > 0 || window.__searchedBond) && inTracked);
     card.classList.toggle('searched-char', window.__searchedChar === ch);
     card.classList.toggle('superstar-card', ch === window.__superstar);
+    card.classList.toggle('star-hunter-card', window.__starHunters.indexOf(ch) >= 0);
 
     if (info.spend) card.appendChild(createSpendBadge(info.spend, 'card-'));
 
@@ -903,6 +911,7 @@
 
   function renderSlots() {
     dismissMergePopups();
+    window.__updateStarHunters();
     const effectiveMax = getEffectiveMaxSlots();
     while (window.__slotCards.length < effectiveMax) { window.__slotCards.push(null); window.__slotWeapons.push([]); window.__slotDiceWeapons.push(new Set()); }
     while (window.__slotCards.length > effectiveMax) { window.__slotCards.pop(); window.__slotWeapons.pop(); window.__slotDiceWeapons.pop(); }
@@ -1059,6 +1068,10 @@
       const existingIndex = window.__slotCards.indexOf(char);
       if (existingIndex >= 0) {
         window.__slotCards[existingIndex] = window.__slotCards[targetSlot] || null;
+        var orderA = window.__slotPlaceOrder[existingIndex];
+        var orderB = window.__slotPlaceOrder[targetSlot];
+        window.__slotPlaceOrder[existingIndex] = orderB;
+        window.__slotPlaceOrder[targetSlot] = orderA;
         const ew = window.__slotWeapons[existingIndex];
         const ed = window.__slotDiceWeapons[existingIndex];
         window.__slotWeapons[existingIndex] = window.__slotWeapons[targetSlot];
@@ -1068,6 +1081,7 @@
       } else {
         window.__slotWeapons[targetSlot] = [];
         window.__slotDiceWeapons[targetSlot] = new Set();
+        window.__slotPlaceOrder[targetSlot] = ++window.__placeOrderSeq;
       }
       removeMutualExclusion(char, -1);
       window.__slotCards[targetSlot] = char;
@@ -1080,12 +1094,17 @@
       window.__slotCards[data.index] = null;
       window.__slotWeapons[data.index] = [];
       window.__slotDiceWeapons[data.index] = new Set();
+      var srcOrder = window.__slotPlaceOrder[data.index];
+      var dstOrder = window.__slotPlaceOrder[targetSlot];
+      window.__slotPlaceOrder[data.index] = 0;
       removeMutualExclusion(char, targetSlot);
       window.__slotCards[targetSlot] = char;
+      window.__slotPlaceOrder[targetSlot] = srcOrder;
       window.__slotWeapons[targetSlot] = srcWeapons;
       window.__slotDiceWeapons[targetSlot] = srcDice;
       if (displaced) {
         window.__slotCards[data.index] = displaced;
+        window.__slotPlaceOrder[data.index] = dstOrder;
         window.__slotWeapons[data.index] = dstWeapons;
         window.__slotDiceWeapons[data.index] = dstDice;
       }
@@ -1169,6 +1188,7 @@
         if (idx >= 0) weapons.splice(idx, 1);
         consumeExtraIngredients(weapons, result, weaponName, existing);
         if (canKeepStarEmblem(result, charName, weapons)) weapons.push(result);
+        window.__slotEquipOrder[slotIndex] = ++window.__equipOrderSeq;
         refreshWeaponState();
         return;
       }
@@ -1185,6 +1205,7 @@
     if (isDice && regularCount > 0) return;
 
     weapons.push(weaponName);
+    window.__slotEquipOrder[slotIndex] = ++window.__equipOrderSeq;
     refreshWeaponState();
 
     // 随便骰子 effect: randomly equip 2 weapons, locked
@@ -1515,6 +1536,13 @@
       showSuperstarSelection();
     }
 
+    // 星核猎手: update hunters when bond count changes
+    var prevHunters = window.__starHunters.slice();
+    window.__updateStarHunters();
+    if (prevHunters.join(',') !== window.__starHunters.join(',')) {
+      renderSlots();
+    }
+
     updateCompendiumMaxWidth();
 
     fieldBonds.innerHTML = '';
@@ -1588,6 +1616,11 @@
     window.__slotDiceWeapons = new Array(effectiveMax).fill(null).map(() => new Set());
     window.__trackedBonds = [];
     window.__superstar = null;
+    window.__starHunters = [];
+    window.__placeOrderSeq = 0;
+    window.__equipOrderSeq = 0;
+    window.__slotPlaceOrder = new Array(effectiveMax).fill(0);
+    window.__slotEquipOrder = new Array(effectiveMax).fill(0);
     window.__searchedChar = null;
     window.__searchedBond = null;
     document.getElementById('team-search-input').value = '';
