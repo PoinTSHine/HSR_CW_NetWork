@@ -287,11 +287,7 @@ function deselectNode() {
 
 function selectBond(bond) {
   hideDetailBox();
-  if (bond === '挚爱之人') {
-    applyFilter(getPinkChars());
-  } else {
-    applyFilter(new Set(bondChars[bond]));
-  }
+  applyFilter(new Set(bondChars[bond]));
   const bondNodes = bondChars[bond].map(name => nodeMap[name]).filter(Boolean);
   if (bondNodes.length > 0) {
     if (bondNodes.length === 1) {
@@ -527,7 +523,7 @@ function buildSidebar() {
         <span class="bond-name">${bond}</span>
         <span class="bond-count">${chars.length}人</span>
       `;
-      header.addEventListener('click', () => toggleBond(bond));
+      header.addEventListener('click', (e) => { e.stopPropagation(); toggleBond(bond); });
 
       // Character list
       const charList = document.createElement('div');
