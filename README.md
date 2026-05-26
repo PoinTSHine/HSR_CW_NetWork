@@ -218,7 +218,7 @@ block-beta
 │   ├── buli_mechanics.js   # 步离人卡牌逻辑
 │   ├── yese_mechanics.js   # 月色精华卡牌逻辑
 │   ├── mmg_mechanics.js    # 猫猫糕卡牌逻辑
-│   ├── starhunter_mechanics.js # 猎星人逻辑
+│   ├── starhunter_mechanics.js # 猎星人卡牌逻辑
 │   └── d3.v7.min.js        # D3.js 库
 └── style/                  # 样式文件
     ├── common.css          # 共享样式（重置、侧栏、标签栏、颜色系统等）
