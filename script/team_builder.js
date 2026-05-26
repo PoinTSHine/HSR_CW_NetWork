@@ -853,12 +853,12 @@
       weaponsDiv.appendChild(slot);
     }
 
-    // Event delegation for clicks and drops on unlocked slots
+    // Event delegation for clicks on weapon slots
     weaponsDiv.addEventListener('click', (e) => {
       const slot = e.target.closest('.aha-weapon-slot');
       if (!slot) return;
       const w = parseInt(slot.getAttribute('data-aha-slot'));
-      if (isNaN(w) || w !== getFirstAvailableAhaSlot()) return;
+      if (isNaN(w) || !window.__ahaWeapons[w]) return;
       e.stopPropagation();
       const ahaSlotIdx = -(w + 1);
       if (window.__weaponInfoPopupEl && window.__weaponInfoPopupEl.getAttribute('data-weapon') === window.__ahaWeapons[w] && window.__weaponInfoPopupEl.getAttribute('data-slot') === String(ahaSlotIdx)) {
