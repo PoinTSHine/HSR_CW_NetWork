@@ -1084,3 +1084,12 @@
   padding: 1px 6px;
   border-radius: 3px;
 }
+
+.chr-intro-bonds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(192,160,80,0.15);
+}

@@ -355,6 +355,10 @@
         e.dataTransfer.setData('text/plain', JSON.stringify({ source: 'compendium', char: ch }));
         e.dataTransfer.effectAllowed = 'move';
       });
+      card.addEventListener('click', function(e) {
+        e.stopPropagation();
+        window.__showChrIntroPopup(ch, card);
+      });
 
       compendiumList.appendChild(card);
     });
@@ -695,6 +699,59 @@
     return slot;
   }
 
+  window.__showChrIntroPopup = function(charName, anchorEl) {
+    var old = document.querySelector('.chr-intro-popup');
+    if (old) old.remove();
+    var intros = window.__CHR_INTRO?.[charName];
+    if (!intros) return;
+    var popup = document.createElement('div');
+    popup.className = 'weapon-info-popup chr-intro-popup';
+    Object.keys(intros).forEach(function(key) {
+      var sec = document.createElement('div');
+      sec.className = 'wip-section';
+      sec.innerHTML = '<div class="wip-title">' + key + '</div>';
+      var line = document.createElement('div');
+      line.className = 'wip-line wip-desc-text';
+      line.innerHTML = intros[key].replace(/\n/g, '<br>');
+      sec.appendChild(line);
+      popup.appendChild(sec);
+    });
+    // Bond tags
+    var bonds = charMap[charName]?.bonds;
+    if (bonds && bonds.length) {
+      var bondRow = document.createElement('div');
+      bondRow.className = 'chr-intro-bonds';
+      bonds.forEach(function(b) {
+        var tag = document.createElement('span');
+        tag.className = 'detail-bond-tag';
+        tag.textContent = b;
+        tag.addEventListener('click', function(e) {
+          e.stopPropagation();
+          showBondInfoPopup(b, tag);
+        });
+        bondRow.appendChild(tag);
+      });
+      popup.appendChild(bondRow);
+    }
+    document.body.appendChild(popup);
+    popup.style.position = 'fixed';
+    var rect = anchorEl.getBoundingClientRect();
+    var left = rect.right + 8;
+    var top = rect.top;
+    if (left + 300 > window.innerWidth) left = rect.left - 308;
+    if (top + popup.offsetHeight > window.innerHeight) top = window.innerHeight - popup.offsetHeight - 8;
+    popup.style.left = Math.max(4, left) + 'px';
+    popup.style.top = Math.max(4, top) + 'px';
+    popup.addEventListener('click', function(e) { e.stopPropagation(); });
+    // Dismiss on outside click
+    setTimeout(function() {
+      document.addEventListener('click', function dismissChrPopup(e) {
+        if (!popup.parentNode) { document.removeEventListener('click', dismissChrPopup); return; }
+        if (!popup.contains(e.target)) { popup.remove(); document.removeEventListener('click', dismissChrPopup); }
+      });
+    }, 0);
+  };
+
   function renderCard(ch, slotIndex) {
     const info = charMap[ch];
     const card = document.createElement('div');
@@ -814,6 +871,11 @@
       e.dataTransfer.setData('text/plain', JSON.stringify({ source: 'slot', index: slotIndex, char: ch }));
       e.dataTransfer.effectAllowed = 'move';
     });
+    card.addEventListener('click', function(e) {
+      if (e.target.closest('.card-weapon-slot') || e.target.closest('.aha-weapon-slot')) return;
+      e.stopPropagation();
+      window.__showChrIntroPopup(ch, card);
+    });
 
     return card;
   }
@@ -911,6 +973,8 @@
 
   function renderSlots() {
     dismissMergePopups();
+    var chrPopup = document.querySelector('.chr-intro-popup');
+    if (chrPopup) chrPopup.remove();
     window.__updateStarHunters();
     const effectiveMax = getEffectiveMaxSlots();
     while (window.__slotCards.length < effectiveMax) { window.__slotCards.push(null); window.__slotWeapons.push([]); window.__slotDiceWeapons.push(new Set()); }
