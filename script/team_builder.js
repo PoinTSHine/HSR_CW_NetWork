@@ -701,11 +701,18 @@
 
   window.__showChrIntroPopup = function(charName, anchorEl) {
     var old = document.querySelector('.chr-intro-popup');
+    if (old && old.getAttribute('data-char') === charName) {
+      dismissBondInfoPopup();
+      return;
+    }
     if (old) old.remove();
+    dismissWeaponInfoPopup();
+    dismissBondInfoPopup();
     var intros = window.__CHR_INTRO?.[charName];
     if (!intros) return;
     var popup = document.createElement('div');
     popup.className = 'weapon-info-popup chr-intro-popup';
+    popup.setAttribute('data-char', charName);
     Object.keys(intros).forEach(function(key) {
       var sec = document.createElement('div');
       sec.className = 'wip-section';
@@ -727,7 +734,7 @@
         tag.textContent = b;
         tag.addEventListener('click', function(e) {
           e.stopPropagation();
-          showBondInfoPopup(b, tag);
+          showBondInfoPopup(b, tag, true);
         });
         bondRow.appendChild(tag);
       });
@@ -742,7 +749,10 @@
     if (top + popup.offsetHeight > window.innerHeight) top = window.innerHeight - popup.offsetHeight - 8;
     popup.style.left = Math.max(4, left) + 'px';
     popup.style.top = Math.max(4, top) + 'px';
-    popup.addEventListener('click', function(e) { e.stopPropagation(); });
+    popup.addEventListener('click', function(e) {
+      e.stopPropagation();
+      dismissBondInfoPopup(true);
+    });
     // Dismiss on outside click
     setTimeout(function() {
       document.addEventListener('click', function dismissChrPopup(e) {
@@ -1361,9 +1371,13 @@
   window.__bondInfoPopupEl = null;
   window.__bondInfoPopupBond = null;
 
-  function dismissBondInfoPopup() {
+  function dismissBondInfoPopup(keepChr) {
     if (window.__bondInfoPopupEl) { window.__bondInfoPopupEl.remove(); window.__bondInfoPopupEl = null; window.__bondInfoPopupBond = null; }
     dismissWeaponInfoPopup();
+    if (!keepChr) {
+      var cp = document.querySelector('.chr-intro-popup');
+      if (cp) cp.remove();
+    }
   }
   window.__dismissBondInfoPopup = dismissBondInfoPopup;
 
@@ -1422,6 +1436,7 @@
     }
 
     document.body.appendChild(popup);
+    popup.addEventListener('click', function(e) { e.stopPropagation(); });
     popup.style.position = 'fixed';
     const cardRect = cardEl.getBoundingClientRect();
     var left = cardRect.right + 8;
@@ -1433,13 +1448,13 @@
     window.__bondInfoPopupEl = popup;
   };
 
-  function showBondInfoPopup(bond, anchorEl) {
+  function showBondInfoPopup(bond, anchorEl, keepChr) {
     // Toggle: if popup already open for this bond, close it
     if (window.__bondInfoPopupEl && window.__bondInfoPopupEl.getAttribute('data-bond') === bond) {
-      dismissBondInfoPopup();
+      dismissBondInfoPopup(keepChr);
       return;
     }
-    dismissBondInfoPopup();
+    dismissBondInfoPopup(keepChr);
     const stats = window.__CAMP_STATS?.[bond];
     if (!stats) return;
 
@@ -1561,6 +1576,7 @@
     popup.style.top = '0px';
     window.__bondInfoPopupBond = bond;
     document.body.appendChild(popup);
+    popup.addEventListener('click', function(e) { e.stopPropagation(); });
 
     const popupRect = popup.getBoundingClientRect();
     let left = rect.right + 8;
