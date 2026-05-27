@@ -179,49 +179,51 @@ document.getElementById('detail-close').addEventListener('click', deselectNode);
 function showDetailBox(node, cx, cy) {
   selectedId = node.id;
   detailName.innerHTML = '';
-  const nameSpan = document.createElement('span');
+  var nameSpan = document.createElement('span');
   nameSpan.textContent = node.id;
   detailName.appendChild(nameSpan);
   if (node.spend) {
-    const spendBadge = document.createElement('span');
+    var spendBadge = document.createElement('span');
     spendBadge.className = 'detail-spend spend-' + node.spend;
     spendBadge.textContent = node.spend === 'special' ? '特' : node.spend + '费';
     detailName.appendChild(spendBadge);
   }
-  // Type badge
-  let typeLabel = '';
-  if (node.isSolo && !node.isExpert) typeLabel = '独立羁绊';
-  else if (node.isExpert) typeLabel = '专家顾问';
-  if (typeLabel) {
-    const typeBadge = document.createElement('span');
-    typeBadge.className = 'detail-type-badge ' + (node.isExpert ? 'expert-badge' : 'solo-badge');
-    typeBadge.textContent = typeLabel;
-    detailName.appendChild(typeBadge);
+  if (node.position) {
+    var posSpan = document.createElement('span');
+    posSpan.className = 'detail-pos';
+    posSpan.title = node.position;
+    posSpan.innerHTML = '<span class="pos-block pos-top ' + (node.position === '后台' ? 'pos-hollow' : 'pos-solid') + '"></span><span class="pos-block pos-bottom ' + (node.position === '前台' ? 'pos-hollow' : 'pos-solid') + '"></span>';
+    detailName.appendChild(posSpan);
   }
-  // Clear and rebuild bonds + meta
+
+  // Clear and rebuild
   detailBonds.innerHTML = '';
-  // Remove old meta if exists
-  const oldMeta = document.getElementById('detail-meta');
+  var oldMeta = document.getElementById('detail-meta');
   if (oldMeta) oldMeta.remove();
-  // Add metadata
-  const metaDiv = document.createElement('div');
-  metaDiv.id = 'detail-meta';
-  const posHTML = node.position ? `
-    <span class="detail-pos" title="${node.position}">
-      <span class="pos-block pos-top ${node.position === '后台' ? 'pos-hollow' : 'pos-solid'}"></span>
-      <span class="pos-block pos-bottom ${node.position === '前台' ? 'pos-hollow' : 'pos-solid'}"></span>
-    </span>` : '';
-  metaDiv.innerHTML = `
-    <span class="detail-meta-item">羁绊数 <span class="meta-value">${node.bondCount}</span></span>
-    <span class="detail-meta-item">关联角色 <span class="meta-value">${node.degree}</span></span>
-    ${posHTML}
-  `;
-  detailBonds.parentNode.insertBefore(metaDiv, detailBonds);
-  node.bonds.forEach(bond => {
-    const tag = document.createElement('span');
+
+  // Character intro from __CHR_INTRO
+  var intros = window.__CHR_INTRO?.[node.id];
+  if (intros) {
+    var introDiv = document.createElement('div');
+    introDiv.id = 'detail-meta';
+    Object.keys(intros).forEach(function(key) {
+      var sec = document.createElement('div');
+      sec.className = 'wip-section';
+      sec.innerHTML = '<div class="wip-title">' + key + '</div>';
+      var line = document.createElement('div');
+      line.className = 'wip-line wip-desc-text';
+      line.innerHTML = intros[key].replace(/\n/g, '<br>');
+      sec.appendChild(line);
+      introDiv.appendChild(sec);
+    });
+    detailBonds.parentNode.insertBefore(introDiv, detailBonds);
+  }
+
+  node.bonds.forEach(function(bond) {
+    var tag = document.createElement('span');
     tag.className = 'detail-bond-tag' + (bondChars[bond].length === 1 ? ' solo-bond' : '');
     tag.textContent = bond;
-    tag.addEventListener('click', (e) => {
+    tag.addEventListener('click', function(e) {
       e.stopPropagation();
       selectBond(bond);
     });

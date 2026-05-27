@@ -179,11 +179,10 @@ line.link.link-solo.link-expert {
 
 /* Detail meta */
 #detail-meta {
-  display: flex;
-  gap: 14px;
+  display: block;
   margin-bottom: 10px;
   font-size: 11px;
-  color: #889;
+  color: #556;
 }
 .detail-meta-item {
   display: flex;
@@ -239,4 +238,22 @@ line.link.link-solo.link-expert {
   box-shadow:
     3px 3px 5px #c8c0b8,
     -3px -3px 5px #fff8f0;
+}
+
+/* Character intro sections in detail box */
+#detail-meta .wip-section { margin-bottom: 6px; }
+#detail-meta .wip-section:last-child { margin-bottom: 0; }
+#detail-meta .wip-title {
+  font-weight: bold;
+  color: #8a6d10;
+  margin-bottom: 2px;
+  font-size: 11px;
+  border-bottom: 1px solid rgba(192,160,80,0.2);
+  padding-bottom: 2px;
+}
+#detail-meta .wip-desc-text {
+  color: #5a4a5a;
+  font-size: 11px;
+  line-height: 1.4;
+  padding: 2px 0;
 }
