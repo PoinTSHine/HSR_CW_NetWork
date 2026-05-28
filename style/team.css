@@ -534,6 +534,34 @@
     inset -2px -2px 4px #ffffff;
 }
 
+#home-btn {
+  margin: 0 8px 8px;
+  padding: 8px;
+  border: none;
+  border-radius: 10px;
+  background: #e4e9f0;
+  color: #667;
+  font-size: 12px;
+  cursor: pointer;
+  transition: box-shadow 0.15s, color 0.15s;
+  flex-shrink: 0;
+  box-shadow:
+    3px 3px 6px #c8cdd4,
+    -3px -3px 6px #ffffff;
+}
+#home-btn:hover {
+  color: #3a6aaa;
+  box-shadow:
+    4px 4px 8px #c0c8d0,
+    -4px -4px 8px #ffffff;
+}
+#home-btn:active {
+  color: #2a4a7a;
+  box-shadow:
+    inset 2px 2px 4px #c8cdd4,
+    inset -2px -2px 4px #ffffff;
+}
+
 /* ===== Weapon List ===== */
 #weapon-list {
   flex: 1;
@@ -1096,4 +1124,84 @@
 .chr-intro-bonds .detail-bond-tag {
   font-size: 10px;
   padding: 2px 7px;
+}
+
+/* ===== Home Confirm Modal ===== */
+.confirm-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+.confirm-overlay.show {
+  display: flex;
+}
+.confirm-dialog {
+  background: #e8ecf2;
+  border-radius: 16px;
+  padding: 28px 32px 20px;
+  max-width: 340px;
+  width: 90%;
+  text-align: center;
+  box-shadow:
+    8px 8px 16px rgba(0, 0, 0, 0.15),
+    -4px -4px 12px #ffffff;
+}
+.confirm-message {
+  font-size: 14px;
+  color: #4a4a5a;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.confirm-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+.confirm-btn {
+  padding: 8px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: box-shadow 0.15s, color 0.15s;
+  background: #e4e9f0;
+}
+.confirm-cancel {
+  color: #667;
+  box-shadow:
+    3px 3px 6px #c8cdd4,
+    -3px -3px 6px #ffffff;
+}
+.confirm-cancel:hover {
+  color: #2a2a3a;
+  box-shadow:
+    4px 4px 8px #c0c8d0,
+    -4px -4px 8px #ffffff;
+}
+.confirm-cancel:active {
+  box-shadow:
+    inset 2px 2px 4px #c8cdd4,
+    inset -2px -2px 4px #ffffff;
+}
+.confirm-ok {
+  color: #b33a3a;
+  box-shadow:
+    3px 3px 6px #c8cdd4,
+    -3px -3px 6px #ffffff;
+}
+.confirm-ok:hover {
+  color: #d94a4a;
+  box-shadow:
+    4px 4px 8px #c0c8d0,
+    -4px -4px 8px #ffffff;
+}
+.confirm-ok:active {
+  color: #d94a4a;
+  box-shadow:
+    inset 2px 2px 4px #c8cdd4,
+    inset -2px -2px 4px #ffffff;
 }

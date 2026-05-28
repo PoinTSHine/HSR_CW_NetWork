@@ -794,7 +794,9 @@ toggleBtn.addEventListener('click', () => {
 
 // Reset buttons
 document.getElementById('reset-btn').addEventListener('click', resetFilter);
-document.getElementById('init-btn').addEventListener('click', resetFilter);
+document.getElementById('init-btn').addEventListener('click', () => {
+  window.location.href = 'index.html';
+});
 
 // Initialize sidebar
 buildSidebar();
