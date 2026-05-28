@@ -1720,7 +1720,7 @@
     overlay.className = 'confirm-overlay';
     overlay.innerHTML =
       '<div class="confirm-dialog">' +
-        '<p class="confirm-message">返回首页将不会保留当前阵容，确定要返回吗？</p>' +
+        '<p class="confirm-message">返回首页将丢失当前全部内容，确定要返回吗？</p>' +
         '<div class="confirm-buttons">' +
           '<button class="confirm-btn confirm-cancel">取消</button>' +
           '<button class="confirm-btn confirm-ok">确定返回</button>' +
