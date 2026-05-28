@@ -219,8 +219,8 @@ block-beta
 ├── app.html                # 主应用页面
 ├── README.md               # 说明文档
 ├── data/                   # 数据文件
-│   ├── camp.js             # 羁绊数据
-│   ├── chr.js              # 角色数据（费用、站位、专家）
+│   ├── camp.js             # 羁绊数据（分类、成员、层级、颜色、内容）
+│   ├── chr.js              # 角色数据（专家、费用、站位、介绍）
 │   ├── camp.json           # 角色数据 JSON 格式
 │   └── equipments.js       # 装备数据（分类列表、激活条件、合成配方）
 ├── script/                 # 脚本文件
@@ -244,20 +244,24 @@ block-beta
 
 ## 数据说明
 
-### camp_data.js
+### camp.js
 
-- **__CAMP_DATA**：所有羁绊及其成员角色
 - **__CAMP_CLASS**：羁绊分类（阵营羁绊 / 流派羁绊 / 独立羁绊）
+- **__CAMP_MEM**：各羁绊的成员列表
 - **__CAMP_NUM**：各羁绊每层激活所需角色数量
 - **__CAMP_COLORS**：各羁绊每层激活后的高亮颜色（铜/银/金/幻彩）
-- **__EXPERTS**：专家顾问角色列表
-- **__SPEND**：角色费用分组（1-5 费、特殊）
-- **__POSITION**：角色站位分组（前台 / 后台 / 前后台）
-- **__CAMP_STATS**：羁绊内容
+- **__CAMP_STATS**：羁绊内容（名称、介绍、层级加成、补充说明）
+
+### chr.js
+
+- **__CHR_EXPERTS**：专家顾问角色列表
+- **__CHR_SPEND**：角色费用分组（1-5 费、特殊）
+- **__CHR_POSITION**：角色站位分组（前台 / 后台 / 前后台）
+- **__CHR_INTRO**：角色介绍文本
 
 ### camp.json
 
-与 `camp_data.js` 对应的 JSON 格式数据，含 `camp_class`、`camp_members`、`camp_num`、`camp_colors`、`experts`、`spend`、`position`。
+与 `camp.js` 对应的 JSON 格式数据，含 `camp_class`、`camp_members`、`camp_num`、`camp_colors`、`experts`、`spend`、`position`。
 
 ### equipments.js
 
