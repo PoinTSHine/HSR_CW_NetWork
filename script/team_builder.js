@@ -1714,45 +1714,35 @@
   });
 
   // ===== Home Confirm Modal =====
-  function showHomeConfirm(callback) {
-    var overlay = document.getElementById('home-confirm-overlay');
-    if (!overlay) {
-      overlay = document.createElement('div');
-      overlay.id = 'home-confirm-overlay';
-      overlay.className = 'confirm-overlay';
-      overlay.innerHTML =
-        '<div class="confirm-dialog">' +
-          '<p class="confirm-message">返回首页将不会保留当前阵容，确定要返回吗？</p>' +
-          '<div class="confirm-buttons">' +
-            '<button class="confirm-btn confirm-cancel">取消</button>' +
-            '<button class="confirm-btn confirm-ok">确定返回</button>' +
-          '</div>' +
-        '</div>';
-      document.body.appendChild(overlay);
+  (function() {
+    var overlay = document.createElement('div');
+    overlay.id = 'home-confirm-overlay';
+    overlay.className = 'confirm-overlay';
+    overlay.innerHTML =
+      '<div class="confirm-dialog">' +
+        '<p class="confirm-message">返回首页将不会保留当前阵容，确定要返回吗？</p>' +
+        '<div class="confirm-buttons">' +
+          '<button class="confirm-btn confirm-cancel">取消</button>' +
+          '<button class="confirm-btn confirm-ok">确定返回</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(overlay);
 
-      overlay.querySelector('.confirm-cancel').addEventListener('click', function() {
-        overlay.classList.remove('show');
-        callback(false);
-      });
-      overlay.querySelector('.confirm-ok').addEventListener('click', function() {
-        overlay.classList.remove('show');
-        callback(true);
-      });
-      overlay.addEventListener('click', function(e) {
-        if (e.target === overlay) {
-          overlay.classList.remove('show');
-          callback(false);
-        }
-      });
-    }
-    overlay.classList.add('show');
-  }
-
-  document.getElementById('home-btn').addEventListener('click', () => {
-    showHomeConfirm(function(confirmed) {
+    function dismiss(confirmed) {
+      overlay.classList.remove('show');
       if (confirmed) window.location.href = 'index.html';
+    }
+
+    overlay.querySelector('.confirm-cancel').addEventListener('click', function() { dismiss(false); });
+    overlay.querySelector('.confirm-ok').addEventListener('click', function() { dismiss(true); });
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) dismiss(false);
     });
-  });
+
+    document.getElementById('home-btn').addEventListener('click', function() {
+      overlay.classList.add('show');
+    });
+  })();
 
   // ===== Compendium Resize =====
   const compendiumPanel = document.getElementById('compendium-panel');
@@ -1875,4 +1865,9 @@
 
   // Legacy
   window.initTeamBuilder = initTeamBuilder;
+
+  // If team builder is already visible (e.g. entered with ?mode=team), init now
+  if (teamBuilder.style.display === 'flex') {
+    initTeamBuilder();
+  }
 })();

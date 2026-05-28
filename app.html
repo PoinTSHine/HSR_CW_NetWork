@@ -128,14 +128,5 @@
   <script src="script/graph.js"></script>
   <script src="data/equipments.js"></script>
   <script src="script/team_builder.js"></script>
-  <script>
-    (function() {
-      var params = new URLSearchParams(window.location.search);
-      if (params.get('mode') === 'team') {
-        var teamBtn = document.querySelector('#tab-bar .tab-btn[data-mode="team"]');
-        if (teamBtn) teamBtn.click();
-      }
-    })();
-  </script>
 </body>
 </html>

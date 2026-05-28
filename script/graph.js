@@ -878,25 +878,37 @@ searchToggle.addEventListener('click', function(e) {
   const sidebarToggle = document.getElementById('sidebar-toggle');
   const sidebar = document.getElementById('sidebar');
   const teamBuilder = document.getElementById('team-builder');
-  let currentMode = 'graph';
+  let currentMode = null;
 
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const mode = btn.getAttribute('data-mode');
-      if (mode === currentMode) return;
-      currentMode = mode;
+  function applyMode(mode) {
+    if (mode === currentMode) return;
+    currentMode = mode;
 
-      tabBtns.forEach(b => b.classList.toggle('active', b === btn));
+    var btn = document.querySelector('#tab-bar .tab-btn[data-mode="' + mode + '"]');
+    tabBtns.forEach(function(b) { b.classList.toggle('active', b === btn); });
 
-      const isGraph = mode === 'graph';
-      graphContainer.style.display = isGraph ? '' : 'none';
-      sidebarToggle.style.display = isGraph ? '' : 'none';
-      sidebar.style.display = isGraph ? '' : 'none';
-      teamBuilder.style.display = isGraph ? 'none' : 'flex';
-      if (!isGraph && window.initTeamBuilder) {
-        window.initTeamBuilder();
-      }
-      window.dispatchEvent(new Event('resize'));
+    var isGraph = mode === 'graph';
+    graphContainer.style.display = isGraph ? '' : 'none';
+    sidebarToggle.style.display = isGraph ? '' : 'none';
+    sidebar.style.display = isGraph ? '' : 'none';
+    teamBuilder.style.display = isGraph ? 'none' : 'flex';
+
+    history.replaceState(null, '', 'app.html?mode=' + mode);
+
+    if (!isGraph && window.initTeamBuilder) {
+      window.initTeamBuilder();
+    }
+    window.dispatchEvent(new Event('resize'));
+  }
+
+  tabBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      applyMode(btn.getAttribute('data-mode'));
     });
   });
+
+  // Determine initial mode from URL (set by homepage choice)
+  var params = new URLSearchParams(window.location.search);
+  var initialMode = params.get('mode') === 'team' ? 'team' : 'graph';
+  applyMode(initialMode);
 })();
