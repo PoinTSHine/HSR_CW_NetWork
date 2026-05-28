@@ -340,7 +340,12 @@ simulation = d3.forceSimulation(nodes)
   .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 2))
   // Stronger centering for isolated nodes (no edges)
   .force('x', d3.forceX(width / 2).strength(d => d.degree === 0 ? 0.3 : 0.02))
-  .force('y', d3.forceY(height / 2).strength(d => d.degree === 0 ? 0.3 : 0.02));
+  .force('y', d3.forceY(height / 2).strength(d => d.degree === 0 ? 0.3 : 0.02))
+  .alphaDecay(0.01)       // slower cooling → nodes spread further before settling
+  .alphaTarget(0).stop();  // start paused, will be started below
+
+// Pre-run simulation to settle layout before first render
+simulation.tick(300);
 
 // ===== Render Links =====
 linkEls = g.append('g')
@@ -817,55 +822,7 @@ window.addEventListener('resize', () => {
   simulation.alpha(0.1).restart();
 });
 
-// ===== Search (delegated to shared utility) =====
-var searchInput = document.getElementById('search-input');
-var searchResult = document.getElementById('search-result');
 
-__createFuzzySearch({
-  input: searchInput,
-  btn: document.getElementById('search-btn'),
-  resultEl: searchResult,
-  container: document.getElementById('search-box'),
-  sources: [
-    {
-      name: '角色',
-      items: new Set(nodes.map(function(n) { return n.id; })),
-      onSelect: function(v) { resetFilter(); selectNode(nodeMap[v]); },
-    },
-    {
-      name: '羁绊',
-      items: new Set(Object.keys(bondChars)),
-      onSelect: function(v) { selectBond(v); },
-    },
-  ],
-  onNoMatch: function() {
-    resetFilter();
-    var cx = nodes.reduce(function(s, n) { return s + n.x; }, 0) / nodes.length;
-    var cy = nodes.reduce(function(s, n) { return s + n.y; }, 0) / nodes.length;
-    centerOnPoint(cx, cy, 1);
-  },
-  onSelect: function() { hideSearchBox(); },
-});
-
-var searchBox = document.getElementById('search-box');
-var searchToggle = document.getElementById('sidebar-search-btn');
-
-function hideSearchBox() {
-  searchBox.classList.remove('visible');
-  searchInput.value = '';
-  searchResult.textContent = '';
-  searchResult.className = '';
-}
-
-searchToggle.addEventListener('click', function(e) {
-  e.stopPropagation();
-  var isVisible = searchBox.classList.toggle('visible');
-  if (isVisible) {
-    searchInput.focus();
-  } else {
-    hideSearchBox();
-  }
-});
 
   // Expose for tab switching
   window.graphResize = () => window.dispatchEvent(new Event('resize'));

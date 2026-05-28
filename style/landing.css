@@ -164,14 +164,38 @@ body::before {
   color: #99a;
 }
 
-.footer a {
-  color: #3a6aaa;
-  text-decoration: none;
-  transition: color 0.15s;
+.footer-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.footer a:hover {
-  color: #1a4a8a;
+.footer-link {
+  padding: 6px 16px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: #667;
+  text-decoration: none;
+  background: #e4e9f0;
+  transition: box-shadow 0.15s, color 0.15s;
+  box-shadow:
+    2px 2px 4px #c8cdd4,
+    -2px -2px 4px #ffffff;
+}
+
+.footer-link:hover {
+  color: #3a6aaa;
+  box-shadow:
+    3px 3px 6px #c0c8d0,
+    -3px -3px 6px #ffffff;
+}
+
+.footer-link:active {
+  color: #2a4a7a;
+  box-shadow:
+    inset 2px 2px 4px #c8cdd4,
+    inset -2px -2px 4px #ffffff;
 }
 
 .footer .divider {
