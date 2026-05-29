@@ -31,13 +31,30 @@
 /* ===== Reset & Base ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+html {
+  background: transparent;
+}
+
+/* Star canvas (shared with landing page) */
+#star-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
 body {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
   font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", sans-serif;
-  background: #e4e9f0;
+  background: transparent;
   color: #2a2a3a;
   -webkit-user-select: none;
   user-select: none;
@@ -53,18 +70,17 @@ body {
   display: flex;
   gap: 10px;
   padding: 10px 14px;
-  background: #e4e9f0;
-  border: none;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   flex-shrink: 0;
-  box-shadow:
-    inset 0 2px 4px rgba(200, 205, 212, 0.4),
-    inset 0 -1px 2px rgba(255, 255, 255, 0.5);
 }
 .tab-btn {
   padding: 8px 22px;
   border: none;
   border-radius: 20px;
-  background: #e4e9f0;
+  background: rgba(0, 0, 0, 0.04);
   color: #778;
   font-size: 13px;
   font-weight: 500;
@@ -75,18 +91,16 @@ body {
     -3px -3px 6px #ffffff;
 }
 .tab-btn:hover {
-  color: #2a2a3a;
+  background: rgba(0, 0, 0, 0.08);
+  color: #1d1d1f;
   transform: translateY(-1px);
-  box-shadow:
-    4px 4px 8px #c0c8d0,
-    -4px -4px 8px #ffffff;
 }
 .tab-btn.active {
-  color: #2a2a3a;
-  font-weight: bold;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1d1d1f;
+  font-weight: 600;
   box-shadow:
-    inset 3px 3px 6px #c8cdd4,
-    inset -3px -3px 6px #ffffff;
+    0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 /* ===== Sidebar Toggle ===== */
@@ -123,7 +137,9 @@ body {
   min-width: 0;
   position: relative;
   z-index: 10;
-  background: #e8ecf2;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
   flex-direction: column;
 }

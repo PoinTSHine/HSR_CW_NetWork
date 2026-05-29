@@ -12,14 +12,14 @@
 
   function initStars() {
     stars = [];
-    var count = Math.floor(window.innerWidth / 12);
+    var count = Math.floor(window.innerWidth / 10);
     for (var i = 0; i < count; i++) {
       stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 1.5 + 0.5,
-        opacity: Math.random(),
-        speed: Math.random() * 0.02 + 0.005
+        size: Math.random() * 2.5 + 1,
+        opacity: Math.random() * 0.7 + 0.3,
+        speed: Math.random() * 0.015 + 0.003
       });
     }
   }
@@ -30,8 +30,8 @@
       canvas.width / 2, canvas.height / 2, 0,
       canvas.width / 2, canvas.height / 2, canvas.width
     );
-    grad.addColorStop(0, '#f8fcff');
-    grad.addColorStop(1, '#f6f9ff');
+    grad.addColorStop(0, '#edf1f5');
+    grad.addColorStop(1, '#e4e9f0');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
