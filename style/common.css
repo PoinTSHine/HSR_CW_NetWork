@@ -51,8 +51,8 @@ body {
 /* ===== Tab Bar ===== */
 #tab-bar {
   display: flex;
-  gap: 8px;
-  padding: 6px 12px;
+  gap: 10px;
+  padding: 10px 14px;
   background: #e4e9f0;
   border: none;
   flex-shrink: 0;
@@ -61,44 +61,43 @@ body {
     inset 0 -1px 2px rgba(255, 255, 255, 0.5);
 }
 .tab-btn {
-  padding: 6px 18px;
+  padding: 8px 22px;
   border: none;
-  border-radius: 10px 10px 0 0;
+  border-radius: 20px;
   background: #e4e9f0;
   color: #778;
   font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
-  transition: box-shadow 0.15s, color 0.15s;
+  transition: box-shadow 0.2s, color 0.2s, transform 0.2s;
   box-shadow:
-    2px 0 4px rgba(200, 205, 212, 0.2),
-    -2px 0 4px rgba(200, 205, 212, 0.2),
-    0 -2px 4px rgba(200, 205, 212, 0.15),
-    inset 0 1px 2px rgba(255, 255, 255, 0.6);
+    3px 3px 6px #c8cdd4,
+    -3px -3px 6px #ffffff;
 }
 .tab-btn:hover {
   color: #2a2a3a;
+  transform: translateY(-1px);
   box-shadow:
-    2px 0 5px rgba(200, 205, 212, 0.3),
-    -2px 0 5px rgba(200, 205, 212, 0.3),
-    0 -3px 5px rgba(200, 205, 212, 0.2),
-    inset 0 1px 3px rgba(255, 255, 255, 0.7);
+    4px 4px 8px #c0c8d0,
+    -4px -4px 8px #ffffff;
 }
 .tab-btn.active {
-  background: #e4e9f0;
   color: #2a2a3a;
   font-weight: bold;
   box-shadow:
-    inset 0 2px 4px rgba(200, 205, 212, 0.4),
-    inset 1px 0 3px rgba(200, 205, 212, 0.2),
-    inset -1px 0 3px rgba(200, 205, 212, 0.2),
-    0 -1px 2px rgba(255, 255, 255, 0.6);
+    inset 3px 3px 6px #c8cdd4,
+    inset -3px -3px 6px #ffffff;
 }
 
 /* ===== Sidebar Toggle ===== */
 #sidebar-toggle {
-  position: relative;
-  z-index: 15;
+  position: absolute;
+  left: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 51;
   width: 18px;
+  height: 56px;
   background: #e4e9f0;
   border: none;
   border-radius: 8px 0 0 8px;
@@ -110,7 +109,6 @@ body {
   align-items: center;
   justify-content: center;
   transition: box-shadow 0.15s, color 0.15s;
-  flex-shrink: 0;
   box-shadow:
     -2px 0 4px rgba(200, 205, 212, 0.5),
     inset 1px 0 2px rgba(255, 255, 255, 0.6);
@@ -126,13 +124,11 @@ body {
   position: relative;
   z-index: 10;
   background: #e8ecf2;
-  border-left: 1px solid #d0d4da;
   display: flex;
   flex-direction: column;
 }
 #sidebar.collapsed {
   width: 0 !important;
-  border-left: none;
 }
 #sidebar.collapsed .sidebar-header,
 #sidebar.collapsed .sidebar-list,
@@ -603,13 +599,19 @@ body {
 /* ===== Legend ===== */
 #legend {
   position: fixed;
-  bottom: 16px;
+  bottom: 6px;
   left: 16px;
   display: flex;
   gap: 16px;
   font-size: 11px;
   color: #556;
   z-index: 1;
+  background: #e4e9f0;
+  padding: 8px 16px;
+  border-radius: 20px;
+  box-shadow:
+    3px 3px 6px #c8cdd4,
+    -3px -3px 6px #ffffff;
 }
 .legend-item {
   display: flex;
