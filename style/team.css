@@ -18,8 +18,8 @@
   flex-direction: column;
   border-right: 1px solid rgba(0, 0, 0, 0.06);
   background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   flex-shrink: 0;
 }
 #left-panel h3 {
@@ -423,8 +423,8 @@
   display: flex;
   flex-direction: column;
   background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border-left: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: -2px 0 16px rgba(0,0,0,0.08);
   z-index: 50;

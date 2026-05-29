@@ -93,8 +93,8 @@ function linkId(endpoint) {
 }
 
 function collapseAllSidebar() {
-  const sel = '.bond-item.expanded, .bond-chars.expanded, .char-item.selected, .bond-section-header.expanded, .bond-section-body.expanded';
-  document.querySelectorAll(sel).forEach(el => {
+  var sel = '.bond-item.expanded, .bond-chars.expanded, .char-item.selected, .bond-section-header.expanded, .bond-section-body.expanded, .bond-info-panel.expanded';
+  document.querySelectorAll(sel).forEach(function(el) {
     el.classList.remove('expanded', 'active', 'selected');
   });
 }
@@ -266,6 +266,7 @@ function resetFilter() {
   activeBond = null;
   applyFilter(null);
   hideDetailBox();
+  hideBondInfoPanel();
   collapseAllSidebar();
   svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
 }
@@ -316,20 +317,27 @@ function selectBond(bond) {
   activeBond = bond;
   collapseAllSidebar();
 
-  const header = document.querySelector(`.bond-item[data-bond="${CSS.escape(bond)}"]`);
-  const charList = document.querySelector(`.bond-chars[data-bond="${CSS.escape(bond)}"]`);
+  var header = document.querySelector('.bond-item[data-bond="' + CSS.escape(bond) + '"]');
   if (header) {
     // Expand parent section so the target bond is visible
-    const sectionBody = header.closest('.bond-section-body');
+    var sectionBody = header.closest('.bond-section-body');
     if (sectionBody) {
       sectionBody.classList.add('expanded');
-      const sectionHeader = document.querySelector(`.bond-section-header[data-section="${CSS.escape(sectionBody.dataset.section)}"]`);
+      var sectionHeader = document.querySelector('.bond-section-header[data-section="' + CSS.escape(sectionBody.dataset.section) + '"]');
       if (sectionHeader) sectionHeader.classList.add('expanded');
     }
     header.classList.add('expanded', 'active');
     header.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    // Expand info panel
+    var infoPanel = document.querySelector('.bond-info-panel[data-bond="' + CSS.escape(bond) + '"]');
+    if (!infoPanel) {
+      infoPanel = buildBondInfoPanel(bond);
+      header.parentElement.appendChild(infoPanel);
+    }
+    infoPanel.querySelectorAll('.bond-info-char.selected').forEach(function(c) { c.classList.remove('selected'); });
+    infoPanel.classList.add('expanded');
+    infoPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
-  if (charList) charList.classList.add('expanded');
 }
 
 // ===== Force Simulation =====
@@ -687,6 +695,7 @@ function switchSidebarMode(mode) {
     item.classList.toggle('active', item.getAttribute('data-mode') === mode);
   });
   document.getElementById('sidebar-menu').classList.remove('open');
+  hideBondInfoPanel();
   resetFilter();
 }
 
@@ -704,37 +713,118 @@ document.addEventListener('click', (e) => {
 });
 
 function toggleBond(bond) {
-  const header = document.querySelector(`.bond-item[data-bond="${CSS.escape(bond)}"]`);
-  const charList = document.querySelector(`.bond-chars[data-bond="${CSS.escape(bond)}"]`);
+  var header = document.querySelector('.bond-item[data-bond="' + CSS.escape(bond) + '"]');
 
   if (!header.classList.contains('expanded')) {
     selectBond(bond);
     return;
   }
 
-  if (selectedId && activeBond === bond) {
-    document.querySelectorAll('.char-item.selected').forEach(c => c.classList.remove('selected'));
-    selectBond(bond);
-    return;
-  }
-
   header.classList.remove('expanded', 'active');
-  charList.classList.remove('expanded');
+  var infoPanel = document.querySelector('.bond-info-panel[data-bond="' + CSS.escape(bond) + '"]');
+  if (infoPanel) {
+    infoPanel.classList.remove('expanded');
+    infoPanel.querySelectorAll('.bond-info-char.selected').forEach(function(c) { c.classList.remove('selected'); });
+  }
   activeBond = null;
   applyFilter(null);
   hideDetailBox();
   svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
 }
 
+function buildBondInfoPanel(bond) {
+  var stats = window.__CAMP_STATS && window.__CAMP_STATS[bond];
+  var chars = bondChars[bond] || [];
+
+  var panel = document.createElement('div');
+  panel.className = 'bond-info-panel';
+  panel.setAttribute('data-bond', bond);
+
+  var html = '<div class="bond-info-box">';
+
+  // Description
+  if (stats && stats['介绍']) {
+    html += '<div class="bond-info-intro">' + stats['介绍'].replace(/\n/g, '<br>') + '</div>';
+  }
+
+  // Supplement
+  if (stats && stats['补充']) {
+    var sup = stats['补充'];
+    if (typeof sup === 'object') {
+      var keys = Object.keys(sup);
+      html += '<div class="bond-info-supp-title">补充</div>';
+      keys.forEach(function(name, i) {
+        var entry = sup[name];
+        var last = i === keys.length - 1;
+        var cls = 'bond-info-supp-item' + (last ? ' bond-info-supp-sep' : '');
+        var text = (typeof entry === 'object' && entry['介绍']) ? entry['介绍'] : entry;
+        html += '<div class="' + cls + '"><span class="bond-info-supp-name">' + name + '</span>' + text + '</div>';
+      });
+    } else {
+      html += '<div class="bond-info-supp bond-info-supp-sep">' + sup.replace(/\n/g, '<br>') + '</div>';
+    }
+  }
+
+  // Tier effects
+  if (stats) {
+    Object.keys(stats).forEach(function(k) {
+      if (k === '介绍' || k === '补充') return;
+      if (/^\d+$/.test(k)) {
+        html += '<div class="bond-info-tier"><span class="bond-info-tier-num">' + k + '人</span>' + stats[k] + '</div>';
+      }
+    });
+  }
+
+  // Character list
+  html += '<div class="bond-info-chars">';
+  chars.sort(function(a, b) { return a.localeCompare(b[0], 'zh'); }).forEach(function(ch) {
+    var d = nodeMap[ch];
+    var cls = 'bond-info-char';
+    if (d) {
+      if (d.isSolo && !d.isExpert) cls += ' solo-char';
+      else if (d.isExpert) cls += ' expert-char';
+    }
+    html += '<div class="' + cls + '" data-char="' + ch + '">' + ch;
+    if (d && d.spend) {
+      html += '<span class="char-spend-badge spend-' + d.spend + '">' + (d.spend === 'special' ? '特' : d.spend + '费') + '</span>';
+    }
+    html += '</div>';
+  });
+  html += '</div>'; // close bond-info-chars
+  html += '</div>'; // close bond-info-box
+
+  panel.innerHTML = html;
+
+  // Character click handling
+  panel.querySelectorAll('.bond-info-char').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var ch = item.getAttribute('data-char');
+      document.querySelectorAll('.bond-info-char.selected').forEach(function(c) { c.classList.remove('selected'); });
+      item.classList.add('selected');
+      var node = nodeMap[ch];
+      if (node) selectNode(node);
+    });
+  });
+
+  return panel;
+}
+
+function hideBondInfoPanel() {
+  document.querySelectorAll('.bond-info-panel.expanded').forEach(function(p) {
+    p.classList.remove('expanded');
+    p.querySelectorAll('.bond-info-char.selected').forEach(function(c) { c.classList.remove('selected'); });
+  });
+}
+
 function selectCharacter(charName, bond) {
-  // Update char-item selection
-  document.querySelectorAll('.char-item.selected').forEach(c => c.classList.remove('selected'));
-  const charList = document.querySelector(`.bond-chars[data-bond="${CSS.escape(bond)}"]`);
+  document.querySelectorAll('.char-item.selected').forEach(function(c) { c.classList.remove('selected'); });
+  var charList = document.querySelector('.bond-chars[data-bond="' + CSS.escape(bond) + '"]');
   if (charList) {
-    const item = charList.querySelector(`.char-item[data-char="${CSS.escape(charName)}"]`);
+    var item = charList.querySelector('.char-item[data-char="' + CSS.escape(charName) + '"]');
     if (item) item.classList.add('selected');
   }
-  const node = nodeMap[charName];
+  var node = nodeMap[charName];
   if (node) selectNode(node);
 }
 
