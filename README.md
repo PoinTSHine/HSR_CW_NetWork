@@ -10,7 +10,7 @@
 
 ## 导航
 
-- **首页**（`index.html`）：展示项目名称与简介，两张卡片分别进入「角色星图」（`?mode=graph`）和「阵容摆放」（`?mode=team`）
+- **首页**（`index.html`）：采用 Celestial Neumorphism 风格，含星空粒子背景、流光标题、视差卡片。两张卡片分别进入「角色星图」（`?mode=graph`）和「阵容摆放」（`?mode=team`）
 - **主应用**（`app.html`）：顶栏标签在两种模式间切换，切换时地址栏同步更新（`?mode=graph` / `?mode=team`），刷新页面保持当前模式不变
 - **返回首页**：图鉴模式左下角 ⌂ 按钮 / 阵容模式左面板 ⌂ 首页按钮，均可返回首页（阵容模式会弹出确认框）
 
@@ -219,9 +219,10 @@ block-beta
 │   ├── camp.json           # 角色数据 JSON 格式
 │   └── equipments.js       # 装备数据（分类列表、激活条件、合成配方）
 ├── script/                 # 脚本文件
+│   ├── landing.js          # 首页脚本（星空背景、卡片视差）
 │   ├── graph.js            # 关系图逻辑
 │   ├── team_builder.js     # 阵容摆放主逻辑（槽位渲染、拖放、图鉴、初始化）
-│   ├── search.js           # 共享模糊搜索组件（图鉴/阵容均使用）
+│   ├── search.js           # 模糊搜索组件（阵容模式）
 │   ├── game_state.js       # 共享游戏状态（slotCards, trackedBonds 等）
 │   ├── weapon_ui.js        # 武器信息弹窗、合成弹窗
 │   ├── aha_mechanics.js    # 阿哈卡牌逻辑

@@ -1,6 +1,6 @@
 /* ============================================================
-   landing.css — 首页（欢迎页）专用样式
-   新拟物化（Neumorphism）风格，与项目整体一致
+   landing.css — 首页专用样式
+   Celestial Neumorphism 风格，融合《崩坏：星穹铁道》视觉语言
    ============================================================ */
 
 /* ===== Reset & Base ===== */
@@ -13,22 +13,21 @@ body {
   justify-content: center;
   min-height: 100vh;
   font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", sans-serif;
-  background: #e4e9f0;
-  color: #2a2a3a;
+  background: #f6f9ff;
+  color: #171c21;
   padding: 40px 20px;
+  overflow-x: hidden;
 }
 
-/* ===== Animated Background ===== */
-body::before {
-  content: "";
+/* ===== Starry Background Canvas ===== */
+#star-canvas {
   position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 20% 20%, rgba(180, 200, 230, 0.4) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 70%, rgba(200, 180, 220, 0.3) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(210, 220, 235, 0.5) 0%, transparent 60%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
   pointer-events: none;
-  z-index: 0;
 }
 
 /* ===== Main Container ===== */
@@ -43,6 +42,36 @@ body::before {
   width: 100%;
 }
 
+/* ===== Animations ===== */
+@keyframes slideInDown {
+  from { transform: translateY(-30px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes popUp {
+  0%   { transform: scale(0.9) translateY(40px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+.animate-slide-down { animation: slideInDown 1s ease-out forwards; }
+
+.animate-pop-up {
+  animation: popUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  opacity: 0;
+}
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+
 /* ===== Header ===== */
 .header {
   text-align: center;
@@ -54,23 +83,26 @@ body::before {
 .header .icon {
   font-size: 56px;
   line-height: 1;
-  filter: drop-shadow(3px 3px 6px #c8cdd4) drop-shadow(-3px -3px 6px #ffffff);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+  animation: float 3s ease-in-out infinite;
 }
 
 .header h1 {
   font-size: 32px;
-  font-weight: bold;
-  color: #2a2a3a;
+  font-weight: 700;
   letter-spacing: 2px;
-  text-shadow:
-    -1px -1px 0 rgba(255, 255, 255, 0.5),
-    1px 1px 0 rgba(0, 0, 0, 0.08);
+  background: linear-gradient(90deg, #3a6aaa, #b4c8e6, #3a6aaa);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+  text-shadow: none;
 }
 
 .header .subtitle {
   font-size: 14px;
-  color: #778;
+  color: #424750;
   line-height: 1.7;
 }
 
@@ -86,72 +118,86 @@ body::before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  padding: 36px 28px;
-  border-radius: 20px;
-  background: #e4e9f0;
+  text-align: center;
+  gap: 14px;
+  padding: 40px 28px;
+  border-radius: 32px;
+  background: #f6f9ff;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
-  transition: box-shadow 0.3s, transform 0.25s;
+  transition: box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow:
-    6px 6px 12px #c8cdd4,
-    -6px -6px 12px #ffffff;
+    8px 8px 16px #c8cdd4,
+    -8px -8px 16px #ffffff;
 }
 
 .card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-8px) scale(1.02);
   box-shadow:
-    8px 8px 16px #c0c8d0,
-    -8px -8px 16px #f8fcff;
+    12px 12px 20px #c0c8d0,
+    -12px -12px 20px #f8fcff;
 }
 
 .card:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.98);
   box-shadow:
     inset 4px 4px 8px #c8cdd4,
     inset -4px -4px 8px #ffffff;
 }
 
-.card .card-icon {
-  font-size: 48px;
+.card-icon-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  background: #f6f9ff;
+  box-shadow:
+    inset 4px 4px 8px #c8cdd4,
+    inset -4px -4px 8px #ffffff;
+  transition: color 0.5s;
+  color: #3a6aaa;
+}
+
+.card:hover .card-icon-wrap {
+  color: #d4af37;
+}
+
+.card-icon-wrap .card-icon {
+  font-size: 36px;
   line-height: 1;
 }
 
 .card h2 {
-  font-size: 18px;
-  font-weight: bold;
-  color: #2a2a3a;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1b5190;
 }
 
 .card p {
   font-size: 13px;
-  color: #667;
-  text-align: center;
-  line-height: 1.6;
+  color: #424750;
+  line-height: 1.7;
+  max-width: 240px;
 }
 
-.card .card-arrow {
-  display: inline-flex;
+.card-label {
+  margin-top: 8px;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  font-size: 16px;
-  color: #667;
-  background: #e4e9f0;
-  transition: box-shadow 0.2s, color 0.2s;
-  box-shadow:
-    3px 3px 6px #c8cdd4,
-    -3px -3px 6px #ffffff;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: #3a6aaa;
 }
 
-.card:hover .card-arrow {
-  color: #3a6aaa;
-  box-shadow:
-    4px 4px 8px #c0c8d0,
-    -4px -4px 8px #ffffff;
+.card-label .arrow {
+  font-size: 14px;
 }
 
 /* ===== Footer ===== */
@@ -159,50 +205,58 @@ body::before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-size: 12px;
-  color: #99a;
+  color: #737781;
+  margin-top: 8px;
 }
 
-.footer-links {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.footer-link {
-  padding: 6px 16px;
-  border-radius: 10px;
-  font-size: 12px;
-  color: #667;
-  text-decoration: none;
-  background: #e4e9f0;
-  transition: box-shadow 0.15s, color 0.15s;
-  box-shadow:
-    2px 2px 4px #c8cdd4,
-    -2px -2px 4px #ffffff;
-}
-
-.footer-link:hover {
-  color: #3a6aaa;
-  box-shadow:
-    3px 3px 6px #c0c8d0,
-    -3px -3px 6px #ffffff;
-}
-
-.footer-link:active {
-  color: #2a4a7a;
-  box-shadow:
-    inset 2px 2px 4px #c8cdd4,
-    inset -2px -2px 4px #ffffff;
+.footer-label {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: #737781;
+  text-transform: uppercase;
 }
 
 .footer .divider {
   width: 40px;
   height: 2px;
   border-radius: 1px;
-  background: #d0d4da;
+  background: #c2c6d2;
+}
+
+.footer-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-link {
+  padding: 5px 14px;
+  border-radius: 10px;
+  font-size: 11px;
+  color: #424750;
+  text-decoration: none;
+  background: #f6f9ff;
+  transition: box-shadow 0.2s, color 0.2s;
+  box-shadow:
+    2px 2px 4px #c8cdd4,
+    -2px -2px 4px #ffffff;
+}
+
+.footer-link:hover {
+  color: #1b5190;
+  box-shadow:
+    3px 3px 6px #c0c8d0,
+    -3px -3px 6px #ffffff;
+}
+
+.footer-link:active {
+  color: #084785;
+  box-shadow:
+    inset 2px 2px 4px #c8cdd4,
+    inset -2px -2px 4px #ffffff;
 }
 
 /* ===== Responsive ===== */
@@ -212,5 +266,8 @@ body::before {
   }
   .header h1 {
     font-size: 24px;
+  }
+  .card {
+    padding: 32px 20px;
   }
 }

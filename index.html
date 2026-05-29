@@ -8,9 +8,11 @@
   <link rel="stylesheet" href="style/landing.css">
 </head>
 <body>
+  <canvas id="star-canvas"></canvas>
+
   <div class="landing">
     <!-- Header -->
-    <div class="header">
+    <div class="header animate-slide-down">
       <div class="icon">✦</div>
       <h1>角色网络星图 &amp; 阵容摆放</h1>
       <p class="subtitle">
@@ -21,23 +23,34 @@
 
     <!-- Mode Cards -->
     <div class="cards">
-      <a class="card" href="app.html?mode=graph">
-        <div class="card-icon">🕸️</div>
+      <a class="card animate-pop-up delay-1" href="app.html?mode=graph">
+        <div class="card-icon-wrap">
+          <span class="card-icon">🕸️</span>
+        </div>
         <h2>角色星图</h2>
-        <p>探索角色羁绊关系网络图<br>拖拽缩放 · 筛选追踪 · 详情查看</p>
-        <span class="card-arrow">→</span>
+        <p>探索角色羁绊关系网络图，在星网中定位每一份共鸣与关联，优化团队协同深度。</p>
+        <div class="card-label">
+          <span>角色星图</span>
+          <span class="arrow">→</span>
+        </div>
       </a>
 
-      <a class="card" href="app.html?mode=team">
-        <div class="card-icon">⚔️</div>
+      <a class="card animate-pop-up delay-2" href="app.html?mode=team">
+        <div class="card-icon-wrap">
+          <span class="card-icon">⚔️</span>
+        </div>
         <h2>阵容摆放</h2>
-        <p>拖拽式角色布阵工具<br>装备合成 · 羁绊追踪 · 站位校验</p>
-        <span class="card-arrow">→</span>
+        <p>拖拽式角色布阵工具，模拟战场环境，快速构建、调整并评估开拓者小队配置。</p>
+        <div class="card-label">
+          <span>阵容摆放</span>
+          <span class="arrow">→</span>
+        </div>
       </a>
     </div>
 
     <!-- Footer -->
-    <div class="footer">
+    <div class="footer animate-pop-up delay-2">
+      <span class="footer-label">ASTRAL EXPRESS INTELLIGENCE</span>
       <div class="divider"></div>
       <p>使用 PC 端浏览器获得最佳体验</p>
       <div class="footer-links">
@@ -47,5 +60,7 @@
       </div>
     </div>
   </div>
+
+  <script src="script/landing.js"></script>
 </body>
 </html>
