@@ -369,7 +369,7 @@ body {
 .section-header.expanded .section-arrow { transform: rotate(90deg); }
 .section-body {
   overflow: hidden;
-  max-height: 1200px;
+  max-height: 8000px;
   padding-left: 8px;
   transition: max-height 0.3s ease;
 }
@@ -716,7 +716,7 @@ body {
   transition: max-height 0.3s ease;
 }
 .bond-info-panel.expanded {
-  max-height: 4000px;
+  max-height: 6000px;
 }
 
 .bond-info-box {
@@ -752,13 +752,6 @@ body {
   background: rgba(74, 144, 217, 0.1);
 }
 
-.bond-info-supp-title {
-  margin: 8px 0 2px;
-  font-size: 11px;
-  font-weight: bold;
-  color: #556;
-}
-
 .bond-info-supp,
 .bond-info-supp-item {
   font-size: 12px;
@@ -773,7 +766,7 @@ body {
 }
 
 .bond-info-supp-item {
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .bond-info-supp-sep {
   margin-bottom: 10px;
@@ -781,10 +774,12 @@ body {
   border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 .bond-info-supp-name {
-  display: block;
   font-weight: bold;
   color: #556;
   font-size: 11px;
+}
+.bond-info-supp-name::after {
+  content: '：';
 }
 
 .bond-info-chars {

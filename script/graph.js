@@ -752,7 +752,6 @@ function buildBondInfoPanel(bond) {
     var sup = stats['补充'];
     if (typeof sup === 'object') {
       var keys = Object.keys(sup);
-      html += '<div class="bond-info-supp-title">补充</div>';
       keys.forEach(function(name, i) {
         var entry = sup[name];
         var last = i === keys.length - 1;
