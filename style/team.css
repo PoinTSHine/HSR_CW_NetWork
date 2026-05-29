@@ -300,7 +300,24 @@
     3px 3px 6px #c8cdd4,
     -3px -3px 6px #ffffff;
 }
-.slot-card .card-name { font-size: 13px; }
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: nowrap;
+}
+.slot-card .card-name {
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-badge {
+  font-size: 11px;
+  line-height: 1;
+  margin-left: 3px;
+  vertical-align: middle;
+}
 .slot-card .card-spend {
   font-size: 10px;
   padding: 1px 6px;

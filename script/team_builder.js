@@ -756,17 +756,34 @@
     card.draggable = true;
     card.setAttribute('data-char', ch);
 
-    card.innerHTML = '<span class="card-name">' + (ch === window.__superstar ? '⭐ ' : '') + (window.__starHunters.indexOf(ch) >= 0 ? '⚔ ' : '') + ch + '</span>';
+    card.innerHTML = '<span class="card-name">' + ch + '</span>';
 
-    const inTracked = info.bonds.some(b => window.__trackedBonds.includes(b)) || info.bonds.includes(window.__searchedBond);
+    var inTracked = info.bonds.some(function(b) { return window.__trackedBonds.indexOf(b) >= 0; }) || info.bonds.indexOf(window.__searchedBond) >= 0;
     card.classList.toggle('tracked-char', (window.__trackedBonds.length > 0 || window.__searchedBond) && inTracked);
     card.classList.toggle('searched-char', window.__searchedChar === ch);
     card.classList.toggle('superstar-card', ch === window.__superstar);
     card.classList.toggle('star-hunter-card', window.__starHunters.indexOf(ch) >= 0);
 
-    if (info.spend) card.appendChild(createSpendBadge(info.spend, 'card-'));
+    if (info.spend || ch === window.__superstar || window.__starHunters.indexOf(ch) >= 0 || info.position) {
+      var metaRow = document.createElement('div');
+      metaRow.className = 'card-meta';
 
-    if (info.position) {
+      if (info.spend) metaRow.appendChild(createSpendBadge(info.spend, 'card-'));
+
+      if (ch === window.__superstar) {
+        var badge = document.createElement('span');
+        badge.className = 'card-badge card-badge-superstar';
+        badge.textContent = '⭐';
+        metaRow.appendChild(badge);
+      }
+      if (window.__starHunters.indexOf(ch) >= 0) {
+        var badge = document.createElement('span');
+        badge.className = 'card-badge card-badge-hunter';
+        badge.textContent = '⚔';
+        metaRow.appendChild(badge);
+      }
+
+      if (info.position) {
       const posSpan = createPositionIndicator(info.position, 'card-');
       const isTopRow = slotIndex < TOTAL_FIXED_TOP;
       const inXunhai = info.bonds.includes('巡海游侠');
@@ -779,8 +796,10 @@
       } else if (wrongPos) {
         posSpan.querySelectorAll('.pb').forEach(pb => pb.classList.add('wrong'));
       }
-      card.appendChild(posSpan);
+      metaRow.appendChild(posSpan);
     }
+    card.appendChild(metaRow);
+  }
 
     // Weapon slots
     const weaponsDiv = document.createElement('div');
@@ -1384,6 +1403,7 @@
     }
     updateLeftPanel();
     renderSlots();
+    if (window.__compendiumMode !== 'character') switchCompendiumMode('character');
     reorderCompendium();
     compendiumList.scrollTop = 0;
   }
