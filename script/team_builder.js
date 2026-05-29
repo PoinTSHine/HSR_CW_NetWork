@@ -332,19 +332,6 @@
 
       card.innerHTML = `<span class="cc-name">${ch}</span>`;
 
-      // Bond tags
-      if (info.bonds.length > 0) {
-        const bondRow = document.createElement('div');
-        bondRow.className = 'cc-bonds';
-        info.bonds.forEach(b => {
-          const tag = document.createElement('span');
-          tag.className = 'cc-bond-tag';
-          tag.textContent = b;
-          bondRow.appendChild(tag);
-        });
-        card.appendChild(bondRow);
-      }
-
       // Spend badge
       if (info.spend) card.appendChild(createSpendBadge(info.spend, 'cc-'));
 
