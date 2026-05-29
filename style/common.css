@@ -133,7 +133,7 @@ body {
 
 /* ===== Sidebar ===== */
 #sidebar {
-  width: 400px;
+  width: 300px;
   min-width: 0;
   position: relative;
   z-index: 10;
