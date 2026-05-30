@@ -1746,8 +1746,13 @@
       if (e.target === overlay) dismiss(false);
     });
 
-    document.getElementById('home-btn').addEventListener('click', function() {
-      overlay.classList.add('show');
+    document.getElementById('tab-home-btn').addEventListener('click', function() {
+      var mode = new URLSearchParams(window.location.search).get('mode');
+      if (mode === 'team') {
+        overlay.classList.add('show');
+      } else {
+        window.location.href = 'index.html';
+      }
     });
   })();
 

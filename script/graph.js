@@ -909,9 +909,6 @@ toggleBtn.addEventListener('click', () => {
 
 // Reset buttons
 document.getElementById('reset-btn').addEventListener('click', resetFilter);
-document.getElementById('init-btn').addEventListener('click', () => {
-  window.location.href = 'index.html';
-});
 
 // Initialize sidebar
 buildSidebar();
@@ -945,6 +942,7 @@ window.addEventListener('resize', () => {
   const sidebarToggle = document.getElementById('sidebar-toggle');
   const sidebar = document.getElementById('sidebar');
   const teamBuilder = document.getElementById('team-builder');
+  const othersContainer = document.getElementById('others-container');
   let currentMode = null;
 
   function applyMode(mode) {
@@ -955,15 +953,20 @@ window.addEventListener('resize', () => {
     tabBtns.forEach(function(b) { b.classList.toggle('active', b === btn); });
 
     var isGraph = mode === 'graph';
+    var isEnvironment = mode === 'environment';
     graphContainer.style.display = isGraph ? '' : 'none';
     sidebarToggle.style.display = isGraph ? '' : 'none';
     sidebar.style.display = isGraph ? '' : 'none';
-    teamBuilder.style.display = isGraph ? 'none' : 'flex';
+    teamBuilder.style.display = (isGraph || isEnvironment) ? 'none' : 'flex';
+    othersContainer.style.display = isEnvironment ? 'flex' : 'none';
 
     history.replaceState(null, '', 'app.html?mode=' + mode);
 
-    if (!isGraph && window.initTeamBuilder) {
+    if (!isGraph && !isEnvironment && window.initTeamBuilder) {
       window.initTeamBuilder();
+    }
+    if (isEnvironment && window.initEnvorn) {
+      window.initEnvorn();
     }
     window.dispatchEvent(new Event('resize'));
   }
@@ -976,6 +979,7 @@ window.addEventListener('resize', () => {
 
   // Determine initial mode from URL (set by homepage choice)
   var params = new URLSearchParams(window.location.search);
-  var initialMode = params.get('mode') === 'team' ? 'team' : 'graph';
+  var modeParam = params.get('mode');
+  var initialMode = (modeParam === 'team' || modeParam === 'environment') ? modeParam : 'graph';
   applyMode(initialMode);
 })();

@@ -1,0 +1,136 @@
+/* ============================================================
+   environment.css — 环境图鉴模式专用样式
+   新拟物化 Neumorphism 卡片网格
+   ============================================================ */
+
+/* ===== Others Container ===== */
+#others-container {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ===== Grid ===== */
+#others-grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#others-grid::-webkit-scrollbar { width: 4px; }
+#others-grid::-webkit-scrollbar-track { background: transparent; }
+#others-grid::-webkit-scrollbar-thumb { background: #c0c8d2; border-radius: 2px; }
+
+/* ===== Section ===== */
+.others-section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  background: rgba(228, 233, 240, 0.75);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  font-size: 13px;
+  font-weight: bold;
+  color: #3a6aaa;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: box-shadow 0.15s, color 0.15s;
+  box-shadow:
+    2px 2px 4px #c8cdd4,
+    -2px -2px 4px #ffffff;
+}
+.others-section-header:hover {
+  box-shadow:
+    3px 3px 5px #c0c8d0,
+    -3px -3px 5px #ffffff;
+}
+.others-section-header:active {
+  box-shadow:
+    inset 2px 2px 4px #c8cdd4,
+    inset -2px -2px 4px #ffffff;
+}
+.others-section-header .section-arrow {
+  font-size: 10px;
+  color: #8899aa;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.others-section-header.collapsed .section-arrow {
+  transform: rotate(-90deg);
+}
+.others-section-header .section-label {
+  flex: 1;
+}
+.others-section-header .section-count {
+  font-size: 11px;
+  color: #778;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 2px 8px;
+  border-radius: 8px;
+  box-shadow:
+    inset 1.5px 1.5px 3px #c8cdd4,
+    inset -1.5px -1.5px 3px #ffffff;
+}
+
+/* ===== Section Body (collapse wrapper) ===== */
+.others-section-body {
+  overflow: hidden;
+  max-height: 8000px;
+  transition: max-height 0.3s ease;
+}
+.others-section-body.collapsed {
+  max-height: 0;
+}
+
+/* ===== Section Card Grid ===== */
+.others-section-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  padding-bottom: 12px;
+}
+
+/* ===== Blessing Card ===== */
+.blessing-card {
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(228, 233, 240, 0.75);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  cursor: default;
+  transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow:
+    4px 4px 8px #c8cdd4,
+    -4px -4px 8px #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.blessing-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    6px 6px 12px #c0c8d0,
+    -6px -6px 12px #f8fcff;
+}
+/* ===== Card Title ===== */
+.blessing-card .blessing-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: #3a6aaa;
+  line-height: 1.4;
+}
+
+/* ===== Card Description ===== */
+.blessing-card .blessing-desc {
+  font-size: 12px;
+  color: #4a4a5a;
+  line-height: 1.7;
+  white-space: pre-line;
+}

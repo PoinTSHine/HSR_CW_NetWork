@@ -553,33 +553,6 @@
     inset -2px -2px 4px #ffffff;
 }
 
-#home-btn {
-  margin: 0 8px 8px;
-  padding: 8px;
-  border: none;
-  border-radius: 10px;
-  background: #e4e9f0;
-  color: #667;
-  font-size: 12px;
-  cursor: pointer;
-  transition: box-shadow 0.15s, color 0.15s;
-  flex-shrink: 0;
-  box-shadow:
-    3px 3px 6px #c8cdd4,
-    -3px -3px 6px #ffffff;
-}
-#home-btn:hover {
-  color: #3a6aaa;
-  box-shadow:
-    4px 4px 8px #c0c8d0,
-    -4px -4px 8px #ffffff;
-}
-#home-btn:active {
-  color: #2a4a7a;
-  box-shadow:
-    inset 2px 2px 4px #c8cdd4,
-    inset -2px -2px 4px #ffffff;
-}
 
 /* ===== Weapon List ===== */
 #weapon-list {

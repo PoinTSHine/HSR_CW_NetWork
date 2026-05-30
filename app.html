@@ -8,12 +8,15 @@
   <link rel="stylesheet" href="style/common.css">
   <link rel="stylesheet" href="style/graph.css">
   <link rel="stylesheet" href="style/team.css">
+  <link rel="stylesheet" href="style/environment.css">
 </head>
 <body>
   <canvas id="star-canvas"></canvas>
   <div id="tab-bar">
     <button class="tab-btn active" data-mode="graph">角色星图</button>
     <button class="tab-btn" data-mode="team">阵容摆放</button>
+    <button class="tab-btn" data-mode="environment">环境图鉴</button>
+    <button id="tab-home-btn" title="返回首页">⌂</button>
   </div>
   <div id="main-row">
     <div id="graph-container">
@@ -40,7 +43,6 @@
         </linearGradient>
       </defs>
     </svg>
-    <button id="init-btn" title="返回首页">⌂</button>
     <div id="detail-box" class="hidden">
       <div class="detail-header">
         <span id="detail-name"></span>
@@ -82,7 +84,6 @@
       <div id="field-bonds"></div>
       <div id="recycle-zone" title="拖至此处删除">🗑 拖至此处删除</div>
       <button id="clear-all-btn" title="清空全部">✕ 清空</button>
-      <button id="home-btn" title="返回首页">⌂ 首页</button>
     </div>
     <div id="slot-area">
       <div id="slot-grid">
@@ -107,9 +108,13 @@
 
     </div>
   </div>
+    <div id="others-container">
+      <div id="others-grid"></div>
+    </div>
   </div>
   <script src="script/d3.v7.min.js"></script>
   <script src="data/camp.js"></script>
+  <script src="data/environment_data.js"></script>
   <script src="data/chr.js"></script>
   <script src="script/game_state.js"></script>
   <script src="script/search.js"></script>
@@ -119,6 +124,7 @@
   <script src="script/yese_mechanics.js"></script>
   <script src="script/mmg_mechanics.js"></script>
   <script src="script/starhunter_mechanics.js"></script>
+  <script src="script/environment.js"></script>
   <script src="script/graph.js"></script>
   <script src="data/equipments.js"></script>
   <script src="script/team_builder.js"></script>

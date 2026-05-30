@@ -103,6 +103,35 @@ body {
     0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+#tab-home-btn {
+  margin-left: auto;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.04);
+  color: #778;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: box-shadow 0.2s, color 0.2s, transform 0.2s;
+  box-shadow:
+    3px 3px 6px #c8cdd4,
+    -3px -3px 6px #ffffff;
+}
+#tab-home-btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: #3a6aaa;
+  transform: translateY(-1px);
+  box-shadow:
+    4px 4px 8px #c0c8d0,
+    -4px -4px 8px #ffffff;
+}
+
 /* ===== Sidebar Toggle ===== */
 #sidebar-toggle {
   position: absolute;
@@ -584,34 +613,6 @@ body {
 .char-spend-badge { border-width: 1px; border-style: solid; }
 
 /* ===== Init Button ===== */
-#init-btn {
-  position: fixed;
-  bottom: 44px;
-  left: 16px;
-  width: 36px;
-  height: 36px;
-  background: #e4e9f0;
-  border: none;
-  border-radius: 50%;
-  color: #667;
-  font-size: 18px;
-  cursor: pointer;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: box-shadow 0.15s, color 0.15s;
-  box-shadow:
-    3px 3px 6px #c8cdd4,
-    -3px -3px 6px #ffffff;
-}
-#init-btn:hover {
-  color: #3a6aaa;
-  box-shadow:
-    4px 4px 8px #c0c8d0,
-    -4px -4px 8px #ffffff;
-}
-
 /* ===== Legend ===== */
 #legend {
   position: fixed;
