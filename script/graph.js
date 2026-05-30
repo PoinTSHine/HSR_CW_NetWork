@@ -136,9 +136,15 @@ legend.innerHTML = `
 container.appendChild(legend);
 
 // ===== Background click =====
-svg.on('click', (event) => {
-  if (event.target === svg.node()) {
-    resetFilter();
+svg.on('click', function(event) {
+  var target = event.target;
+  var isDimmed = target.classList && target.classList.contains('dimmed');
+  if (target === svg.node() || target === g.node() || isDimmed) {
+    if (selectedId && activeBond) {
+      deselectNode();
+    } else {
+      resetFilter();
+    }
   }
 });
 
@@ -273,16 +279,46 @@ function resetFilter() {
 
 // ===== Selection =====
 function selectNode(node) {
+  // If already selected and a bond is active, deselect and return to bond view
+  if (selectedId === node.id && activeBond) {
+    deselectNode();
+    return;
+  }
   hideDetailBox();
   applyFilter(new Set([node.id]));
   centerOnPoint(node.x, node.y, 1.5)
-    .on('end', () => { showDetailBox(node, node.x, node.y); });
+    .on('end', function() { showDetailBox(node, node.x, node.y); });
+}
+
+function centerOnBond(bond) {
+  var bondNodes = bondChars[bond].map(function(name) { return nodeMap[name]; }).filter(Boolean);
+  if (bondNodes.length === 1) {
+    centerOnPoint(bondNodes[0].x, bondNodes[0].y, 1.5);
+  } else if (bondNodes.length > 1) {
+    var PAD = 60;
+    var w = container.clientWidth;
+    var h = container.clientHeight;
+    var xs = bondNodes.map(function(n) { return n.x; });
+    var ys = bondNodes.map(function(n) { return n.y; });
+    var minX = Math.min.apply(null, xs);
+    var maxX = Math.max.apply(null, xs);
+    var minY = Math.min.apply(null, ys);
+    var maxY = Math.max.apply(null, ys);
+    var bw = maxX - minX + PAD * 2;
+    var bh = maxY - minY + PAD * 2;
+    var scale = Math.min(1.5, Math.min(w / bw, h / bh));
+    var cx = (minX + maxX) / 2;
+    var cy = (minY + maxY) / 2;
+    centerOnPoint(cx, cy, scale);
+  }
 }
 
 function deselectNode() {
   hideDetailBox();
+  document.querySelectorAll('.bond-info-char.selected, .char-item.selected').forEach(function(c) { c.classList.remove('selected'); });
   if (activeBond) {
     applyFilter(new Set(bondChars[activeBond]));
+    centerOnBond(activeBond);
   } else {
     resetFilter();
   }
@@ -291,26 +327,7 @@ function deselectNode() {
 function selectBond(bond) {
   hideDetailBox();
   applyFilter(new Set(bondChars[bond]));
-  const bondNodes = bondChars[bond].map(name => nodeMap[name]).filter(Boolean);
-  if (bondNodes.length > 0) {
-    if (bondNodes.length === 1) {
-      centerOnPoint(bondNodes[0].x, bondNodes[0].y, 1.5);
-    } else {
-      const PAD = 60;
-      const w = container.clientWidth;
-      const h = container.clientHeight;
-      const xs = bondNodes.map(n => n.x);
-      const ys = bondNodes.map(n => n.y);
-      const minX = Math.min(...xs), maxX = Math.max(...xs);
-      const minY = Math.min(...ys), maxY = Math.max(...ys);
-      const bw = maxX - minX + PAD * 2;
-      const bh = maxY - minY + PAD * 2;
-      const scale = Math.min(1.5, Math.min(w / bw, h / bh));
-      const cx = (minX + maxX) / 2;
-      const cy = (minY + maxY) / 2;
-      centerOnPoint(cx, cy, scale);
-    }
-  }
+  centerOnBond(bond);
 
   if (activeBond === bond) return; // already on this bond (e.g. from detail tag)
 
