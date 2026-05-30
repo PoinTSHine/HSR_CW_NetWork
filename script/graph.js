@@ -751,14 +751,18 @@ function buildBondInfoPanel(bond) {
   if (stats && stats['补充']) {
     var sup = stats['补充'];
     if (typeof sup === 'object') {
-      var keys = Object.keys(sup);
+      var keys = Object.keys(sup).filter(function(k) { return k !== '补充'; });
+      var hasMeta = !!sup['补充'];
       keys.forEach(function(name, i) {
         var entry = sup[name];
-        var last = i === keys.length - 1;
+        var last = i === keys.length - 1 && !hasMeta;
         var cls = 'bond-info-supp-item' + (last ? ' bond-info-supp-sep' : '');
         var text = (typeof entry === 'object' && entry['介绍']) ? entry['介绍'] : entry;
-        html += '<div class="' + cls + '"><span class="bond-info-supp-name">' + name + '</span>' + text + '</div>';
+        html += '<div class="' + cls + '"><span class="bond-info-supp-name">' + name + '：</span>' + text + '</div>';
       });
+      if (hasMeta) {
+        html += '<div class="bond-info-supp bond-info-supp-sep">' + sup['补充'] + '</div>';
+      }
     } else {
       html += '<div class="bond-info-supp bond-info-supp-sep">' + sup.replace(/\n/g, '<br>') + '</div>';
     }

@@ -28,7 +28,7 @@
   }
 
   // Mutual exclusion rules
-  const MUTUAL_EXCLUSIONS = [['记忆主', '欢愉主']];
+  const MUTUAL_EXCLUSIONS = [['开拓者·记忆', '开拓者·欢愉']];
 
   function removeMutualExclusion(char, skipIndex) {
     for (const [a, b] of MUTUAL_EXCLUSIONS) {
@@ -1140,9 +1140,9 @@
       return;
     }
     let char = data.char;
-    // Transform: 欢愉主 → top row becomes 记忆主, 记忆主 → bottom row becomes 欢愉主
-    if (char === '欢愉主' && targetSlot < TOTAL_FIXED_TOP) char = '记忆主';
-    else if (char === '记忆主' && targetSlot >= TOTAL_FIXED_TOP) char = '欢愉主';
+    // Transform: 开拓者·欢愉 → top row becomes 开拓者·记忆, 开拓者·记忆 → bottom row becomes 开拓者·欢愉
+    if (char === '开拓者·欢愉' && targetSlot < TOTAL_FIXED_TOP) char = '开拓者·记忆';
+    else if (char === '开拓者·记忆' && targetSlot >= TOTAL_FIXED_TOP) char = '开拓者·欢愉';
 
     if (data.source === 'compendium') {
       const existingIndex = window.__slotCards.indexOf(char);
