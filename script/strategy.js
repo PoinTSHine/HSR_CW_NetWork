@@ -55,7 +55,7 @@
     return '其它';
   }
 
-  function renderCards() {
+  function renderCards(rarities) {
     if (!grid) return;
     var data = window.strategy;
     if (!data) return;
@@ -65,6 +65,7 @@
     var groups = {};
     SECTION_ORDER.forEach(function(s) { groups[s.key] = []; });
     names.forEach(function(name) {
+      if (rarities && rarities.indexOf(data[name]['稀有度']) === -1) return;
       groups[classify(name)].push(name);
     });
 
@@ -110,13 +111,21 @@
       .replace(/"/g, '&quot;');
   }
 
+  function getActiveRarities() {
+    var checks = document.querySelectorAll('#strategy-filter-menu .filter-option input');
+    var result = [];
+    checks.forEach(function(cb) { if (cb.checked) result.push(cb.value); });
+    return result;
+  }
+
   function init() {
     if (initialized) return;
     initialized = true;
 
     grid = document.getElementById('strategy-grid');
-    renderCards();
+    renderCards(getActiveRarities());
 
+    // Collapse toggle
     grid.addEventListener('click', function(e) {
       var header = e.target.closest('.gallery-section-header');
       if (!header) return;
@@ -124,6 +133,27 @@
       if (!body || !body.classList.contains('gallery-section-body')) return;
       header.classList.toggle('collapsed');
       body.classList.toggle('collapsed');
+    });
+
+    // Filter button toggle
+    var filterBtn = document.getElementById('strategy-filter-btn');
+    var filterMenu = document.getElementById('strategy-filter-menu');
+    filterBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      filterMenu.classList.toggle('open');
+    });
+    filterMenu.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+    document.addEventListener('click', function() {
+      filterMenu.classList.remove('open');
+    });
+
+    // Filter checkbox change
+    filterMenu.querySelectorAll('.filter-option input').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        renderCards(getActiveRarities());
+      });
     });
   }
 

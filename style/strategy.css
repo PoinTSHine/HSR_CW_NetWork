@@ -2,7 +2,71 @@
    strategy.css — 策略图鉴模式专用样式
    ============================================================ */
 
+/* ===== Filter Bar ===== */
+#strategy-filter-bar {
+  position: absolute;
+  top: 5px;
+  left: 6px;
+  z-index: 10;
+}
+#strategy-filter-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(228, 233, 240, 0.85);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #556;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px #c8cdd4, -2px -2px 4px #ffffff;
+  transition: box-shadow 0.15s;
+}
+#strategy-filter-btn:hover {
+  box-shadow: 3px 3px 5px #c0c8d0, -3px -3px 5px #ffffff;
+}
+#strategy-filter-btn:active {
+  box-shadow: inset 2px 2px 4px #c8cdd4, inset -2px -2px 4px #ffffff;
+}
+
+.filter-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  padding: 8px 0;
+  background: rgba(228, 233, 240, 0.92);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-shadow: 3px 3px 8px #c8cdd4, -3px -3px 8px #ffffff;
+  min-width: 100px;
+}
+.filter-dropdown.open { display: block; }
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: #4a4a5a;
+  cursor: pointer;
+  user-select: none;
+}
+.filter-option:hover { background: rgba(0,0,0,0.04); }
+.filter-option input { accent-color: #3a6aaa; }
+
 /* ===== Card Grid ===== */
+#strategy-container {
+  position: relative;
+}
+
+#strategy-grid {
+  padding-top: 40px;
+}
+
 .strategy-section-cards {
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 }
