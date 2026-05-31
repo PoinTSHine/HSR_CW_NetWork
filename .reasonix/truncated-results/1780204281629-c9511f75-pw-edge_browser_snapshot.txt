@@ -1,0 +1,822 @@
+### Page
+- Page URL: http://localhost:3000/app.html?mode=graph
+- Page Title: 货币战争工具
+### Snapshot
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - button "角色星图" [ref=e3] [cursor=pointer]
+    - button "阵容摆放" [ref=e4] [cursor=pointer]
+    - button "环境图鉴" [ref=e5] [cursor=pointer]
+    - button "策略图鉴" [ref=e6] [cursor=pointer]
+    - button "⌂" [ref=e7] [cursor=pointer]
+  - generic [ref=e8]:
+    - generic [ref=e9]:
+      - img [ref=e10]:
+        - generic [ref=e415]:
+          - generic [ref=e416]:
+            - generic: 黑塔
+          - generic [ref=e418]:
+            - generic: 翡翠
+          - generic [ref=e420]:
+            - generic: 银枝
+          - generic [ref=e422]:
+            - generic: 缇宝
+          - generic [ref=e424]:
+            - generic: 那刻夏
+          - generic [ref=e426]:
+            - generic: 大黑塔
+          - generic [ref=e428]:
+            - generic: 景元
+          - generic [ref=e430]:
+            - generic: 艾丝妲
+          - generic [ref=e432]:
+            - generic: 桑博
+          - generic [ref=e434]:
+            - generic: 卡芙卡
+          - generic [ref=e436]:
+            - generic: 海瑟音
+          - generic [ref=e438]:
+            - generic: 黑天鹅
+          - generic [ref=e442]:
+            - generic: 刃
+          - generic [ref=e444]:
+            - generic: 万敌
+          - generic [ref=e446]:
+            - generic: 风堇
+          - generic [ref=e448]:
+            - generic: 镜流
+          - generic [ref=e450]:
+            - generic: 长夜月
+          - generic [ref=e452]:
+            - generic: 遐蝶
+          - generic [ref=e454]:
+            - generic: 布洛妮娅
+          - generic [ref=e458]:
+            - generic: 三月七
+          - generic [ref=e460]:
+            - generic: 丹恒腾荒
+          - generic [ref=e462]:
+            - generic: 砂金
+          - generic [ref=e464]:
+            - generic: 杰帕德
+          - generic [ref=e466]:
+            - generic: 貊泽
+          - generic [ref=e469]:
+            - generic: 赛飞儿
+          - generic [ref=e471]:
+            - generic: 飞霄
+          - generic [ref=e473]:
+            - generic: 不死途
+          - generic [ref=e475]:
+            - generic: 真理医生
+          - generic [ref=e477]:
+            - generic: 知更鸟
+          - generic [ref=e479]:
+            - generic: 托帕
+          - generic [ref=e481]:
+            - generic: 加拉赫
+          - generic [ref=e484]:
+            - generic: 乱破
+          - generic [ref=e486]:
+            - generic: 大丽花
+          - generic [ref=e488]:
+            - generic: 阮梅
+          - generic [ref=e490]:
+            - generic: 灵砂
+          - generic [ref=e492]:
+            - generic: 忘归人
+          - generic [ref=e494]:
+            - generic: 姬子
+          - generic [ref=e496]:
+            - generic: 波提欧
+          - generic [ref=e498]:
+            - generic: 流萤
+          - generic [ref=e500]:
+            - generic: 花火
+          - generic [ref=e502]:
+            - generic: 希儿
+          - generic [ref=e504]:
+            - generic: 符玄
+          - generic [ref=e506]:
+            - generic: 银狼
+          - generic [ref=e509]:
+            - generic: 椒丘
+          - generic [ref=e511]:
+            - generic: 佩拉
+          - generic [ref=e513]:
+            - generic: 黄泉
+          - generic [ref=e515]:
+            - generic: 彦卿
+          - generic [ref=e517]:
+            - generic: 瓦尔特
+          - generic [ref=e519]:
+            - generic: 爻光
+          - generic [ref=e521]:
+            - generic: 青雀
+          - generic [ref=e524]:
+            - generic: 丹恒饮月
+          - generic [ref=e526]:
+            - generic: 刻律德菈
+          - generic [ref=e528]:
+            - generic: 火花
+          - generic [ref=e530]:
+            - generic: Archer
+          - generic [ref=e534]:
+            - generic: 藿藿
+          - generic [ref=e536]:
+            - generic: 停云
+          - generic [ref=e539]:
+            - generic: 阿格莱雅
+          - generic [ref=e541]:
+            - generic: Saber
+          - generic [ref=e543]:
+            - generic: 星期日
+          - generic [ref=e545]:
+            - generic: 开拓者·记忆
+          - generic [ref=e547]:
+            - generic: 云璃
+          - generic [ref=e549]:
+            - generic: 娜塔莎
+          - generic [ref=e551]:
+            - generic: 罗刹
+          - generic [ref=e553]:
+            - generic: 绯英
+          - generic [ref=e555]:
+            - generic: 银狼Lv.999
+          - generic [ref=e559]:
+            - generic: 开拓者·欢愉
+          - generic [ref=e561]:
+            - generic: 昔涟
+          - generic [ref=e565]:
+            - generic: 白厄
+      - generic:
+        - generic:
+          - button "×"
+      - generic [ref=e569]:
+        - generic [ref=e570]: 普通角色
+        - generic [ref=e572]: 独立羁绊角色
+        - generic [ref=e574]: 专家顾问角色
+    - generic [ref=e576]:
+      - button "▶" [ref=e577]
+      - generic [ref=e578]:
+        - button "☰" [ref=e580] [cursor=pointer]
+        - heading "羁绊列表" [level=2] [ref=e581]
+        - button "显示全部" [ref=e582] [cursor=pointer]
+      - generic [ref=e583]:
+        - generic [ref=e584] [cursor=pointer]:
+          - generic [ref=e585]: ▶
+          - text: 阵营羁绊
+        - generic:
+          - generic [ref=e586]:
+            - generic [ref=e587] [cursor=pointer]:
+              - generic [ref=e588]: ▶
+              - generic [ref=e589]: 贝洛伯格
+              - generic [ref=e590]: 6人
+            - generic:
+              - generic [ref=e591] [cursor=pointer]:
+                - text: ★ 布洛妮娅
+                - generic [ref=e592]: 5费
+              - generic [ref=e593] [cursor=pointer]:
+                - text: 杰帕德
+                - generic [ref=e594]: 4费
+              - generic [ref=e595] [cursor=pointer]:
+                - text: 娜塔莎
+                - generic [ref=e596]: 3费
+              - generic [ref=e597] [cursor=pointer]:
+                - text: 佩拉
+                - generic [ref=e598]: 2费
+              - generic [ref=e599] [cursor=pointer]:
+                - text: 桑博
+                - generic [ref=e600]: 1费
+              - generic [ref=e601] [cursor=pointer]:
+                - text: 希儿
+                - generic [ref=e602]: 3费
+          - generic [ref=e603]:
+            - generic [ref=e604] [cursor=pointer]:
+              - generic [ref=e605]: ▶
+              - generic [ref=e606]: 公司
+              - generic [ref=e607]: 3人
+            - generic:
+              - generic [ref=e608] [cursor=pointer]:
+                - text: 翡翠
+                - generic [ref=e609]: 1费
+              - generic [ref=e610] [cursor=pointer]:
+                - text: 砂金
+                - generic [ref=e611]: 2费
+              - generic [ref=e612] [cursor=pointer]:
+                - text: 托帕
+                - generic [ref=e613]: 5费
+          - generic [ref=e614]:
+            - generic [ref=e615] [cursor=pointer]:
+              - generic [ref=e616]: ▶
+              - generic [ref=e617]: 狼狩
+              - generic [ref=e618]: 7人
+            - generic:
+              - generic [ref=e619] [cursor=pointer]:
+                - text: 飞霄
+                - generic [ref=e620]: 1费
+              - generic [ref=e621] [cursor=pointer]:
+                - text: 椒丘
+                - generic [ref=e622]: 1费
+              - generic [ref=e623] [cursor=pointer]:
+                - text: 镜流
+                - generic [ref=e624]: 3费
+              - generic [ref=e625] [cursor=pointer]:
+                - text: 灵砂
+                - generic [ref=e626]: 2费
+              - generic [ref=e627] [cursor=pointer]:
+                - text: ◆ 貊泽
+                - generic [ref=e628]: 1费
+              - generic [ref=e629] [cursor=pointer]:
+                - text: 彦卿
+                - generic [ref=e630]: 4费
+              - generic [ref=e631] [cursor=pointer]:
+                - text: 云璃
+                - generic [ref=e632]: 5费
+          - generic [ref=e633]:
+            - generic [ref=e634] [cursor=pointer]:
+              - generic [ref=e635]: ▶
+              - generic [ref=e636]: 列车同行
+              - generic [ref=e637]: 7人
+            - generic:
+              - generic [ref=e638] [cursor=pointer]:
+                - text: 丹恒饮月
+                - generic [ref=e639]: 2费
+              - generic [ref=e640] [cursor=pointer]:
+                - text: 姬子
+                - generic [ref=e641]: 3费
+              - generic [ref=e642] [cursor=pointer]:
+                - text: 开拓者·记忆
+                - generic [ref=e643]: 4费
+              - generic [ref=e644] [cursor=pointer]:
+                - text: 开拓者·欢愉
+                - generic [ref=e645]: 4费
+              - generic [ref=e646] [cursor=pointer]:
+                - text: 三月七
+                - generic [ref=e647]: 1费
+              - generic [ref=e648] [cursor=pointer]:
+                - text: 瓦尔特
+                - generic [ref=e649]: 5费
+              - generic [ref=e650] [cursor=pointer]:
+                - text: 星期日
+                - generic [ref=e651]: 3费
+          - generic [ref=e652]:
+            - generic [ref=e653] [cursor=pointer]:
+              - generic [ref=e654]: ▶
+              - generic [ref=e655]: 盛会之星
+              - generic [ref=e656]: 6人
+            - generic:
+              - generic [ref=e657] [cursor=pointer]:
+                - text: 大丽花
+                - generic [ref=e658]: 1费
+              - generic [ref=e659] [cursor=pointer]:
+                - text: ★ 黑天鹅
+                - generic [ref=e660]: 5费
+              - generic [ref=e661] [cursor=pointer]:
+                - text: 花火
+                - generic [ref=e662]: 2费
+              - generic [ref=e663] [cursor=pointer]:
+                - text: ◆ 加拉赫
+                - generic [ref=e664]: 1费
+              - generic [ref=e665] [cursor=pointer]:
+                - text: 星期日
+                - generic [ref=e666]: 3费
+              - generic [ref=e667] [cursor=pointer]:
+                - text: 知更鸟
+                - generic [ref=e668]: 4费
+          - generic [ref=e669]:
+            - generic [ref=e670] [cursor=pointer]:
+              - generic [ref=e671]: ▶
+              - generic [ref=e672]: 仙舟
+              - generic [ref=e673]: 9人
+            - generic:
+              - generic [ref=e674] [cursor=pointer]:
+                - text: 丹恒饮月
+                - generic [ref=e675]: 2费
+              - generic [ref=e676] [cursor=pointer]:
+                - text: 符玄
+                - generic [ref=e677]: 4费
+              - generic [ref=e678] [cursor=pointer]:
+                - text: 藿藿
+                - generic [ref=e679]: 1费
+              - generic [ref=e680] [cursor=pointer]:
+                - text: 景元
+                - generic [ref=e681]: 5费
+              - generic [ref=e682] [cursor=pointer]:
+                - text: ◆ 青雀
+                - generic [ref=e683]: 1费
+              - generic [ref=e684] [cursor=pointer]:
+                - text: ◆ 停云
+                - generic [ref=e685]: 1费
+              - generic [ref=e686] [cursor=pointer]:
+                - text: 忘归人
+                - generic [ref=e687]: 3费
+              - generic [ref=e688] [cursor=pointer]:
+                - text: 彦卿
+                - generic [ref=e689]: 4费
+              - generic [ref=e690] [cursor=pointer]:
+                - text: 爻光
+                - generic [ref=e691]: 1费
+          - generic [ref=e692]:
+            - generic [ref=e693] [cursor=pointer]:
+              - generic [ref=e694]: ▶
+              - generic [ref=e695]: 星间旅人
+              - generic [ref=e696]: 8人
+            - generic:
+              - generic [ref=e697] [cursor=pointer]:
+                - text: 绯英
+                - generic [ref=e698]: 2费
+              - generic [ref=e699] [cursor=pointer]:
+                - text: 火花
+                - generic [ref=e700]: 4费
+              - generic [ref=e701] [cursor=pointer]:
+                - text: 罗刹
+                - generic [ref=e702]: 4费
+              - generic [ref=e703] [cursor=pointer]:
+                - text: 桑博
+                - generic [ref=e704]: 1费
+              - generic [ref=e705] [cursor=pointer]:
+                - text: 银枝
+                - generic [ref=e706]: 2费
+              - generic [ref=e707] [cursor=pointer]:
+                - text: 真理医生
+                - generic [ref=e708]: 3费
+              - generic [ref=e709] [cursor=pointer]:
+                - text: ★ Archer
+                - generic [ref=e710]: 5费
+              - generic [ref=e711] [cursor=pointer]:
+                - text: Saber
+                - generic [ref=e712]: 3费
+          - generic [ref=e713]:
+            - generic [ref=e714] [cursor=pointer]:
+              - generic [ref=e715]: ▶
+              - generic [ref=e716]: 星核猎手
+              - generic [ref=e717]: 5人
+            - generic:
+              - generic [ref=e718] [cursor=pointer]:
+                - text: 卡芙卡
+                - generic [ref=e719]: 2费
+              - generic [ref=e720] [cursor=pointer]:
+                - text: 流萤
+                - generic [ref=e721]: 5费
+              - generic [ref=e722] [cursor=pointer]:
+                - text: 刃
+                - generic [ref=e723]: 1费
+              - generic [ref=e724] [cursor=pointer]:
+                - text: ◆ 银狼
+                - generic [ref=e725]: 4费
+              - generic [ref=e726] [cursor=pointer]:
+                - text: ★ 银狼Lv.999
+                - generic [ref=e727]: 特
+          - generic [ref=e728]:
+            - generic [ref=e729] [cursor=pointer]:
+              - generic [ref=e730]: ▶
+              - generic [ref=e731]: 巡海游侠
+              - generic [ref=e732]: 4人
+            - generic:
+              - generic [ref=e733] [cursor=pointer]:
+                - text: 波提欧
+                - generic [ref=e734]: 4费
+              - generic [ref=e735] [cursor=pointer]:
+                - text: 不死途
+                - generic [ref=e736]: 2费
+              - generic [ref=e737] [cursor=pointer]:
+                - text: 黄泉
+                - generic [ref=e738]: 3费
+              - generic [ref=e739] [cursor=pointer]:
+                - text: 乱破
+                - generic [ref=e740]: 1费
+          - generic [ref=e741]:
+            - generic [ref=e742] [cursor=pointer]:
+              - generic [ref=e743]: ▶
+              - generic [ref=e744]: 夜之半神
+              - generic [ref=e745]: 7人
+            - generic:
+              - generic [ref=e746] [cursor=pointer]:
+                - text: 丹恒腾荒
+                - generic [ref=e747]: 2费
+              - generic [ref=e748] [cursor=pointer]:
+                - text: 刻律德菈
+                - generic [ref=e749]: 3费
+              - generic [ref=e750] [cursor=pointer]:
+                - text: 赛飞儿
+                - generic [ref=e751]: 1费
+              - generic [ref=e752] [cursor=pointer]:
+                - text: 万敌
+                - generic [ref=e753]: 2费
+              - generic [ref=e754] [cursor=pointer]:
+                - text: ★ 昔涟
+                - generic [ref=e755]: 5费
+              - generic [ref=e756] [cursor=pointer]:
+                - text: 遐蝶
+                - generic [ref=e757]: 4费
+              - generic [ref=e758] [cursor=pointer]:
+                - text: 长夜月
+                - generic [ref=e759]: 4费
+          - generic [ref=e760]:
+            - generic [ref=e761] [cursor=pointer]:
+              - generic [ref=e762]: ▶
+              - generic [ref=e763]: 银河学者
+              - generic [ref=e764]: 5人
+            - generic:
+              - generic [ref=e765] [cursor=pointer]:
+                - text: 艾丝妲
+                - generic [ref=e766]: 1费
+              - generic [ref=e767] [cursor=pointer]:
+                - text: 大黑塔
+                - generic [ref=e768]: 4费
+              - generic [ref=e769] [cursor=pointer]:
+                - text: 黑塔
+                - generic [ref=e770]: 1费
+              - generic [ref=e771] [cursor=pointer]:
+                - text: 阮梅
+                - generic [ref=e772]: 2费
+              - generic [ref=e773] [cursor=pointer]:
+                - text: 真理医生
+                - generic [ref=e774]: 3费
+          - generic [ref=e775]:
+            - generic [ref=e776] [cursor=pointer]:
+              - generic [ref=e777]: ▶
+              - generic [ref=e778]: 昼之半神
+              - generic [ref=e779]: 6人
+            - generic:
+              - generic [ref=e780] [cursor=pointer]:
+                - text: 阿格莱雅
+                - generic [ref=e781]: 1费
+              - generic [ref=e782] [cursor=pointer]:
+                - text: 风堇
+                - generic [ref=e783]: 2费
+              - generic [ref=e784] [cursor=pointer]:
+                - text: 海瑟音
+                - generic [ref=e785]: 4费
+              - generic [ref=e786] [cursor=pointer]:
+                - text: 那刻夏
+                - generic [ref=e787]: 3费
+              - generic [ref=e788] [cursor=pointer]:
+                - text: 缇宝
+                - generic [ref=e789]: 2费
+              - generic [ref=e790] [cursor=pointer]:
+                - text: ★ 昔涟
+                - generic [ref=e791]: 5费
+        - generic [ref=e792] [cursor=pointer]:
+          - generic [ref=e793]: ▶
+          - text: 流派羁绊
+        - generic:
+          - generic [ref=e794]:
+            - generic [ref=e795] [cursor=pointer]:
+              - generic [ref=e796]: ▶
+              - generic [ref=e797]: 持续伤害
+              - generic [ref=e798]: 5人
+            - generic:
+              - generic [ref=e799] [cursor=pointer]:
+                - text: 艾丝妲
+                - generic [ref=e800]: 1费
+              - generic [ref=e801] [cursor=pointer]:
+                - text: 海瑟音
+                - generic [ref=e802]: 4费
+              - generic [ref=e803] [cursor=pointer]:
+                - text: ★ 黑天鹅
+                - generic [ref=e804]: 5费
+              - generic [ref=e805] [cursor=pointer]:
+                - text: 卡芙卡
+                - generic [ref=e806]: 2费
+              - generic [ref=e807] [cursor=pointer]:
+                - text: 桑博
+                - generic [ref=e808]: 1费
+          - generic [ref=e809]:
+            - generic [ref=e810] [cursor=pointer]:
+              - generic [ref=e811]: ▶
+              - generic [ref=e812]: 护盾
+              - generic [ref=e813]: 4人
+            - generic:
+              - generic [ref=e814] [cursor=pointer]:
+                - text: 丹恒腾荒
+                - generic [ref=e815]: 2费
+              - generic [ref=e816] [cursor=pointer]:
+                - text: 杰帕德
+                - generic [ref=e817]: 4费
+              - generic [ref=e818] [cursor=pointer]:
+                - text: 三月七
+                - generic [ref=e819]: 1费
+              - generic [ref=e820] [cursor=pointer]:
+                - text: 砂金
+                - generic [ref=e821]: 2费
+          - generic [ref=e822]:
+            - generic [ref=e823] [cursor=pointer]:
+              - generic [ref=e824]: ▶
+              - generic [ref=e825]: 欢愉
+              - generic [ref=e826]: 5人
+            - generic:
+              - generic [ref=e827] [cursor=pointer]:
+                - text: 绯英
+                - generic [ref=e828]: 2费
+              - generic [ref=e829] [cursor=pointer]:
+                - text: 火花
+                - generic [ref=e830]: 4费
+              - generic [ref=e831] [cursor=pointer]:
+                - text: 开拓者·欢愉
+                - generic [ref=e832]: 4费
+              - generic [ref=e833] [cursor=pointer]:
+                - text: 爻光
+                - generic [ref=e834]: 1费
+              - generic [ref=e835] [cursor=pointer]:
+                - text: ★ 银狼Lv.999
+                - generic [ref=e836]: 特
+          - generic [ref=e837]:
+            - generic [ref=e838] [cursor=pointer]:
+              - generic [ref=e839]: ▶
+              - generic [ref=e840]: 击破
+              - generic [ref=e841]: 9人
+            - generic:
+              - generic [ref=e842] [cursor=pointer]:
+                - text: 波提欧
+                - generic [ref=e843]: 4费
+              - generic [ref=e844] [cursor=pointer]:
+                - text: 大丽花
+                - generic [ref=e845]: 1费
+              - generic [ref=e846] [cursor=pointer]:
+                - text: 姬子
+                - generic [ref=e847]: 3费
+              - generic [ref=e848] [cursor=pointer]:
+                - text: ◆ 加拉赫
+                - generic [ref=e849]: 1费
+              - generic [ref=e850] [cursor=pointer]:
+                - text: 灵砂
+                - generic [ref=e851]: 2费
+              - generic [ref=e852] [cursor=pointer]:
+                - text: 流萤
+                - generic [ref=e853]: 5费
+              - generic [ref=e854] [cursor=pointer]:
+                - text: 乱破
+                - generic [ref=e855]: 1费
+              - generic [ref=e856] [cursor=pointer]:
+                - text: 阮梅
+                - generic [ref=e857]: 2费
+              - generic [ref=e858] [cursor=pointer]:
+                - text: 忘归人
+                - generic [ref=e859]: 3费
+          - generic [ref=e860]:
+            - generic [ref=e861] [cursor=pointer]:
+              - generic [ref=e862]: ▶
+              - generic [ref=e863]: 减益
+              - generic [ref=e864]: 6人
+            - generic:
+              - generic [ref=e865] [cursor=pointer]:
+                - text: 黄泉
+                - generic [ref=e866]: 3费
+              - generic [ref=e867] [cursor=pointer]:
+                - text: 椒丘
+                - generic [ref=e868]: 1费
+              - generic [ref=e869] [cursor=pointer]:
+                - text: 佩拉
+                - generic [ref=e870]: 2费
+              - generic [ref=e871] [cursor=pointer]:
+                - text: 赛飞儿
+                - generic [ref=e872]: 1费
+              - generic [ref=e873] [cursor=pointer]:
+                - text: 瓦尔特
+                - generic [ref=e874]: 5费
+              - generic [ref=e875] [cursor=pointer]:
+                - text: 彦卿
+                - generic [ref=e876]: 4费
+          - generic [ref=e877]:
+            - generic [ref=e878] [cursor=pointer]:
+              - generic [ref=e879]: ▶
+              - generic [ref=e880]: 量子同频
+              - generic [ref=e881]: 5人
+            - generic:
+              - generic [ref=e882] [cursor=pointer]:
+                - text: 符玄
+                - generic [ref=e883]: 4费
+              - generic [ref=e884] [cursor=pointer]:
+                - text: 花火
+                - generic [ref=e885]: 2费
+              - generic [ref=e886] [cursor=pointer]:
+                - text: 缇宝
+                - generic [ref=e887]: 2费
+              - generic [ref=e888] [cursor=pointer]:
+                - text: 希儿
+                - generic [ref=e889]: 3费
+              - generic [ref=e890] [cursor=pointer]:
+                - text: ◆ 银狼
+                - generic [ref=e891]: 4费
+          - generic [ref=e892]:
+            - generic [ref=e893] [cursor=pointer]:
+              - generic [ref=e894]: ▶
+              - generic [ref=e895]: 能量
+              - generic [ref=e896]: 8人
+            - generic:
+              - generic [ref=e897] [cursor=pointer]:
+                - text: 阿格莱雅
+                - generic [ref=e898]: 1费
+              - generic [ref=e899] [cursor=pointer]:
+                - text: 藿藿
+                - generic [ref=e900]: 1费
+              - generic [ref=e901] [cursor=pointer]:
+                - text: 开拓者·记忆
+                - generic [ref=e902]: 4费
+              - generic [ref=e903] [cursor=pointer]:
+                - text: ◆ 停云
+                - generic [ref=e904]: 1费
+              - generic [ref=e905] [cursor=pointer]:
+                - text: 星期日
+                - generic [ref=e906]: 3费
+              - generic [ref=e907] [cursor=pointer]:
+                - text: 银枝
+                - generic [ref=e908]: 2费
+              - generic [ref=e909] [cursor=pointer]:
+                - text: 云璃
+                - generic [ref=e910]: 5费
+              - generic [ref=e911] [cursor=pointer]:
+                - text: Saber
+                - generic [ref=e912]: 3费
+          - generic [ref=e913]:
+            - generic [ref=e914] [cursor=pointer]:
+              - generic [ref=e915]: ▶
+              - generic [ref=e916]: 群攻
+              - generic [ref=e917]: 7人
+            - generic:
+              - generic [ref=e918] [cursor=pointer]:
+                - text: 大黑塔
+                - generic [ref=e919]: 4费
+              - generic [ref=e920] [cursor=pointer]:
+                - text: 翡翠
+                - generic [ref=e921]: 1费
+              - generic [ref=e922] [cursor=pointer]:
+                - text: 黑塔
+                - generic [ref=e923]: 1费
+              - generic [ref=e924] [cursor=pointer]:
+                - text: 景元
+                - generic [ref=e925]: 5费
+              - generic [ref=e926] [cursor=pointer]:
+                - text: 那刻夏
+                - generic [ref=e927]: 3费
+              - generic [ref=e928] [cursor=pointer]:
+                - text: 缇宝
+                - generic [ref=e929]: 2费
+              - generic [ref=e930] [cursor=pointer]:
+                - text: 银枝
+                - generic [ref=e931]: 2费
+          - generic [ref=e932]:
+            - generic [ref=e933] [cursor=pointer]:
+              - generic [ref=e934]: ▶
+              - generic [ref=e935]: 燃血
+              - generic [ref=e936]: 7人
+            - generic:
+              - generic [ref=e937] [cursor=pointer]:
+                - text: ★ 布洛妮娅
+                - generic [ref=e938]: 5费
+              - generic [ref=e939] [cursor=pointer]:
+                - text: 风堇
+                - generic [ref=e940]: 2费
+              - generic [ref=e941] [cursor=pointer]:
+                - text: 镜流
+                - generic [ref=e942]: 3费
+              - generic [ref=e943] [cursor=pointer]:
+                - text: 刃
+                - generic [ref=e944]: 1费
+              - generic [ref=e945] [cursor=pointer]:
+                - text: 万敌
+                - generic [ref=e946]: 2费
+              - generic [ref=e947] [cursor=pointer]:
+                - text: 遐蝶
+                - generic [ref=e948]: 4费
+              - generic [ref=e949] [cursor=pointer]:
+                - text: 长夜月
+                - generic [ref=e950]: 4费
+          - generic [ref=e951]:
+            - generic [ref=e952] [cursor=pointer]:
+              - generic [ref=e953]: ▶
+              - generic [ref=e954]: 战技点
+              - generic [ref=e955]: 7人
+            - generic:
+              - generic [ref=e956] [cursor=pointer]:
+                - text: 丹恒饮月
+                - generic [ref=e957]: 2费
+              - generic [ref=e958] [cursor=pointer]:
+                - text: 花火
+                - generic [ref=e959]: 2费
+              - generic [ref=e960] [cursor=pointer]:
+                - text: 火花
+                - generic [ref=e961]: 4费
+              - generic [ref=e962] [cursor=pointer]:
+                - text: 刻律德菈
+                - generic [ref=e963]: 3费
+              - generic [ref=e964] [cursor=pointer]:
+                - text: ◆ 青雀
+                - generic [ref=e965]: 1费
+              - generic [ref=e966] [cursor=pointer]:
+                - text: 爻光
+                - generic [ref=e967]: 1费
+              - generic [ref=e968] [cursor=pointer]:
+                - text: ★ Archer
+                - generic [ref=e969]: 5费
+          - generic [ref=e970]:
+            - generic [ref=e971] [cursor=pointer]:
+              - generic [ref=e972]: ▶
+              - generic [ref=e973]: 治疗
+              - generic [ref=e974]: 6人
+            - generic:
+              - generic [ref=e975] [cursor=pointer]:
+                - text: 符玄
+                - generic [ref=e976]: 4费
+              - generic [ref=e977] [cursor=pointer]:
+                - text: 藿藿
+                - generic [ref=e978]: 1费
+              - generic [ref=e979] [cursor=pointer]:
+                - text: ◆ 加拉赫
+                - generic [ref=e980]: 1费
+              - generic [ref=e981] [cursor=pointer]:
+                - text: 椒丘
+                - generic [ref=e982]: 1费
+              - generic [ref=e983] [cursor=pointer]:
+                - text: 罗刹
+                - generic [ref=e984]: 4费
+              - generic [ref=e985] [cursor=pointer]:
+                - text: 娜塔莎
+                - generic [ref=e986]: 3费
+          - generic [ref=e987]:
+            - generic [ref=e988] [cursor=pointer]:
+              - generic [ref=e989]: ▶
+              - generic [ref=e990]: 追击
+              - generic [ref=e991]: 8人
+            - generic:
+              - generic [ref=e992] [cursor=pointer]:
+                - text: 不死途
+                - generic [ref=e993]: 2费
+              - generic [ref=e994] [cursor=pointer]:
+                - text: 飞霄
+                - generic [ref=e995]: 1费
+              - generic [ref=e996] [cursor=pointer]:
+                - text: ◆ 貊泽
+                - generic [ref=e997]: 1费
+              - generic [ref=e998] [cursor=pointer]:
+                - text: 赛飞儿
+                - generic [ref=e999]: 1费
+              - generic [ref=e1000] [cursor=pointer]:
+                - text: 砂金
+                - generic [ref=e1001]: 2费
+              - generic [ref=e1002] [cursor=pointer]:
+                - text: 托帕
+                - generic [ref=e1003]: 5费
+              - generic [ref=e1004] [cursor=pointer]:
+                - text: 真理医生
+                - generic [ref=e1005]: 3费
+              - generic [ref=e1006] [cursor=pointer]:
+                - text: 知更鸟
+                - generic [ref=e1007]: 4费
+        - generic [ref=e1008] [cursor=pointer]:
+          - generic [ref=e1009]: ▶
+          - text: 独立羁绊
+        - generic:
+          - generic [ref=e1010]:
+            - generic [ref=e1011] [cursor=pointer]:
+              - generic [ref=e1012]: ▶
+              - generic [ref=e1013]: 大守护者
+              - generic [ref=e1014]: 1人
+            - generic [ref=e1015] [cursor=pointer]:
+              - text: ★ 布洛妮娅
+              - generic [ref=e1016]: 5费
+          - generic [ref=e1017]:
+            - generic [ref=e1018] [cursor=pointer]:
+              - generic [ref=e1019]: ▶
+              - generic [ref=e1020]: 救世主
+              - generic [ref=e1021]: 1人
+            - generic [ref=e1022] [cursor=pointer]:
+              - text: ★ 白厄
+              - generic [ref=e1023]: 3费
+          - generic [ref=e1024]:
+            - generic [ref=e1025] [cursor=pointer]:
+              - generic [ref=e1026]: ▶
+              - generic [ref=e1027]: 命运卜者
+              - generic [ref=e1028]: 1人
+            - generic [ref=e1029] [cursor=pointer]:
+              - text: ★ 黑天鹅
+              - generic [ref=e1030]: 5费
+          - generic [ref=e1031]:
+            - generic [ref=e1032] [cursor=pointer]:
+              - generic [ref=e1033]: ▶
+              - generic [ref=e1034]: 魔术师
+              - generic [ref=e1035]: 1人
+            - generic [ref=e1036] [cursor=pointer]:
+              - text: ★ Archer
+              - generic [ref=e1037]: 5费
+          - generic [ref=e1038]:
+            - generic [ref=e1039] [cursor=pointer]:
+              - generic [ref=e1040]: ▶
+              - generic [ref=e1041]: 头号玩家
+              - generic [ref=e1042]: 1人
+            - generic [ref=e1043] [cursor=pointer]:
+              - text: ★ 银狼Lv.999
+              - generic [ref=e1044]: 特
+          - generic [ref=e1045]:
+            - generic [ref=e1046] [cursor=pointer]:
+              - generic [ref=e1047]: ▶
+              - generic [ref=e1048]: 挚爱之人
+              - generic [ref=e1049]: 1人
+            - generic [ref=e1050] [cursor=pointer]:
+              - text: ★ 昔涟
+              - generic [ref=e1051]: 5费
+      - text: ◆ ◆ ◆ ◆ ★ ◆ ★ ★ ★ ★ ★ ★ ★ ◆ ★ ★ ★ ★ ◆ ◆ ◆ ◆
+```

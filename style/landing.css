@@ -38,7 +38,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 48px;
-  max-width: 720px;
+  max-width: 1020px;
   width: 100%;
 }
 
@@ -73,6 +73,7 @@ body {
 .delay-2 { animation-delay: 0.4s; }
 .delay-3 { animation-delay: 0.6s; }
 .delay-4 { animation-delay: 0.8s; }
+.delay-5 { animation-delay: 1.0s; }
 
 /* ===== Header ===== */
 .header {
@@ -117,6 +118,7 @@ body {
 
 .card {
   flex: 1;
+  min-width: 260px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -266,10 +268,10 @@ body {
   .cards {
     flex-direction: column;
   }
-  .header h1 {
-    font-size: 24px;
-  }
   .card {
     padding: 32px 20px;
+  }
+  .header h1 {
+    font-size: 24px;
   }
 }

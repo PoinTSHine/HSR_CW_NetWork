@@ -943,6 +943,7 @@ window.addEventListener('resize', () => {
   const sidebar = document.getElementById('sidebar');
   const teamBuilder = document.getElementById('team-builder');
   const othersContainer = document.getElementById('others-container');
+  const strategyContainer = document.getElementById('strategy-container');
   let currentMode = null;
 
   function applyMode(mode) {
@@ -954,19 +955,24 @@ window.addEventListener('resize', () => {
 
     var isGraph = mode === 'graph';
     var isEnvironment = mode === 'environment';
+    var isStrategy = mode === 'strategy';
     graphContainer.style.display = isGraph ? '' : 'none';
     sidebarToggle.style.display = isGraph ? '' : 'none';
     sidebar.style.display = isGraph ? '' : 'none';
-    teamBuilder.style.display = (isGraph || isEnvironment) ? 'none' : 'flex';
+    teamBuilder.style.display = (isGraph || isEnvironment || isStrategy) ? 'none' : 'flex';
     othersContainer.style.display = isEnvironment ? 'flex' : 'none';
+    strategyContainer.style.display = isStrategy ? 'flex' : 'none';
 
     history.replaceState(null, '', 'app.html?mode=' + mode);
 
-    if (!isGraph && !isEnvironment && window.initTeamBuilder) {
+    if (!isGraph && !isEnvironment && !isStrategy && window.initTeamBuilder) {
       window.initTeamBuilder();
     }
     if (isEnvironment && window.initEnvorn) {
       window.initEnvorn();
+    }
+    if (isStrategy && window.initStrategy) {
+      window.initStrategy();
     }
     window.dispatchEvent(new Event('resize'));
   }
@@ -980,6 +986,6 @@ window.addEventListener('resize', () => {
   // Determine initial mode from URL (set by homepage choice)
   var params = new URLSearchParams(window.location.search);
   var modeParam = params.get('mode');
-  var initialMode = (modeParam === 'team' || modeParam === 'environment') ? modeParam : 'graph';
+  var initialMode = (modeParam === 'team' || modeParam === 'environment' || modeParam === 'strategy') ? modeParam : 'graph';
   applyMode(initialMode);
 })();

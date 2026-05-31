@@ -51,20 +51,20 @@
 
       var cardsHtml = '';
       secNames.forEach(function(name) {
-        cardsHtml += '<div class="blessing-card">' +
+        cardsHtml += '<div class="gallery-card blessing-card">' +
           '<div class="blessing-name">' + escHtml(name) + '</div>' +
           '<div class="blessing-desc">' + escHtml(data[name]) + '</div>' +
         '</div>';
       });
 
-      html += '<div class="others-section">' +
-        '<div class="others-section-header">' +
+      html += '<div class="gallery-section others-section">' +
+        '<div class="gallery-section-header others-section-header">' +
           '<span class="section-arrow">&#9660;</span>' +
           '<span class="section-label">' + escHtml(sec.label) + '</span>' +
           '<span class="section-count">' + secNames.length + '</span>' +
         '</div>' +
-        '<div class="others-section-body">' +
-          '<div class="others-section-cards">' + cardsHtml + '</div>' +
+        '<div class="gallery-section-body others-section-body">' +
+          '<div class="gallery-section-cards others-section-cards">' + cardsHtml + '</div>' +
         '</div>' +
       '</div>';
     });
@@ -89,10 +89,10 @@
 
     // Delegate click on section headers to toggle collapse
     grid.addEventListener('click', function(e) {
-      var header = e.target.closest('.others-section-header');
+      var header = e.target.closest('.gallery-section-header');
       if (!header) return;
       var body = header.nextElementSibling;
-      if (!body || !body.classList.contains('others-section-body')) return;
+      if (!body || !body.classList.contains('gallery-section-body')) return;
       header.classList.toggle('collapsed');
       body.classList.toggle('collapsed');
     });

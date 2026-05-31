@@ -110,22 +110,22 @@ body {
   padding: 0;
   border: none;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.04);
-  color: #778;
+  background: rgba(240, 160, 48, 0.12);
+  color: #b8700a;
   font-size: 15px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: box-shadow 0.2s, color 0.2s, transform 0.2s;
+  transition: box-shadow 0.2s, color 0.2s, background 0.2s, transform 0.2s;
   box-shadow:
     3px 3px 6px #c8cdd4,
     -3px -3px 6px #ffffff;
 }
 #tab-home-btn:hover {
-  background: rgba(0, 0, 0, 0.08);
-  color: #3a6aaa;
+  background: rgba(240, 160, 48, 0.22);
+  color: #8a5000;
   transform: translateY(-1px);
   box-shadow:
     4px 4px 8px #c0c8d0,
@@ -825,3 +825,100 @@ body {
 .bond-info-char.solo-char::before { content: "★"; color: #f0a030; font-size: 9px; flex-shrink: 0; }
 .bond-info-char.expert-char { color: #0d7a60; }
 .bond-info-char.expert-char::before { content: "◆"; color: #20c0a0; font-size: 9px; flex-shrink: 0; }
+
+/* ===== Gallery (环境图鉴 & 策略图鉴共用) ===== */
+.gallery-container {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.gallery-grid {
+  flex: 1;
+  overflow-y: scroll;
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.gallery-grid::-webkit-scrollbar { width: 14px; }
+.gallery-grid::-webkit-scrollbar-track { background: transparent; }
+.gallery-grid::-webkit-scrollbar-thumb { background: rgba(106, 122, 138, 0.55); border-radius: 7px; min-height: 50px; }
+.gallery-grid::-webkit-scrollbar-thumb:hover { background: rgba(74, 90, 106, 0.7); }
+
+.gallery-section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  background: rgba(228, 233, 240, 0.75);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  font-size: 13px;
+  font-weight: bold;
+  color: #3a6aaa;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: box-shadow 0.15s, color 0.15s;
+  box-shadow: 2px 2px 4px #c8cdd4, -2px -2px 4px #ffffff;
+}
+.gallery-section-header:hover {
+  box-shadow: 3px 3px 5px #c0c8d0, -3px -3px 5px #ffffff;
+}
+.gallery-section-header:active {
+  box-shadow: inset 2px 2px 4px #c8cdd4, inset -2px -2px 4px #ffffff;
+}
+.gallery-section-header .section-arrow {
+  font-size: 10px;
+  color: #8899aa;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.gallery-section-header.collapsed .section-arrow {
+  transform: rotate(-90deg);
+}
+.gallery-section-header .section-label { flex: 1; }
+.gallery-section-header .section-count {
+  font-size: 11px;
+  color: #778;
+  background: rgba(0,0,0,0.04);
+  padding: 2px 8px;
+  border-radius: 8px;
+  box-shadow: inset 1.5px 1.5px 3px #c8cdd4, inset -1.5px -1.5px 3px #ffffff;
+}
+
+.gallery-section-body {
+  overflow: hidden;
+  max-height: 99999px;
+  transition: max-height 0.3s ease;
+}
+.gallery-section-body.collapsed {
+  max-height: 0;
+}
+
+.gallery-section-cards {
+  display: grid;
+  gap: 16px;
+  padding: 8px 8px 12px;
+}
+
+.gallery-card {
+  background: rgba(228, 233, 240, 0.75);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  cursor: default;
+  transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow: 4px 4px 8px #c8cdd4, -4px -4px 8px #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+.gallery-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 12px #c0c8d0, -6px -6px 12px #f8fcff;
+}
