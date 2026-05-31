@@ -53,6 +53,7 @@
   font-size: 12px;
   color: #4a4a5a;
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
 }
 .filter-option:hover { background: rgba(0,0,0,0.04); }
