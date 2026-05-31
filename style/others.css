@@ -1,0 +1,75 @@
+/* ============================================================
+   others.css — 其他模式专用样式（侧边栏）
+   ============================================================ */
+
+/* ===== Container ===== */
+#others-container {
+  display: none;
+  flex: 1;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+/* ===== Sidebar ===== */
+#others-sidebar {
+  width: 160px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.75);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 12px 0;
+}
+
+.others-sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 10px;
+}
+
+.others-menu-item {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #667;
+  cursor: pointer;
+  user-select: none;
+  transition: box-shadow 0.15s, color 0.15s;
+  box-shadow: 2px 2px 4px #c8cdd4, -2px -2px 4px #ffffff;
+}
+.others-menu-item:hover {
+  color: #3a6aaa;
+  box-shadow: 3px 3px 5px #c0c8d0, -3px -3px 5px #ffffff;
+}
+.others-menu-item.active {
+  color: #3a6aaa;
+  font-weight: bold;
+  background: rgba(74, 144, 217, 0.1);
+  box-shadow: inset 2px 2px 4px #c8cdd4, inset -2px -2px 4px #ffffff;
+}
+
+.others-menu-arrow {
+  font-size: 9px;
+  margin-right: 4px;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+.others-menu-item.collapsed .others-menu-arrow {
+  transform: rotate(-90deg);
+}
+
+.others-submenu {
+  overflow: hidden;
+  max-height: 200px;
+  padding-left: 12px;
+  transition: max-height 0.3s ease;
+}
+.others-submenu.collapsed {
+  max-height: 0;
+}
+
+.others-menu-item.sub {
+  font-size: 12px;
+  padding: 8px 12px;
+}

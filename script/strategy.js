@@ -1,8 +1,5 @@
-// ===== Strategy Mode — 策略图鉴卡片展示 =====
+// ===== Strategy Data — 分组定义 + HTML 构建 =====
 (function () {
-  var initialized = false;
-  var grid = null;
-
   var SECTION_ORDER = (function() {
     var sections = [
       { key: '星徽套组', label: '星徽套组', match: function(n) { return n.slice(-4) === '星徽套组'; } },
@@ -55,107 +52,25 @@
     return '其它';
   }
 
-  function renderCards(rarities) {
-    if (!grid) return;
-    var data = window.strategy;
-    if (!data) return;
+  var escHtml = window.__escHtml;
 
+  window.buildStrategyHTML = function() {
+    var data = window.__STRATEGY_DATA;
+    if (!data) return '';
     var names = Object.keys(data);
-
     var groups = {};
     SECTION_ORDER.forEach(function(s) { groups[s.key] = []; });
-    names.forEach(function(name) {
-      if (rarities && rarities.indexOf(data[name]['稀有度']) === -1) return;
-      groups[classify(name)].push(name);
-    });
+    names.forEach(function(n) { groups[classify(n)].push(n); });
 
-    var html = '';
-
-    SECTION_ORDER.forEach(function(sec) {
-      var secNames = groups[sec.key];
-      if (secNames.length === 0) return;
-      secNames.sort(function(a, b) { return a.localeCompare(b, 'zh-CN'); });
-
-      var cardsHtml = '';
-      secNames.forEach(function(name) {
-        var entry = data[name];
-        var desc = entry['介绍'];
-        var rarity = entry['稀有度'];
-        var descHtml = desc ? '<div class="strategy-desc">' + escHtml(desc) + '</div>' : '';
-        cardsHtml += '<div class="gallery-card strategy-card rarity-' + rarity + '">' +
-          '<div class="strategy-name">' + escHtml(name) + '</div>' +
-          descHtml +
-        '</div>';
-      });
-
-      html += '<div class="gallery-section strategy-section">' +
-        '<div class="gallery-section-header strategy-section-header">' +
-          '<span class="section-arrow">&#9660;</span>' +
-          '<span class="section-label">' + escHtml(sec.label) + '</span>' +
-          '<span class="section-count">' + secNames.length + '</span>' +
-        '</div>' +
-        '<div class="gallery-section-body strategy-section-body">' +
-          '<div class="gallery-section-cards strategy-section-cards">' + cardsHtml + '</div>' +
-        '</div>' +
+    return window.__buildGroupedHTML(SECTION_ORDER, groups, function(name) {
+      var entry = data[name];
+      var desc = entry['介绍'];
+      var rarity = entry['稀有度'];
+      var descHtml = desc ? '<div class="strategy-desc">' + escHtml(desc) + '</div>' : '';
+      return '<div class="gallery-card strategy-card rarity-' + rarity + '">' +
+        '<div class="strategy-name">' + escHtml(name) + '</div>' +
+        descHtml +
       '</div>';
-    });
-
-    grid.innerHTML = html;
-  }
-
-  function escHtml(str) {
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
-
-  function getActiveRarities() {
-    var checks = document.querySelectorAll('#strategy-filter-menu .filter-option input');
-    var result = [];
-    checks.forEach(function(cb) { if (cb.checked) result.push(cb.value); });
-    return result;
-  }
-
-  function init() {
-    if (initialized) return;
-    initialized = true;
-
-    grid = document.getElementById('strategy-grid');
-    renderCards(getActiveRarities());
-
-    // Collapse toggle
-    grid.addEventListener('click', function(e) {
-      var header = e.target.closest('.gallery-section-header');
-      if (!header) return;
-      var body = header.nextElementSibling;
-      if (!body || !body.classList.contains('gallery-section-body')) return;
-      header.classList.toggle('collapsed');
-      body.classList.toggle('collapsed');
-    });
-
-    // Filter button toggle
-    var filterBtn = document.getElementById('strategy-filter-btn');
-    var filterMenu = document.getElementById('strategy-filter-menu');
-    filterBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      filterMenu.classList.toggle('open');
-    });
-    filterMenu.addEventListener('click', function(e) {
-      e.stopPropagation();
-    });
-    document.addEventListener('click', function() {
-      filterMenu.classList.remove('open');
-    });
-
-    // Filter checkbox change
-    filterMenu.querySelectorAll('.filter-option input').forEach(function(cb) {
-      cb.addEventListener('change', function() {
-        renderCards(getActiveRarities());
-      });
-    });
-  }
-
-  window.initStrategy = init;
+    }, 'strategy-section');
+  };
 })();

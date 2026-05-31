@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(node -e \"try { require\\('./equipments.js'\\); console.log\\('OK'\\); } catch\\(e\\) { console.log\\('ERROR:', e.message\\); }\")",
-      "Bash(node -e ' *)"
-    ]
-  }
-}

@@ -1,8 +1,5 @@
-// ===== Environment Mode — 环境图鉴卡片展示（分组） =====
+// ===== Environment Data — 分组定义 + HTML 构建 =====
 (function () {
-  var initialized = false;
-  var grid = null;
-
   var SECTION_ORDER = (function() {
     var sections = [
       { key: '特邀专家',  label: '特邀专家',  match: function(n) { return n.indexOf('特邀专家') === 0; } },
@@ -28,76 +25,21 @@
     return '其它';
   }
 
-  function renderCards() {
-    if (!grid) return;
-    var data = window.envornment;
-    if (!data) return;
+  var escHtml = window.__escHtml;
 
+  window.buildEnvironmentHTML = function() {
+    var data = window.__ENVIRONMENT_DATA;
+    if (!data) return '';
     var names = Object.keys(data);
-
-    // Group names
     var groups = {};
     SECTION_ORDER.forEach(function(s) { groups[s.key] = []; });
-    names.forEach(function(name) {
-      groups[classify(name)].push(name);
-    });
+    names.forEach(function(n) { groups[classify(n)].push(n); });
 
-    var html = '';
-
-    SECTION_ORDER.forEach(function(sec) {
-      var secNames = groups[sec.key];
-      if (secNames.length === 0) return;
-      secNames.sort(function(a, b) { return a.localeCompare(b, 'zh-CN'); });
-
-      var cardsHtml = '';
-      secNames.forEach(function(name) {
-        cardsHtml += '<div class="gallery-card blessing-card">' +
-          '<div class="blessing-name">' + escHtml(name) + '</div>' +
-          '<div class="blessing-desc">' + escHtml(data[name]) + '</div>' +
-        '</div>';
-      });
-
-      html += '<div class="gallery-section others-section">' +
-        '<div class="gallery-section-header others-section-header">' +
-          '<span class="section-arrow">&#9660;</span>' +
-          '<span class="section-label">' + escHtml(sec.label) + '</span>' +
-          '<span class="section-count">' + secNames.length + '</span>' +
-        '</div>' +
-        '<div class="gallery-section-body others-section-body">' +
-          '<div class="gallery-section-cards others-section-cards">' + cardsHtml + '</div>' +
-        '</div>' +
+    return window.__buildGroupedHTML(SECTION_ORDER, groups, function(name) {
+      return '<div class="gallery-card blessing-card">' +
+        '<div class="blessing-name">' + escHtml(name) + '</div>' +
+        '<div class="blessing-desc">' + escHtml(data[name]) + '</div>' +
       '</div>';
     });
-
-    grid.innerHTML = html;
-  }
-
-  function escHtml(str) {
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
-
-  function init() {
-    if (initialized) return;
-    initialized = true;
-
-    grid = document.getElementById('others-grid');
-    renderCards();
-
-    // Delegate click on section headers to toggle collapse
-    grid.addEventListener('click', function(e) {
-      var header = e.target.closest('.gallery-section-header');
-      if (!header) return;
-      var body = header.nextElementSibling;
-      if (!body || !body.classList.contains('gallery-section-body')) return;
-      header.classList.toggle('collapsed');
-      body.classList.toggle('collapsed');
-    });
-  }
-
-  // Expose for lazy initialization when switching to this mode
-  window.initEnvorn = init;
+  };
 })();

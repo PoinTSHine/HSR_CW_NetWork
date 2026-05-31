@@ -1,0 +1,31 @@
+/* ============================================================
+   enemy.css — 敌方图鉴专用样式（势力编队）
+   ============================================================ */
+
+.enemy-section-cards {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* Enemy group cards */
+.enemy-group-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+}
+
+.enemy-subtitle {
+  font-size: 12px;
+  font-weight: bold;
+  color: #8a6a4a;
+  padding: 4px 0 2px;
+}
+
+.enemy-member {
+  font-size: 13px;
+  color: #4a4a5a;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(228, 233, 240, 0.6);
+  box-shadow: 1px 1px 3px #c8cdd4, -1px -1px 3px #ffffff;
+}
