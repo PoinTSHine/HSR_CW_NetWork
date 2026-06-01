@@ -826,7 +826,7 @@ body {
 .bond-info-char.expert-char { color: #0d7a60; }
 .bond-info-char.expert-char::before { content: "◆"; color: #20c0a0; font-size: 9px; flex-shrink: 0; }
 
-/* ===== Gallery (环境图鉴 & 策略图鉴共用) ===== */
+/* ===== Gallery ===== */
 .gallery-container {
   display: none;
   flex: 1;
@@ -844,7 +844,7 @@ body {
   flex-direction: column;
   gap: 12px;
 }
-.gallery-grid::-webkit-scrollbar { width: 14px; }
+.gallery-grid::-webkit-scrollbar { width: 8px; }
 .gallery-grid::-webkit-scrollbar-track { background: transparent; }
 .gallery-grid::-webkit-scrollbar-thumb { background: rgba(106, 122, 138, 0.55); border-radius: 7px; min-height: 50px; }
 .gallery-grid::-webkit-scrollbar-thumb:hover { background: rgba(74, 90, 106, 0.7); }

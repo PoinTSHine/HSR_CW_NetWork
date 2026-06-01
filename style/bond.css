@@ -1,0 +1,132 @@
+/* ============================================================
+   bond.css — 羁绊图鉴专用样式
+   ============================================================ */
+
+#others-grid {
+  position: relative;
+}
+
+.bond-section-cards {
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.bond-card {
+  display: block !important;
+  padding: 16px;
+  border-radius: 14px;
+}
+
+.bond-members {
+  margin-bottom: 6px;
+}
+.bond-member-tag {
+  display: inline-block;
+  padding: 1px 6px;
+  margin: 1px 3px 1px 0;
+  background: #e4e9f0;
+  border-radius: 5px;
+  font-size: 11px;
+  color: #556;
+  box-shadow: 1px 1px 2px #c8cdd4, -1px -1px 2px #ffffff;
+}
+
+.bond-card .bond-name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #3a6aaa;
+  margin-bottom: 10px;
+}
+
+.bond-card .bond-intro {
+  font-size: 12px;
+  color: #4a4a5a;
+  line-height: 1.7;
+  white-space: pre-line;
+  margin-bottom: 6px;
+}
+
+.bond-tier-line {
+  font-size: 12px;
+  color: #4a4a5a;
+  line-height: 1.6;
+}
+
+.bond-tier-num {
+  display: inline-block;
+  min-width: 18px;
+  font-weight: bold;
+  color: #3a6aaa;
+}
+
+.bond-supp {
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  font-size: 12px;
+  color: #667;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+.bond-supp-line {
+  display: block;
+  margin: 2px 0;
+}
+.bond-supp-name {
+  display: inline-block;
+  padding: 1px 6px;
+  background: #e4e9f0;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: bold;
+  color: #3a6aaa;
+  margin-right: 4px;
+  box-shadow: 1px 1px 2px #c8cdd4, -1px -1px 2px #ffffff;
+}
+.bond-supp-clickable {
+  cursor: pointer;
+}
+.bond-supp-clickable:hover {
+  color: #2a4a8a;
+  box-shadow: 2px 2px 4px #c0c8d0, -2px -2px 4px #ffffff;
+}
+.bond-supp-clickable.active {
+  box-shadow: inset 2px 2px 4px #c8cdd4, inset -2px -2px 4px #ffffff;
+}
+
+.bond-detail-popup {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  padding: 12px 16px;
+  background: rgba(228, 233, 240, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  min-width: 200px;
+  max-width: 300px;
+}
+.bond-detail-popup.show {
+  display: block;
+}
+.bond-detail-popup .popup-name {
+  font-size: 13px;
+  font-weight: bold;
+  color: #3a6aaa;
+  margin-bottom: 8px;
+}
+.bond-detail-popup .popup-tier {
+  font-size: 12px;
+  color: #4a4a5a;
+  line-height: 1.6;
+  margin: 2px 0;
+}
+.bond-detail-popup .popup-tier-num {
+  font-weight: bold;
+  color: #3a6aaa;
+  margin-right: 4px;
+}
+.bond-supp-item {
+  display: inline;
+  color: #556;
+  line-height: 1.5;
+  margin-right: 8px;
+}

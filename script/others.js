@@ -8,18 +8,21 @@
     'enemy-labels': function() { return window.buildEnemyLabelsHTML ? window.buildEnemyLabelsHTML() : ''; },
     'enemy-groups': function() { return window.buildEnemyGroupsHTML ? window.buildEnemyGroupsHTML() : ''; },
     'environment':  function() { return window.buildEnvironmentHTML  ? window.buildEnvironmentHTML()  : ''; },
-    'strategy':     function() { return window.buildStrategyHTML     ? window.buildStrategyHTML()     : ''; }
+    'strategy':     function() { return window.buildStrategyHTML     ? window.buildStrategyHTML()     : ''; },
+    'bond':         function() { return window.buildBondHTML         ? window.buildBondHTML()         : ''; },
+    'character':    function() { return window.buildCharacterHTML    ? window.buildCharacterHTML()    : ''; }
   };
 
   function renderCards() {
     if (!grid) return;
     var fn = BUILDERS[currentView];
     grid.innerHTML = fn ? fn() : '';
+    if (currentView === 'bond' && window.ensureBondPopup) window.ensureBondPopup();
   }
 
   function switchView(view, collapseEnemy) {
     var subItems = document.querySelectorAll('.others-menu-item.sub');
-    var topItems = document.querySelectorAll('.others-menu-item[data-view="environment"], .others-menu-item[data-view="strategy"]');
+    var topItems = document.querySelectorAll('.others-menu-item[data-view="environment"], .others-menu-item[data-view="strategy"], .others-menu-item[data-view="bond"], .others-menu-item[data-view="character"]');
     var enemyParent = document.querySelector('.others-menu-item[data-view="enemy"]');
     var enemySubmenu = document.querySelector('.others-submenu');
 
@@ -67,7 +70,7 @@
       });
     });
 
-    document.querySelectorAll('.others-menu-item[data-view="environment"], .others-menu-item[data-view="strategy"]').forEach(function(item) {
+    document.querySelectorAll('.others-menu-item[data-view="environment"], .others-menu-item[data-view="strategy"], .others-menu-item[data-view="bond"], .others-menu-item[data-view="character"]').forEach(function(item) {
       item.addEventListener('click', function() {
         switchView(item.getAttribute('data-view'), true);
         item.classList.add('active');

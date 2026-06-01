@@ -12,13 +12,15 @@
   <link rel="stylesheet" href="style/strategy.css">
   <link rel="stylesheet" href="style/others.css">
   <link rel="stylesheet" href="style/enemy.css">
+  <link rel="stylesheet" href="style/bond.css">
+  <link rel="stylesheet" href="style/character.css">
 </head>
 <body>
   <canvas id="star-canvas"></canvas>
   <div id="tab-bar">
     <button class="tab-btn active" data-mode="graph">角色星图</button>
     <button class="tab-btn" data-mode="team">阵容摆放</button>
-    <button class="tab-btn" data-mode="others">其他</button>
+    <button class="tab-btn" data-mode="others">图鉴一览</button>
     <button id="tab-home-btn" title="返回首页">⌂</button>
   </div>
   <div id="main-row">
@@ -116,6 +118,8 @@
         <div class="others-sidebar-menu">
           <div class="others-menu-item active" data-view="environment">投资环境</div>
           <div class="others-menu-item" data-view="strategy">投资策略</div>
+          <div class="others-menu-item" data-view="bond">羁绊图鉴</div>
+          <div class="others-menu-item" data-view="character">角色图鉴</div>
            <div class="others-menu-item collapsed" data-view="enemy">
             <span class="others-menu-arrow">▼</span>敌方图鉴
            </div>
@@ -145,6 +149,8 @@
   <script src="script/enemy.js"></script>
   <script src="script/environment.js"></script>
   <script src="script/strategy.js"></script>
+  <script src="script/bond.js"></script>
+  <script src="script/character.js"></script>
   <script src="script/others.js"></script>
   <script src="script/graph.js"></script>
   <script src="data/equipments_data.js"></script>

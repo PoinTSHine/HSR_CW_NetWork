@@ -1,0 +1,47 @@
+/* ============================================================
+   character.css — 角色图鉴专用样式
+   ============================================================ */
+
+.chr-section-cards {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.chr-card {
+  display: block !important;
+  padding: 14px 16px;
+  border-radius: 14px;
+}
+
+.chr-card .chr-name {
+  margin-bottom: 8px;
+}
+
+.chr-card .chr-name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #2a3a4a;
+}
+
+.chr-roles {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chr-role-line {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.chr-role-name {
+  font-size: 11px;
+  font-weight: bold;
+  color: #3a6aaa;
+}
+
+.chr-role-desc {
+  font-size: 12px;
+  color: #5a4a5a;
+  line-height: 1.6;
+}
