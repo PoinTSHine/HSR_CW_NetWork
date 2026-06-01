@@ -49,30 +49,4 @@
   box-shadow: inset 2px 2px 4px #c8cdd4, inset -2px -2px 4px #ffffff;
 }
 
-.others-menu-arrow {
-  font-size: 9px;
-  margin-right: 4px;
-  transition: transform 0.2s;
-  display: inline-block;
-}
-.others-menu-item.collapsed .others-menu-arrow {
-  transform: rotate(-90deg);
-}
 
-.others-submenu {
-  overflow: hidden;
-  max-height: 200px;
-  padding: 4px 12px 4px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  transition: max-height 0.3s ease;
-}
-.others-submenu.collapsed {
-  max-height: 0;
-}
-
-.others-menu-item.sub {
-  font-size: 12px;
-  padding: 7px 10px;
-}

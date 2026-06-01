@@ -29,18 +29,19 @@
 }
 
 .chr-role-line {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+  margin-bottom: 2px;
 }
 
 .chr-role-name {
+  display: inline;
   font-size: 11px;
   font-weight: bold;
   color: #3a6aaa;
+  margin-right: 4px;
 }
 
 .chr-role-desc {
+  display: inline;
   font-size: 12px;
   color: #5a4a5a;
   line-height: 1.6;

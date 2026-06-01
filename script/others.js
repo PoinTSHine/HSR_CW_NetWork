@@ -20,19 +20,9 @@
     if (currentView === 'bond' && window.ensureBondPopup) window.ensureBondPopup();
   }
 
-  function switchView(view, collapseEnemy) {
-    var subItems = document.querySelectorAll('.others-menu-item.sub');
-    var topItems = document.querySelectorAll('.others-menu-item[data-view="environment"], .others-menu-item[data-view="strategy"], .others-menu-item[data-view="bond"], .others-menu-item[data-view="character"]');
-    var enemyParent = document.querySelector('.others-menu-item[data-view="enemy"]');
-    var enemySubmenu = document.querySelector('.others-submenu');
-
-    subItems.forEach(function(si) { si.classList.remove('active'); });
-    topItems.forEach(function(ti) { ti.classList.remove('active'); });
-    if (collapseEnemy && enemyParent) enemyParent.classList.add('collapsed');
-    if (collapseEnemy && enemySubmenu) enemySubmenu.classList.add('collapsed');
-    if (!collapseEnemy && enemyParent) enemyParent.classList.remove('collapsed');
-    if (!collapseEnemy && enemySubmenu) enemySubmenu.classList.remove('collapsed');
-
+  function switchView(view) {
+    var allItems = document.querySelectorAll('.others-menu-item');
+    allItems.forEach(function(item) { item.classList.remove('active'); });
     currentView = view;
     renderCards();
   }
@@ -53,26 +43,9 @@
       body.classList.toggle('collapsed');
     });
 
-    var enemyParent = document.querySelector('.others-menu-item[data-view="enemy"]');
-    var enemySubmenu = document.querySelector('.others-submenu');
-    if (enemyParent && enemySubmenu) {
-      enemyParent.addEventListener('click', function() {
-        enemyParent.classList.toggle('collapsed');
-        enemySubmenu.classList.toggle('collapsed');
-      });
-    }
-
-    document.querySelectorAll('.others-menu-item.sub').forEach(function(item) {
-      item.addEventListener('click', function(e) {
-        e.stopPropagation();
-        switchView(item.getAttribute('data-view'), false);
-        item.classList.add('active');
-      });
-    });
-
-    document.querySelectorAll('.others-menu-item[data-view="environment"], .others-menu-item[data-view="strategy"], .others-menu-item[data-view="bond"], .others-menu-item[data-view="character"]').forEach(function(item) {
+    document.querySelectorAll('.others-menu-item').forEach(function(item) {
       item.addEventListener('click', function() {
-        switchView(item.getAttribute('data-view'), true);
+        switchView(item.getAttribute('data-view'));
         item.classList.add('active');
       });
     });
