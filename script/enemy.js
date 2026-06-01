@@ -1,14 +1,11 @@
 // ===== Enemy Data — 敌方图鉴分组定义 + HTML 构建 =====
 (function () {
-  var ENEMY_LABEL_ORDER = (function() {
-    var sections = [
-      { key: '强化', label: '强化', match: function(n) { return n.slice(-2) === '强化'; } },
-      { key: '熄火', label: '熄火', match: function(n) { return n.slice(-2) === '熄火'; } },
-    ];
-    sections.sort(function(a, b) { return a.label.localeCompare(b.label, 'zh-CN'); });
-    sections.push({ key: '其它', label: '其它', match: function() { return true; } });
-    return sections;
-  })();
+  var ENEMY_LABEL_ORDER = [
+    { key: '强化', label: '强化', match: function(n) { return n.slice(-2) === '强化'; } },
+    { key: '熄火', label: '熄火', match: function(n) { return n.slice(-2) === '熄火'; } },
+  ];
+  ENEMY_LABEL_ORDER.sort(function(a, b) { return a.label.localeCompare(b.label, 'zh-CN'); });
+  ENEMY_LABEL_ORDER.push({ key: '其它', label: '其它', match: function() { return true; } });
 
   function classifyEnemyLabel(name) {
     for (var i = 0; i < ENEMY_LABEL_ORDER.length; i++) {
@@ -44,21 +41,24 @@
     groupNames.forEach(function(groupName) {
       var group = groups[groupName];
       var membersHtml = '';
-      if (group['首领']) {
-        membersHtml += '<div class="enemy-subtitle">首领</div>' +
-          '<div class="enemy-member">' + escHtml(group['首领']) + '</div>';
+
+      function buildTier(label, list) {
+        if (!list || !list.length) return;
+        membersHtml += '<div class="enemy-subtitle">' + label + '</div>' +
+          '<div class="enemy-tier">';
+        list.forEach(function(m) {
+          membersHtml += '<div class="enemy-member">' + escHtml(m) + '</div>';
+        });
+        membersHtml += '</div>';
       }
-      ['精英敌人', '普通敌人'].forEach(function(tier) {
-        if (group[tier] && group[tier].length) {
-          membersHtml += '<div class="enemy-subtitle">' + tier + '</div>';
-          group[tier].forEach(function(m) {
-            membersHtml += '<div class="enemy-member">' + escHtml(m) + '</div>';
-          });
-        }
-      });
+
+      buildTier('首领', group['首领'] ? [group['首领']] : null);
+      buildTier('精英敌人', group['精英敌人']);
+      buildTier('普通敌人', group['普通敌人']);
+
       cardsHtml += '<div class="gallery-card blessing-card">' +
         '<div class="blessing-name">' + escHtml(groupName) + '</div>' +
-        membersHtml +
+        '<div class="enemy-members">' + membersHtml + '</div>' +
       '</div>';
     });
     return '<div class="gallery-section-cards enemy-section-cards">' + cardsHtml + '</div>';

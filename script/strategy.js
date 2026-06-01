@@ -1,7 +1,6 @@
 // ===== Strategy Data — 分组定义 + HTML 构建 =====
 (function () {
-  var SECTION_ORDER = (function() {
-    var sections = [
+  var SECTION_ORDER = [
       { key: '星徽套组', label: '星徽套组', match: function(n) { return n.slice(-4) === '星徽套组'; } },
       { key: '星徽',     label: '星徽',     match: function(n) { return n.slice(-2) === '星徽'; } },
       { key: '祝福',     label: '祝福',     match: function(n) { return n.slice(-2) === '祝福'; } },
@@ -39,11 +38,9 @@
       { key: '专家招募', label: '专家招募', match: function(n) { return n.indexOf('专家招募') === 0; } },
       { key: '垃圾', label: '垃圾', match: function(n) { return n.slice(-2) === '垃圾'; } },
       { key: '策略三选一', label: '策略三选一', match: function(n) { return n.slice(-2) === '期货' || n.slice(-3) === '期货+' || n.slice(-2) === '投资'; } },
-    ];
-    sections.sort(function(a, b) { return a.label.localeCompare(b.label, 'zh-CN'); });
-    sections.push({ key: '其它', label: '其它', match: function() { return true; } });
-    return sections;
-  })();
+  ];
+  SECTION_ORDER.sort(function(a, b) { return a.label.localeCompare(b.label, 'zh-CN'); });
+  SECTION_ORDER.push({ key: '其它', label: '其它', match: function() { return true; } });
 
   function classify(name) {
     for (var i = 0; i < SECTION_ORDER.length; i++) {

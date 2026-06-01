@@ -4,14 +4,34 @@
   var grid = null;
   var currentView = 'environment';
 
+  var BUILDERS = {
+    'enemy-labels': function() { return window.buildEnemyLabelsHTML ? window.buildEnemyLabelsHTML() : ''; },
+    'enemy-groups': function() { return window.buildEnemyGroupsHTML ? window.buildEnemyGroupsHTML() : ''; },
+    'environment':  function() { return window.buildEnvironmentHTML  ? window.buildEnvironmentHTML()  : ''; },
+    'strategy':     function() { return window.buildStrategyHTML     ? window.buildStrategyHTML()     : ''; }
+  };
+
   function renderCards() {
     if (!grid) return;
-    var html = '';
-    if (currentView === 'enemy-labels') html = window.buildEnemyLabelsHTML ? window.buildEnemyLabelsHTML() : '';
-    else if (currentView === 'enemy-groups') html = window.buildEnemyGroupsHTML ? window.buildEnemyGroupsHTML() : '';
-    else if (currentView === 'environment') html = window.buildEnvironmentHTML ? window.buildEnvironmentHTML() : '';
-    else if (currentView === 'strategy') html = window.buildStrategyHTML ? window.buildStrategyHTML() : '';
-    grid.innerHTML = html;
+    var fn = BUILDERS[currentView];
+    grid.innerHTML = fn ? fn() : '';
+  }
+
+  function switchView(view, collapseEnemy) {
+    var subItems = document.querySelectorAll('.others-menu-item.sub');
+    var topItems = document.querySelectorAll('.others-menu-item[data-view="environment"], .others-menu-item[data-view="strategy"]');
+    var enemyParent = document.querySelector('.others-menu-item[data-view="enemy"]');
+    var enemySubmenu = document.querySelector('.others-submenu');
+
+    subItems.forEach(function(si) { si.classList.remove('active'); });
+    topItems.forEach(function(ti) { ti.classList.remove('active'); });
+    if (collapseEnemy && enemyParent) enemyParent.classList.add('collapsed');
+    if (collapseEnemy && enemySubmenu) enemySubmenu.classList.add('collapsed');
+    if (!collapseEnemy && enemyParent) enemyParent.classList.remove('collapsed');
+    if (!collapseEnemy && enemySubmenu) enemySubmenu.classList.remove('collapsed');
+
+    currentView = view;
+    renderCards();
   }
 
   function init() {
@@ -30,7 +50,6 @@
       body.classList.toggle('collapsed');
     });
 
-    // Sidebar: enemy parent toggle
     var enemyParent = document.querySelector('.others-menu-item[data-view="enemy"]');
     var enemySubmenu = document.querySelector('.others-submenu');
     if (enemyParent && enemySubmenu) {
@@ -40,32 +59,18 @@
       });
     }
 
-    // Sidebar: sub-item clicks
-    var subItems = document.querySelectorAll('.others-menu-item.sub');
-    var topItems = document.querySelectorAll('.others-menu-item[data-view="environment"], .others-menu-item[data-view="strategy"]');
-    subItems.forEach(function(item) {
+    document.querySelectorAll('.others-menu-item.sub').forEach(function(item) {
       item.addEventListener('click', function(e) {
         e.stopPropagation();
-        subItems.forEach(function(si) { si.classList.remove('active'); });
-        topItems.forEach(function(ti) { ti.classList.remove('active'); });
-        if (enemyParent) enemyParent.classList.remove('collapsed');
-        if (enemySubmenu) enemySubmenu.classList.remove('collapsed');
+        switchView(item.getAttribute('data-view'), false);
         item.classList.add('active');
-        currentView = item.getAttribute('data-view');
-        renderCards();
       });
     });
 
-    // Sidebar: top-level non-enemy items
-    topItems.forEach(function(item) {
+    document.querySelectorAll('.others-menu-item[data-view="environment"], .others-menu-item[data-view="strategy"]').forEach(function(item) {
       item.addEventListener('click', function() {
-        subItems.forEach(function(si) { si.classList.remove('active'); });
-        topItems.forEach(function(ti) { ti.classList.remove('active'); });
-        if (enemyParent) enemyParent.classList.add('collapsed');
-        if (enemySubmenu) enemySubmenu.classList.add('collapsed');
+        switchView(item.getAttribute('data-view'), true);
         item.classList.add('active');
-        currentView = item.getAttribute('data-view');
-        renderCards();
       });
     });
   }

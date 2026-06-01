@@ -62,7 +62,10 @@
 .others-submenu {
   overflow: hidden;
   max-height: 200px;
-  padding-left: 12px;
+  padding: 4px 12px 4px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   transition: max-height 0.3s ease;
 }
 .others-submenu.collapsed {
@@ -71,5 +74,5 @@
 
 .others-menu-item.sub {
   font-size: 12px;
-  padding: 8px 12px;
+  padding: 7px 10px;
 }
