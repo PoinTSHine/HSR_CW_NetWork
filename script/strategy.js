@@ -51,23 +51,48 @@
 
   var escHtml = window.__escHtml;
 
-  window.buildStrategyHTML = function() {
+  window.buildStrategyHTML = function(rarities) {
     var data = window.__STRATEGY_DATA;
     if (!data) return '';
     var names = Object.keys(data);
     var groups = {};
-    SECTION_ORDER.forEach(function(s) { groups[s.key] = []; });
-    names.forEach(function(n) { groups[classify(n)].push(n); });
+    var total = {};
+    SECTION_ORDER.forEach(function(s) { groups[s.key] = []; total[s.key] = 0; });
+    names.forEach(function(n) {
+      var key = classify(n);
+      total[key]++;
+      if (rarities && rarities.indexOf(data[n]['稀有度']) === -1) return;
+      groups[key].push(n);
+    });
 
-    return window.__buildGroupedHTML(SECTION_ORDER, groups, function(name) {
-      var entry = data[name];
-      var desc = entry['介绍'];
-      var rarity = entry['稀有度'];
-      var descHtml = desc ? '<div class="strategy-desc">' + escHtml(desc) + '</div>' : '';
-      return '<div class="gallery-card strategy-card rarity-' + rarity + '">' +
-        '<div class="strategy-name">' + escHtml(name) + '</div>' +
-        descHtml +
+    // Build HTML directly to control empty sections
+    var html = '';
+    SECTION_ORDER.forEach(function(sec) {
+      var secNames = groups[sec.key];
+      if (total[sec.key] === 0) return;
+      secNames.sort(function(a, b) { return a.localeCompare(b, 'zh-CN'); });
+      var cardsHtml = '';
+      secNames.forEach(function(name) {
+        var entry = data[name];
+        var desc = entry['介绍'];
+        var rarity = entry['稀有度'];
+        var descHtml = desc ? '<div class="strategy-desc">' + escHtml(desc) + '</div>' : '';
+        cardsHtml += '<div class="gallery-card strategy-card rarity-' + rarity + '">' +
+          '<div class="strategy-name">' + escHtml(name) + '</div>' +
+          descHtml +
+        '</div>';
+      });
+      html += '<div class="gallery-section strategy-section">' +
+        '<div class="gallery-section-header strategy-section-header">' +
+          '<span class="section-arrow">&#9660;</span>' +
+          '<span class="section-label">' + escHtml(sec.label) + '</span>' +
+          '<span class="section-count">' + secNames.length + '</span>' +
+        '</div>' +
+        '<div class="gallery-section-body strategy-section-body">' +
+          '<div class="gallery-section-cards strategy-section-cards">' + cardsHtml + '</div>' +
+        '</div>' +
       '</div>';
-    }, 'strategy-section');
+    });
+    return html;
   };
 })();

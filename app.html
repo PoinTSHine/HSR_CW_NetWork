@@ -118,12 +118,37 @@
         <div class="others-sidebar-menu">
           <div class="others-menu-item active" data-view="environment">投资环境</div>
           <div class="others-menu-item" data-view="strategy">投资策略</div>
+          <div class="filter-panel collapsed" id="strategy-filter">
+            <div class="filter-title">稀有度</div>
+            <label class="filter-opt"><input type="checkbox" value="棱彩" checked> 棱彩</label>
+            <label class="filter-opt"><input type="checkbox" value="金色" checked> 金色</label>
+            <label class="filter-opt"><input type="checkbox" value="银色" checked> 银色</label>
+          </div>
           <div class="others-menu-item" data-view="bond">羁绊图鉴</div>
           <div class="others-menu-item" data-view="character">角色图鉴</div>
+          <div class="filter-panel collapsed" id="character-filter">
+            <div class="cf-section">
+              <div class="cf-header" data-section="bond">羁绊</div>
+              <div class="cf-options" id="cf-bond"></div>
+            </div>
+            <div class="cf-section">
+              <div class="cf-header" data-section="spend">费用</div>
+              <div class="cf-options" id="cf-spend"></div>
+            </div>
+            <div class="cf-section">
+              <div class="cf-header" data-section="position">前后台</div>
+              <div class="cf-options" id="cf-position"></div>
+            </div>
+            <div class="cf-section">
+              <div class="cf-header" data-section="expert">专家顾问</div>
+              <div class="cf-options" id="cf-expert"></div>
+            </div>
+          </div>
           <div class="others-menu-item" data-view="enemy-labels">敌方词缀</div>
           <div class="others-menu-item" data-view="enemy-groups">敌方势力</div>
         </div>
       </div>
+      <button id="others-sidebar-toggle" title="折叠侧边栏">&#9654;</button>
       <div id="others-grid" class="gallery-grid"></div>
     </div>
   </div>

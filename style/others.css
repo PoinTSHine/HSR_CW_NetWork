@@ -1,5 +1,5 @@
 /* ============================================================
-   others.css — 其他模式专用样式（侧边栏）
+   others.css — 图鉴一览侧边栏样式
    ============================================================ */
 
 /* ===== Container ===== */
@@ -8,18 +8,55 @@
   flex: 1;
   flex-direction: row;
   overflow: hidden;
+  min-width: 0;
 }
 
 /* ===== Sidebar ===== */
 #others-sidebar {
   width: 160px;
   flex-shrink: 0;
+  overflow-y: auto;
   background: rgba(255, 255, 255, 0.75);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-right: 1px solid rgba(0, 0, 0, 0.06);
   padding: 12px 0;
+  transition: width 0.25s ease;
 }
+#others-sidebar.collapsed {
+  width: 0;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+}
+#others-sidebar-toggle {
+  z-index: 51;
+  width: 18px;
+  height: 56px;
+  align-self: center;
+  background: #e4e9f0;
+  border: none;
+  border-radius: 4px;
+  color: #667;
+  font-size: 10px;
+  cursor: col-resize;
+  padding: 0;
+  margin-left: 0;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.15s, color 0.15s;
+  box-shadow: 2px 0 4px rgba(200,205,212,0.5), inset -1px 0 2px rgba(255,255,255,0.6);
+}
+#others-sidebar-toggle:hover { color: #2a2a3a; }
+
+#others-sidebar.collapsed + #others-sidebar-toggle {
+  border-radius: 4px;
+}
+
+#others-sidebar::-webkit-scrollbar { width: 4px; }
+#others-sidebar::-webkit-scrollbar-thumb { background: #c0c8d2; border-radius: 2px; }
 
 .others-sidebar-menu {
   display: flex;
@@ -49,4 +86,88 @@
   box-shadow: inset 2px 2px 4px #c8cdd4, inset -2px -2px 4px #ffffff;
 }
 
+/* ===== Filter Panels (shared collapse behavior) ===== */
+.filter-panel {
+  overflow: hidden;
+  padding: 6px 12px 6px 18px;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+.filter-panel.collapsed {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
 
+/* Strategy filter */
+#strategy-filter {
+  max-height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+#strategy-filter .filter-title {
+  font-size: 11px;
+  font-weight: bold;
+  color: #889;
+}
+
+/* Character filter */
+#character-filter {
+  max-height: 2000px;
+}
+#strategy-filter.collapsed,
+#character-filter.collapsed {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* ===== Filter sections (character) ===== */
+.cf-section {
+  margin-bottom: 4px;
+}
+.cf-header {
+  font-size: 11px;
+  font-weight: bold;
+  color: #889;
+  cursor: pointer;
+  padding: 2px 0;
+  user-select: none;
+}
+.cf-header::before {
+  content: "▼";
+  font-size: 8px;
+  margin-right: 4px;
+  display: inline-block;
+  transition: transform 0.2s;
+}
+.cf-header.collapsed::before {
+  transform: rotate(-90deg);
+}
+.cf-header.collapsed {
+  margin-bottom: 0;
+}
+.cf-options {
+  overflow: hidden;
+  max-height: 4000px;
+  padding-left: 4px;
+  transition: max-height 0.2s ease;
+}
+.cf-options.collapsed {
+  max-height: 0;
+}
+
+/* ===== Checkbox options (shared) ===== */
+.filter-opt,
+.cf-opt {
+  font-size: 12px;
+  color: #556;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 0;
+}
+.filter-opt input,
+.cf-opt input { accent-color: #3a6aaa; }
