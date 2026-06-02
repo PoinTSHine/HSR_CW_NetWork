@@ -47,9 +47,15 @@
   align-items: center;
   justify-content: center;
   transition: box-shadow 0.15s, color 0.15s;
-  box-shadow: 2px 0 4px rgba(200,205,212,0.5), inset -1px 0 2px rgba(255,255,255,0.6);
+  box-shadow: 2px 2px 4px #c8cdd4, -2px -2px 4px #ffffff;
 }
-#others-sidebar-toggle:hover { color: #2a2a3a; }
+#others-sidebar-toggle:hover {
+  color: #2a2a3a;
+  box-shadow: 3px 3px 5px #c0c8d0, -3px -3px 5px #ffffff;
+}
+#others-sidebar-toggle:active {
+  box-shadow: inset 2px 2px 4px #c8cdd4, inset -2px -2px 4px #ffffff;
+}
 
 #others-sidebar.collapsed + #others-sidebar-toggle {
   border-radius: 4px;
