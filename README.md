@@ -6,6 +6,7 @@
 
 - **首页**：`index.html` — 欢迎页，提供三种模式的入口
 - **主应用**：`app.html` — 角色星图 & 阵容摆放 & 图鉴一览
+- **更新日志**：`update.html` — 版本更新、赛季扩充、问题修复记录
 
 可通过 `https://pointshine.github.io/HSR_CW_NetWork/` 浏览。
 
@@ -261,6 +262,7 @@ block-beta
 ```bash
 ├── index.html              # 首页（欢迎页）
 ├── app.html                # 主应用页面
+├── update.html             # 更新日志页面
 ├── README.md               # 说明文档
 ├── data/                   # 数据文件
 │   ├── camp_data.js        # 羁绊数据（分类、成员、层级、颜色、内容）
@@ -268,7 +270,8 @@ block-beta
 │   ├── equipments_data.js  # 装备数据（分类列表、激活条件、合成配方）
 │   ├── environment_data.js # 环境祝福数据（名称 → 描述）
 │   ├── strategy_data.js    # 投资策略数据（名称 → {介绍, 稀有度}）
-│   └── enemy_data.js       # 敌人/词缀数据
+│   ├── enemy_data.js       # 敌人/词缀数据
+│   └── update_data.js      # 更新日志数据
 ├── script/                 # 脚本文件
 │   ├── landing.js          # 星空背景 + 首页卡片视差（全站共用）
 │   ├── graph.js            # 关系图逻辑（含模式切换）
@@ -279,6 +282,7 @@ block-beta
 │   ├── bond.js             # 羁绊图鉴（分组定义 + HTML 构建 + 详情弹窗）
 │   ├── character.js        # 角色图鉴（HTML 构建）
 │   ├── others.js           # 图鉴一览侧边栏控制器
+│   ├── update.js           # 更新日志渲染
 │   ├── search.js           # 模糊搜索组件（阵容模式）
 │   ├── game_state.js       # 共享工具（escHtml、buildGroupedHTML、游戏状态）
 │   ├── weapon_ui.js        # 武器信息弹窗、合成弹窗
@@ -298,7 +302,8 @@ block-beta
     ├── environment.css     # 环境卡片样式
     ├── strategy.css        # 策略卡片样式 + 稀有度动画
     ├── bond.css            # 羁绊卡片样式 + 详情弹窗
-    └── character.css       # 角色卡片样式
+    ├── character.css       # 角色卡片样式
+    └── update.css          # 更新日志样式
 ```
 
 ## 数据说明
@@ -337,3 +342,9 @@ block-beta
 
 - **window.__ENEMY_LABEL**：敌方词缀数据，`名称 → 描述`
 - **window.__ENEMY_GROUP**：敌方势力编队数据，`势力名 → {首领, 精英敌人[], 普通敌人[]}`
+
+### update_data.js
+
+- **window.__UPDATE_DATA**：版本更新数据
+- **window.__UPGRADE_DATA**：赛季扩充数据，含 info 和 herf
+- **window.__FIX_DATA**：问题修复数据，版本 → 修复条目列表
