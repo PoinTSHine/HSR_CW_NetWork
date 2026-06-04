@@ -96,40 +96,36 @@ body {
   transform: translateY(-1px);
 }
 .tab-btn.active {
-  background: rgba(255, 255, 255, 0.9);
-  color: #1d1d1f;
+  background: rgba(74, 144, 217, 0.1);
+  color: #3a6aaa;
   font-weight: 600;
   box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.08);
+    inset 3px 3px 6px #c8cdd4,
+    inset -3px -3px 6px #ffffff;
 }
 
 #tab-home-btn {
   margin-left: auto;
-  width: 32px;
-  height: 32px;
-  padding: 0;
+  padding: 8px 16px;
   border: none;
-  border-radius: 50%;
-  background: rgba(240, 160, 48, 0.12);
-  color: #b8700a;
-  font-size: 15px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.85);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: #667;
+  font-size: 13px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: box-shadow 0.2s, color 0.2s, background 0.2s, transform 0.2s;
-  box-shadow:
-    3px 3px 6px #c8cdd4,
-    -3px -3px 6px #ffffff;
+  text-decoration: none;
+  transition: box-shadow 0.15s, color 0.15s;
+  box-shadow: 2px 2px 4px #c8cdd4, -2px -2px 4px #ffffff;
 }
 #tab-home-btn:hover {
-  background: rgba(240, 160, 48, 0.22);
-  color: #8a5000;
-  transform: translateY(-1px);
-  box-shadow:
-    4px 4px 8px #c0c8d0,
-    -4px -4px 8px #ffffff;
+  color: #3a6aaa;
+  box-shadow: 3px 3px 5px #c0c8d0, -3px -3px 5px #ffffff;
 }
 
 /* ===== Sidebar Toggle ===== */
