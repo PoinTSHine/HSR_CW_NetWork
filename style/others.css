@@ -1,5 +1,5 @@
 /* ============================================================
-   others.css — 图鉴一览侧边栏样式
+   others.css — 图鉴一览侧边栏样式（深空主题）
    ============================================================ */
 
 /* ===== Container ===== */
@@ -16,10 +16,10 @@
   width: 160px;
   flex-shrink: 0;
   overflow-y: auto;
-  background: rgba(255, 255, 255, 0.75);
+  background: var(--bg-glass);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  border-right: 1px solid rgba(0, 0, 0, 0.06);
+  border-right: 1px solid var(--border-subtle);
   padding: 12px 0;
   transition: width 0.25s ease;
 }
@@ -34,10 +34,10 @@
   width: 18px;
   height: 56px;
   align-self: center;
-  background: #e4e9f0;
-  border: none;
-  border-radius: 4px;
-  color: #667;
+  background: var(--surface-neumorph);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  color: var(--text-secondary);
   font-size: 10px;
   cursor: col-resize;
   padding: 0;
@@ -46,23 +46,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: box-shadow 0.15s, color 0.15s;
-  box-shadow: 2px 2px 4px #c8cdd4, -2px -2px 4px #ffffff;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
 }
 #others-sidebar-toggle:hover {
-  color: #2a2a3a;
-  box-shadow: 3px 3px 5px #c0c8d0, -3px -3px 5px #ffffff;
-}
-#others-sidebar-toggle:active {
-  box-shadow: inset 2px 2px 4px #c8cdd4, inset -2px -2px 4px #ffffff;
+  color: var(--text-primary);
+  border-color: var(--border-medium);
 }
 
 #others-sidebar.collapsed + #others-sidebar-toggle {
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
 }
 
 #others-sidebar::-webkit-scrollbar { width: 4px; }
-#others-sidebar::-webkit-scrollbar-thumb { background: #c0c8d2; border-radius: 2px; }
+#others-sidebar::-webkit-scrollbar-thumb { background: var(--text-disabled); border-radius: 2px; }
 
 .others-sidebar-menu {
   display: flex;
@@ -73,23 +69,24 @@
 
 .others-menu-item {
   padding: 10px 14px;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   font-size: 13px;
-  color: #667;
+  color: var(--text-secondary);
   cursor: pointer;
   user-select: none;
-  transition: box-shadow 0.15s, color 0.15s;
-  box-shadow: 2px 2px 4px #c8cdd4, -2px -2px 4px #ffffff;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  border: 1px solid transparent;
 }
 .others-menu-item:hover {
-  color: #3a6aaa;
-  box-shadow: 3px 3px 5px #c0c8d0, -3px -3px 5px #ffffff;
+  color: var(--accent-primary);
+  background: var(--accent-primary-bg);
+  border-color: var(--border-subtle);
 }
 .others-menu-item.active {
-  color: #3a6aaa;
+  color: var(--accent-primary);
   font-weight: bold;
-  background: rgba(74, 144, 217, 0.1);
-  box-shadow: inset 2px 2px 4px #c8cdd4, inset -2px -2px 4px #ffffff;
+  background: var(--accent-primary-bg);
+  border-color: var(--accent-primary);
 }
 
 /* ===== Filter Panels (shared collapse behavior) ===== */
@@ -114,7 +111,7 @@
 #strategy-filter .filter-title {
   font-size: 11px;
   font-weight: bold;
-  color: #889;
+  color: var(--text-tertiary);
 }
 
 /* Character filter */
@@ -135,7 +132,7 @@
 .cf-header {
   font-size: 11px;
   font-weight: bold;
-  color: #889;
+  color: var(--text-tertiary);
   cursor: pointer;
   padding: 2px 0;
   user-select: none;
@@ -167,7 +164,7 @@
 .filter-opt,
 .cf-opt {
   font-size: 12px;
-  color: #556;
+  color: var(--text-secondary);
   cursor: pointer;
   user-select: none;
   display: flex;
@@ -176,4 +173,4 @@
   padding: 1px 0;
 }
 .filter-opt input,
-.cf-opt input { accent-color: #3a6aaa; }
+.cf-opt input { accent-color: var(--accent-primary); }

@@ -1,5 +1,5 @@
 /* ============================================================
-   enemy.css — 敌方图鉴专用样式
+   enemy.css — 敌方图鉴专用样式（深空主题）
    ============================================================ */
 
 .enemy-section-cards {
@@ -8,25 +8,25 @@
 
 .enemy-member {
   display: inline-block;
-  background: #e4e9f0;
-  color: #3a6aaa;
+  background: var(--surface-neumorph);
+  border: 1px solid var(--border-subtle);
+  color: var(--accent-primary);
   padding: 2px 8px;
   margin: 2px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   font-size: 11px;
-  box-shadow: 1px 1px 2px #c8cdd4, -1px -1px 2px #ffffff;
 }
 
 .enemy-members {
   font-size: 12px;
-  color: #5a4a5a;
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
 .enemy-subtitle {
   font-size: 11px;
   font-weight: bold;
-  color: #8a6a4a;
+  color: #b08040;
   margin-top: 2px;
 }
 

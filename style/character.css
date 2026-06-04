@@ -1,5 +1,5 @@
 /* ============================================================
-   character.css — 角色图鉴专用样式
+   character.css — 角色图鉴专用样式（深空主题）
    ============================================================ */
 
 .chr-section-cards {
@@ -9,7 +9,7 @@
 .chr-card {
   display: block !important;
   padding: 14px 16px;
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
 }
 
 .chr-card .chr-name {
@@ -19,7 +19,7 @@
 .chr-card .chr-name {
   font-size: 15px;
   font-weight: bold;
-  color: #2a3a4a;
+  color: var(--text-primary);
 }
 
 .chr-roles {
@@ -36,13 +36,13 @@
   display: inline;
   font-size: 11px;
   font-weight: bold;
-  color: #3a6aaa;
+  color: var(--accent-primary);
   margin-right: 4px;
 }
 
 .chr-role-desc {
   display: inline;
   font-size: 12px;
-  color: #5a4a5a;
+  color: var(--text-secondary);
   line-height: 1.6;
 }

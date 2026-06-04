@@ -1,5 +1,5 @@
 /* ============================================================
-   bond.css — 羁绊图鉴专用样式
+   bond.css — 羁绊图鉴专用样式（深空主题）
    ============================================================ */
 
 #others-grid {
@@ -13,7 +13,7 @@
 .bond-card {
   display: block !important;
   padding: 16px;
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
 }
 
 .bond-members {
@@ -23,23 +23,23 @@
   display: inline-block;
   padding: 1px 6px;
   margin: 1px 3px 1px 0;
-  background: #e4e9f0;
-  border-radius: 5px;
+  background: var(--surface-neumorph);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
   font-size: 11px;
-  color: #556;
-  box-shadow: 1px 1px 2px #c8cdd4, -1px -1px 2px #ffffff;
+  color: var(--text-secondary);
 }
 
 .bond-card .bond-name {
   font-size: 15px;
   font-weight: bold;
-  color: #3a6aaa;
+  color: var(--accent-primary);
   margin-bottom: 10px;
 }
 
 .bond-card .bond-intro {
   font-size: 12px;
-  color: #4a4a5a;
+  color: var(--text-secondary);
   line-height: 1.7;
   white-space: pre-line;
   margin-bottom: 6px;
@@ -47,7 +47,7 @@
 
 .bond-tier-line {
   font-size: 12px;
-  color: #4a4a5a;
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
@@ -55,15 +55,15 @@
   display: inline-block;
   min-width: 18px;
   font-weight: bold;
-  color: #3a6aaa;
+  color: var(--accent-primary);
 }
 
 .bond-supp {
   margin-top: 4px;
   padding-top: 8px;
-  border-top: 1px solid rgba(0,0,0,0.06);
+  border-top: 1px solid var(--border-subtle);
   font-size: 12px;
-  color: #667;
+  color: var(--text-tertiary);
   line-height: 1.6;
   white-space: pre-line;
 }
@@ -74,23 +74,23 @@
 .bond-supp-name {
   display: inline-block;
   padding: 1px 6px;
-  background: #e4e9f0;
-  border-radius: 6px;
+  background: var(--surface-neumorph);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
   font-size: 11px;
   font-weight: bold;
-  color: #3a6aaa;
+  color: var(--accent-primary);
   margin-right: 4px;
-  box-shadow: 1px 1px 2px #c8cdd4, -1px -1px 2px #ffffff;
 }
 .bond-supp-clickable {
   cursor: pointer;
 }
 .bond-supp-clickable:hover {
-  color: #2a4a8a;
-  box-shadow: 2px 2px 4px #c0c8d0, -2px -2px 4px #ffffff;
+  color: var(--accent-primary-hover);
+  border-color: var(--accent-primary);
 }
 .bond-supp-clickable.active {
-  box-shadow: inset 2px 2px 4px #c8cdd4, inset -2px -2px 4px #ffffff;
+  background: var(--accent-primary-bg);
 }
 
 .bond-detail-popup {
@@ -98,9 +98,10 @@
   position: absolute;
   z-index: 100;
   padding: 12px 16px;
-  background: rgba(228, 233, 240, 0.95);
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  background: var(--bg-glass-heavy);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-drop-md);
   min-width: 200px;
   max-width: 300px;
 }
@@ -110,23 +111,23 @@
 .bond-detail-popup .popup-name {
   font-size: 13px;
   font-weight: bold;
-  color: #3a6aaa;
+  color: var(--accent-primary);
   margin-bottom: 8px;
 }
 .bond-detail-popup .popup-tier {
   font-size: 12px;
-  color: #4a4a5a;
+  color: var(--text-secondary);
   line-height: 1.6;
   margin: 2px 0;
 }
 .bond-detail-popup .popup-tier-num {
   font-weight: bold;
-  color: #3a6aaa;
+  color: var(--accent-primary);
   margin-right: 4px;
 }
 .bond-supp-item {
   display: inline;
-  color: #556;
+  color: var(--text-secondary);
   line-height: 1.5;
   margin-right: 8px;
 }

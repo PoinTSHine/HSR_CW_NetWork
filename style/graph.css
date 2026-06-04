@@ -19,14 +19,14 @@
 
 /* ===== Nodes ===== */
 .node circle {
-  stroke: #c8d0d8;
+  stroke: var(--border-medium);
   stroke-width: 1.5;
   cursor: pointer;
   transition: opacity 0.25s ease;
 }
 .node text {
   font-size: 11px;
-  fill: #2a2a3a;
+  fill: var(--text-primary);
   pointer-events: none;
   text-anchor: middle;
   dominant-baseline: central;
@@ -35,8 +35,8 @@
 
 /* Solo character — gold, rotating dashed ring, pulsing aura */
 .node.solo circle:first-of-type {
-  fill: #f0a030;
-  stroke: #f0a030;
+  fill: var(--accent-gold);
+  stroke: var(--accent-gold);
   stroke-width: 2.5;
 }
 .node.solo .solo-aura {
@@ -47,12 +47,12 @@
   animation: solo-rotate 2.5s linear infinite;
   filter: drop-shadow(0 0 6px rgba(240, 160, 48, 0.6));
 }
-.node.solo text { fill: #b8700a; }
-.node.expert text { fill: #0d6b58; }
+.node.solo text { fill: var(--accent-gold); }
+.node.expert text { fill: var(--accent-teal); }
 .node.solo text, .node.expert text {
   font-weight: bold;
   paint-order: stroke;
-  stroke: rgba(255, 255, 255, 0.75);
+  stroke: rgba(0, 0, 0, 0.50);
   stroke-width: 3px;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -60,8 +60,8 @@
 
 /* Expert — teal, breathing ring */
 .node.expert circle:first-of-type {
-  fill: #20c0a0;
-  stroke: #20c0a0;
+  fill: var(--accent-teal);
+  stroke: var(--accent-teal);
   stroke-width: 2.5;
 }
 .node.expert .expert-ring {
@@ -71,10 +71,10 @@
 
 /* Normal node */
 .node.normal circle {
-  fill: #4a90d9;
+  fill: var(--accent-primary);
 }
 .node.normal text {
-  fill: #2a4a6a;
+  fill: var(--text-secondary);
 }
 
 /* Dimmed state */
@@ -84,7 +84,7 @@
 
 /* ===== Links ===== */
 line.link {
-  stroke: #8899aa;
+  stroke: var(--text-tertiary);
   stroke-width: 0.8;
   stroke-opacity: 0.4;
   transition: opacity 0.3s ease;
@@ -92,11 +92,11 @@ line.link {
 
 /* Tinted links for special nodes */
 line.link.link-solo {
-  stroke: #f0a030;
+  stroke: var(--accent-gold);
   stroke-opacity: 0.35;
 }
 line.link.link-expert {
-  stroke: #20c0a0;
+  stroke: var(--accent-teal);
   stroke-opacity: 0.35;
 }
 line.link.link-solo.link-expert {
@@ -109,13 +109,11 @@ line.link.link-solo.link-expert {
   position: absolute;
   min-width: 200px;
   max-width: 280px;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(180, 190, 200, 0.6);
-  border-radius: 10px;
+  background: var(--bg-glass-heavy);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
   padding: 14px;
-  box-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  box-shadow: var(--shadow-drop-md);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   z-index: 10;
@@ -133,12 +131,12 @@ line.link.link-solo.link-expert {
   align-items: center;
   margin-bottom: 10px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #d0d4da;
+  border-bottom: 1px solid var(--border-light);
 }
 #detail-name {
   font-size: 15px;
   font-weight: bold;
-  color: #1a1a2e;
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -149,38 +147,38 @@ line.link.link-solo.link-expert {
 .detail-type-badge {
   display: inline-block;
   padding: 2px 8px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   font-size: 10px;
   font-weight: bold;
 }
 .detail-type-badge.solo-badge {
-  background: rgba(240, 160, 48, 0.15);
-  border: 1px solid rgba(240, 160, 48, 0.4);
-  color: #b8700a;
+  background: var(--accent-gold-bg);
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
 }
 .detail-type-badge.expert-badge {
-  background: rgba(32, 192, 160, 0.15);
-  border: 1px solid rgba(32, 192, 160, 0.4);
-  color: #0d7a60;
+  background: var(--accent-teal-bg);
+  border: 1px solid var(--accent-teal);
+  color: var(--accent-teal);
 }
 
 #detail-close {
   background: none;
   border: none;
-  color: #8899aa;
+  color: var(--text-tertiary);
   font-size: 18px;
   cursor: pointer;
   padding: 0 4px;
   line-height: 1;
 }
-#detail-close:hover { color: #f0a030; }
+#detail-close:hover { color: var(--accent-gold); }
 
 /* Detail meta */
 #detail-meta {
   display: block;
   margin-bottom: 10px;
   font-size: 11px;
-  color: #556;
+  color: var(--text-secondary);
 }
 .detail-meta-item {
   display: flex;
@@ -188,7 +186,7 @@ line.link.link-solo.link-expert {
   gap: 4px;
 }
 .detail-meta-item .meta-value {
-  color: #556;
+  color: var(--text-secondary);
   font-weight: bold;
 }
 
@@ -210,32 +208,26 @@ line.link.link-solo.link-expert {
 .detail-bond-tag {
   display: inline-block;
   padding: 3px 10px;
-  background: #e4e9f0;
-  border: none;
-  border-radius: 10px;
+  background: var(--surface-neumorph);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
   font-size: 12px;
-  color: #3a6aaa;
+  color: var(--accent-primary);
   cursor: pointer;
-  transition: box-shadow 0.15s, color 0.15s;
-  box-shadow:
-    2px 2px 4px #c8cdd4,
-    -2px -2px 4px #ffffff;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
 }
 .detail-bond-tag:hover {
-  color: #4a90d9;
-  box-shadow:
-    3px 3px 5px #c0c8d0,
-    -3px -3px 5px #ffffff;
+  color: var(--accent-primary-hover);
+  border-color: var(--accent-primary);
 }
 .detail-bond-tag.solo-bond {
-  background: #ece4d8;
-  color: #b8700a;
+  background: rgba(240, 160, 48, 0.08);
+  color: var(--accent-gold);
+  border-color: rgba(240, 160, 48, 0.2);
 }
 .detail-bond-tag.solo-bond:hover {
-  color: #d49020;
-  box-shadow:
-    3px 3px 5px #c8c0b8,
-    -3px -3px 5px #fff8f0;
+  color: var(--accent-gold-hover);
+  border-color: var(--accent-gold);
 }
 
 /* Character intro sections in detail box */
@@ -243,14 +235,14 @@ line.link.link-solo.link-expert {
 #detail-meta .wip-section:last-child { margin-bottom: 0; }
 #detail-meta .wip-title {
   font-weight: bold;
-  color: #8a6d10;
+  color: var(--accent-gold);
   margin-bottom: 2px;
   font-size: 11px;
-  border-bottom: 1px solid rgba(192,160,80,0.2);
+  border-bottom: 1px solid rgba(240, 160, 48, 0.2);
   padding-bottom: 2px;
 }
 #detail-meta .wip-desc-text {
-  color: #5a4a5a;
+  color: var(--text-secondary);
   font-size: 11px;
   line-height: 1.4;
   padding: 2px 0;

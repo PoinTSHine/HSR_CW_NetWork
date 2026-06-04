@@ -1,5 +1,5 @@
 /* ============================================================
-   strategy.css — 策略图鉴模式专用样式
+   strategy.css — 策略图鉴专用样式（深空主题）
    ============================================================ */
 
 /* ===== Filter Bar ===== */
@@ -11,22 +11,21 @@
 }
 #strategy-filter-btn {
   padding: 6px 14px;
-  border: none;
-  border-radius: 10px;
-  background: rgba(228, 233, 240, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-glass);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  color: #556;
+  color: var(--text-secondary);
   font-size: 12px;
   cursor: pointer;
-  box-shadow: 2px 2px 4px #c8cdd4, -2px -2px 4px #ffffff;
-  transition: box-shadow 0.15s;
+  transition: border-color var(--transition-fast);
 }
 #strategy-filter-btn:hover {
-  box-shadow: 3px 3px 5px #c0c8d0, -3px -3px 5px #ffffff;
+  border-color: var(--accent-primary);
 }
 #strategy-filter-btn:active {
-  box-shadow: inset 2px 2px 4px #c8cdd4, inset -2px -2px 4px #ffffff;
+  background: var(--accent-primary-bg);
 }
 
 .filter-dropdown {
@@ -36,11 +35,12 @@
   left: 0;
   margin-top: 4px;
   padding: 8px 0;
-  background: rgba(228, 233, 240, 0.92);
+  background: var(--bg-glass-heavy);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border-radius: 10px;
-  box-shadow: 3px 3px 8px #c8cdd4, -3px -3px 8px #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-drop-md);
   min-width: 100px;
 }
 .filter-dropdown.open { display: block; }
@@ -51,13 +51,13 @@
   gap: 8px;
   padding: 6px 14px;
   font-size: 12px;
-  color: #4a4a5a;
+  color: var(--text-secondary);
   cursor: pointer;
   -webkit-user-select: none;
   user-select: none;
 }
-.filter-option:hover { background: rgba(0,0,0,0.04); }
-.filter-option input { accent-color: #3a6aaa; }
+.filter-option:hover { background: var(--accent-primary-bg); }
+.filter-option input { accent-color: var(--accent-primary); }
 
 /* ===== Card Grid ===== */
 #strategy-container {
@@ -75,7 +75,7 @@
 /* ===== Strategy Card ===== */
 .strategy-card {
   padding: 12px 14px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   gap: 4px;
 }
 
@@ -83,49 +83,49 @@
 .strategy-card .strategy-name {
   font-size: 13px;
   font-weight: bold;
-  color: #3a6aaa;
+  color: var(--accent-primary);
   line-height: 1.4;
 }
 
 /* ===== Card Description ===== */
 .strategy-card .strategy-desc {
   font-size: 12px;
-  color: #4a4a5a;
+  color: var(--text-secondary);
   line-height: 1.7;
   white-space: pre-line;
 }
 
 /* ===== Rarity Styles ===== */
 @keyframes prismatic-shift {
-  0%  { color: #20c0a0; }
+  0%  { color: var(--accent-teal); }
   25% { color: #a060d0; }
   50% { color: #e04060; }
-  75% { color: #4080d0; }
-  100%{ color: #20c0a0; }
+  75% { color: var(--accent-primary); }
+  100%{ color: var(--accent-teal); }
 }
 @keyframes prismatic-border {
-  0%  { border-left-color: #20c0a0; }
+  0%  { border-left-color: var(--accent-teal); }
   25% { border-left-color: #a060d0; }
   50% { border-left-color: #e04060; }
-  75% { border-left-color: #4080d0; }
-  100%{ border-left-color: #20c0a0; }
+  75% { border-left-color: var(--accent-primary); }
+  100%{ border-left-color: var(--accent-teal); }
 }
 .strategy-card.rarity-棱彩 {
-  border-left: 4px solid #d4a000;
+  border-left: 4px solid var(--accent-gold);
   animation: prismatic-border 3s linear infinite;
 }
 .strategy-card.rarity-棱彩 .strategy-name {
   animation: prismatic-shift 3s linear infinite;
 }
 .strategy-card.rarity-金色 {
-  border-left: 4px solid #d4a000;
+  border-left: 4px solid var(--accent-gold);
 }
 .strategy-card.rarity-金色 .strategy-name {
-  color: #d4a000;
+  color: var(--accent-gold);
 }
 .strategy-card.rarity-银色 {
   border-left: 4px solid #8a8a9a;
 }
 .strategy-card.rarity-银色 .strategy-name {
-  color: #6e6e7e;
+  color: #8a8a9a;
 }

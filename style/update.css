@@ -1,10 +1,13 @@
 /* ============================================================
-   update.css — 更新日志专用样式
+   update.css — 更新日志专用样式（深空主题）
    ============================================================ */
 
 body {
   overflow-y: auto;
   height: auto;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
 }
 
 #update-home-btn {
@@ -13,19 +16,19 @@ body {
   right: 16px;
   z-index: 50;
   padding: 8px 16px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-glass);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   font-size: 13px;
-  color: #667;
+  color: var(--text-secondary);
   text-decoration: none;
-  box-shadow: 2px 2px 4px #c8cdd4, -2px -2px 4px #ffffff;
-  transition: box-shadow 0.15s, color 0.15s;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
 }
 #update-home-btn:hover {
-  color: #3a6aaa;
-  box-shadow: 3px 3px 5px #c0c8d0, -3px -3px 5px #ffffff;
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
 }
 
 #update-container {
@@ -48,35 +51,37 @@ body {
   align-items: center;
   gap: 10px;
   padding: 12px 20px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.75);
+  border-radius: var(--radius-md);
+  background: var(--bg-glass);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
   font-size: 15px;
   font-weight: bold;
-  color: #3a6aaa;
-  box-shadow: 2px 2px 4px #c8cdd4, -2px -2px 4px #ffffff;
+  color: var(--accent-primary);
+  box-shadow: var(--shadow-nm-sm);
 }
 
 /* ===== Version Card ===== */
 .version-card {
   padding: 20px;
-  border-radius: 14px;
-  background: rgba(228,233,240,0.75);
+  border-radius: var(--radius-lg);
+  background: var(--bg-glass);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  box-shadow: 4px 4px 8px #c8cdd4, -4px -4px 8px #ffffff;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-nm-panel);
   margin-bottom: 16px;
 }
 .version-title {
   font-size: 16px;
   font-weight: bold;
-  color: #3a6aaa;
+  color: var(--accent-primary);
   margin-bottom: 12px;
 }
 .version-item {
   font-size: 13px;
-  color: #4a4a5a;
+  color: var(--text-secondary);
   line-height: 1.8;
   padding: 2px 0;
 }
@@ -84,13 +89,14 @@ body {
   display: inline-block;
   margin-top: 8px;
   font-size: 12px;
-  color: #3a6aaa;
+  color: var(--accent-primary);
   text-decoration: none;
   padding: 4px 12px;
-  border-radius: 8px;
-  background: rgba(74,144,217,0.1);
-  box-shadow: 1px 1px 3px #c8cdd4, -1px -1px 3px #ffffff;
+  border-radius: var(--radius-sm);
+  background: var(--accent-primary-bg);
+  border: 1px solid transparent;
+  transition: border-color var(--transition-fast);
 }
 .version-link:hover {
-  box-shadow: 2px 2px 5px #c0c8d0, -2px -2px 5px #ffffff;
+  border-color: var(--accent-primary);
 }

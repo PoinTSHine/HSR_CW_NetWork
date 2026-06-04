@@ -1,5 +1,5 @@
 /* ============================================================
-   environment.css — 环境图鉴模式专用样式
+   environment.css — 环境图鉴专用样式（深空主题）
    ============================================================ */
 
 /* ===== Card Grid ===== */
@@ -10,7 +10,7 @@
 /* ===== Blessing Card ===== */
 .blessing-card {
   padding: 16px;
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   gap: 8px;
 }
 
@@ -18,14 +18,14 @@
 .blessing-card .blessing-name {
   font-size: 14px;
   font-weight: bold;
-  color: #3a6aaa;
+  color: var(--accent-primary);
   line-height: 1.4;
 }
 
 /* ===== Card Description ===== */
 .blessing-card .blessing-desc {
   font-size: 12px;
-  color: #4a4a5a;
+  color: var(--text-secondary);
   line-height: 1.7;
   white-space: pre-line;
 }
