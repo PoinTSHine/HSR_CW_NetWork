@@ -402,41 +402,121 @@ body::before {
   margin-top: 8px;
 }
 
-/* ===== Theme Toggle (Landing) ===== */
-#theme-toggle-landing {
+/* ===== Star Lantern Theme Toggle ===== */
+#lamp-toggle {
   position: fixed;
-  top: 16px;
-  right: 16px;
+  top: -2px;
+  right: 40px;
   z-index: 100;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.06));
+  width: 100px;
+  height: 340px;
+  cursor: pointer;
+  pointer-events: none;
+}
+#lamp-toggle * {
+  pointer-events: auto;
+}
+
+/* Ceiling mount — subtle glowing ring */
+.lamp-mount {
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: var(--bg-glass, rgba(20, 28, 48, 0.78));
+  background: var(--surface-neumorph);
+  border: 1px solid var(--border-medium);
+  box-shadow: 0 0 8px rgba(74, 138, 217, 0.15), inset 0 0 4px rgba(74, 138, 217, 0.1);
+}
+.light .lamp-mount {
+  box-shadow: 0 0 8px rgba(58, 106, 170, 0.1), inset 0 0 4px rgba(58, 106, 170, 0.08);
+}
+
+/* Cord canvas — thin glowing line */
+#lamp-cord-canvas {
+  position: absolute;
+  top: 72px;
+  left: 0;
+  width: 100px;
+  height: 230px;
+  pointer-events: none;
+}
+
+/* Lantern body — glass trapezoid shade */
+.lamp-shade {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 40px;
+  background: var(--bg-glass);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  color: var(--text-secondary, #8a9aba);
-  font-size: 18px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 0.2s, color 0.2s;
-  line-height: 1;
+  clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 0 30px var(--lamp-glow-wide, rgba(74, 138, 217, 0.06)),
+              inset 0 0 20px var(--lamp-glow-inset, rgba(74, 138, 217, 0.05));
+  transition: box-shadow 0.6s ease, border-color 0.6s ease;
 }
-#theme-toggle-landing:hover {
-  border-color: var(--accent-primary, #4a8ad9);
-  color: var(--accent-primary, #4a8ad9);
+.light .lamp-shade {
+  --lamp-glow-wide: rgba(58, 106, 170, 0.05);
+  --lamp-glow-inset: rgba(58, 106, 170, 0.04);
 }
-.light #theme-toggle-landing {
-  background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(0, 0, 0, 0.08);
-  color: #667;
+
+/* Inner glow sphere — inside the top of the trapezoid shade */
+.lamp-bulb {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 20px;
+  border-radius: 50% 50% 45% 45%;
+  background: radial-gradient(circle at 35% 35%, #ffe888, #e8a030);
+  box-shadow: 0 0 24px 8px var(--lamp-glow, rgba(255, 200, 80, 0.35)),
+              0 0 60px 24px var(--lamp-glow-wide, rgba(255, 200, 80, 0.08));
+  transition: background 0.6s ease, box-shadow 0.6s ease;
 }
-.light #theme-toggle-landing:hover {
-  border-color: #3a6aaa;
-  color: #3a6aaa;
+.light .lamp-bulb {
+  background: radial-gradient(circle at 35% 35%, #e8eeff, #7aa8e0);
+  box-shadow: 0 0 24px 8px rgba(120, 180, 255, 0.2),
+              0 0 60px 24px rgba(120, 180, 255, 0.06);
 }
+
+/* Pull ball — small glowing bead */
+.lamp-pullball {
+  position: absolute;
+  z-index: 5;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  border: none;
+  cursor: grab;
+  box-shadow: 0 0 6px 2px rgba(74, 138, 217, 0.3);
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+  pointer-events: auto;
+  visibility: hidden;
+}
+.lamp-pullball:hover {
+  box-shadow: 0 0 12px 4px rgba(74, 138, 217, 0.5);
+  background: #6ab0f0;
+}
+.lamp-pullball:active {
+  cursor: grabbing;
+  box-shadow: 0 0 4px 1px rgba(74, 138, 217, 0.4);
+}
+.light .lamp-pullball {
+  background: var(--accent-primary);
+  box-shadow: 0 0 6px 2px rgba(58, 106, 170, 0.25);
+}
+.light .lamp-pullball:hover {
+  box-shadow: 0 0 12px 4px rgba(58, 106, 170, 0.4);
+}
+
 
 .footer .divider {
   width: 40px;

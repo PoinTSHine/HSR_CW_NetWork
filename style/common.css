@@ -377,31 +377,6 @@ body {
   color: var(--accent-primary);
 }
 
-#theme-toggle-landing {
-  position: fixed;
-  top: 16px;
-  right: 16px;
-  z-index: 100;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-round);
-  background: var(--bg-glass);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  color: var(--text-secondary);
-  font-size: 18px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color var(--transition-fast), color var(--transition-fast);
-  line-height: 1;
-}
-#theme-toggle-landing:hover {
-  border-color: var(--accent-primary);
-  color: var(--accent-primary);
-}
 
 /* ===== Sidebar Toggle ===== */
 #sidebar-toggle {
