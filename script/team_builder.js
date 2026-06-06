@@ -626,7 +626,8 @@
   const compendiumMenu = document.getElementById('compendium-menu');
   const compendiumNavBtn = document.getElementById('compendium-nav-btn');
   const compendiumTitle = document.getElementById('compendium-title');
-  const COMPENDIUM_TITLES = { character: '角色列表', weapon: '装备列表' };
+  const COMPENDIUM_TITLES = { field: '场上羁绊', character: '角色列表', weapon: '装备列表' };
+  const compendiumField = document.getElementById('compendium-field');
 
   function switchCompendiumMode(mode) {
     dismissWeaponInfoPopup();
@@ -635,13 +636,31 @@
     compendiumMenu.querySelectorAll('.menu-item').forEach(item => {
       item.classList.toggle('active', item.getAttribute('data-panel') === mode);
     });
-    if (mode === 'weapon') {
-      compendiumList.style.display = 'none';
+    // Hide all panels first
+    compendiumField.style.display = 'none';
+    compendiumList.style.display = 'none';
+    weaponList.style.display = 'none';
+    // Show the selected panel
+    if (mode === 'field') {
+      compendiumField.style.display = 'flex';
+    } else if (mode === 'weapon') {
       weaponList.style.display = '';
     } else {
       compendiumList.style.display = '';
-      weaponList.style.display = 'none';
     }
+    // Sync the header toggle button state
+    if (compendiumHeaderToggle) {
+      if (mode === 'field') {
+        compendiumHeaderToggle.innerHTML = '◀';
+        compendiumHeaderToggle.title = '切换为角色列表';
+      } else {
+        compendiumHeaderToggle.innerHTML = '▶';
+        compendiumHeaderToggle.title = '切换为场上羁绊';
+      }
+      compendiumHeaderToggle.style.display = '';
+    }
+    // 场上羁绊时隐藏角色/装备切换按钮
+    compendiumNavBtn.style.display = mode === 'field' ? 'none' : '';
   }
 
   compendiumNavBtn.addEventListener('click', (e) => {
@@ -1403,7 +1422,6 @@
     }
     updateLeftPanel();
     renderSlots();
-    if (window.__compendiumMode !== 'character') switchCompendiumMode('character');
     reorderCompendium();
     compendiumList.scrollTop = 0;
   }
@@ -1756,10 +1774,16 @@
     });
   })();
 
+  // ===== Left Panel Toggle =====
+  // No separate left panel anymore — it's merged into compendium panel's "field" mode.
+  // Left panel effective width is always 0 for compendium width calculation.
+  function getLeftPanelEffectiveWidth() {
+    return 0;
+  }
+
   // ===== Compendium Resize =====
   const compendiumPanel = document.getElementById('compendium-panel');
   const compendiumToggleBtn = document.getElementById('compendium-toggle');
-  const leftPanel = document.getElementById('left-panel');
   const MIN_COMPENDIUM_WIDTH = 150;
   let lastCompendiumWidth = 300;
   let compendiumResizing = false;
@@ -1780,7 +1804,7 @@
     const minSlotArea = getSlotAreaMinWidth();
     slotArea.style.minWidth = minSlotArea + 'px';
     const rect = tb.getBoundingClientRect();
-    const maxW = rect.width - leftPanel.offsetWidth - minSlotArea;
+    const maxW = rect.width - getLeftPanelEffectiveWidth() - minSlotArea;
     compendiumPanel.style.maxWidth = Math.max(MIN_COMPENDIUM_WIDTH, maxW) + 'px';
   }
 
@@ -1802,7 +1826,7 @@
     const rawWidth = resizeStartWidth + deltaX;
     const containerRect = document.getElementById('team-builder').getBoundingClientRect();
     const minSlotArea = getSlotAreaMinWidth();
-    const maxAvailable = containerRect.width - leftPanel.offsetWidth - minSlotArea;
+    const maxAvailable = containerRect.width - getLeftPanelEffectiveWidth() - minSlotArea;
 
     // Lock at max: stop processing when already at or past the limit
     if (rawWidth >= maxAvailable) {
@@ -1852,6 +1876,33 @@
       compendiumToggleBtn.title = '展开图鉴';
     }
     window.dispatchEvent(new Event('resize'));
+  });
+
+  // Right-side toggle for compendium panel
+  const compendiumToggleRight = document.getElementById('compendium-toggle-right');
+  compendiumToggleRight.addEventListener('click', () => {
+    if (compendiumPanel.classList.contains('collapsed')) {
+      compendiumPanel.classList.remove('collapsed');
+      compendiumPanel.style.width = lastCompendiumWidth + 'px';
+      compendiumToggleBtn.innerHTML = '&#9654;';
+      compendiumToggleBtn.title = '折叠图鉴';
+    } else {
+      lastCompendiumWidth = parseInt(compendiumPanel.style.width) || parseInt(getComputedStyle(compendiumPanel).width) || 300;
+      compendiumPanel.classList.add('collapsed');
+      compendiumToggleBtn.innerHTML = '&#9664;';
+      compendiumToggleBtn.title = '展开图鉴';
+    }
+    window.dispatchEvent(new Event('resize'));
+  });
+
+  // Header toggle — 在"角色列表"和"场上羁绊"之间切换
+  const compendiumHeaderToggle = document.getElementById('compendium-header-toggle');
+  compendiumHeaderToggle.addEventListener('click', () => {
+    var current = window.__compendiumMode || 'character';
+    var next = current === 'character' ? 'field' : 'character';
+    switchCompendiumMode(next);
+    compendiumHeaderToggle.innerHTML = next === 'field' ? '◀' : '▶';
+    compendiumHeaderToggle.title = next === 'field' ? '切换为角色列表' : '切换为场上羁绊';
   });
 
   // ===== Init =====

@@ -81,19 +81,6 @@
     <div id="position-list" class="sidebar-list"></div>
   </div>
   <div id="team-builder">
-    <div id="left-panel">
-      <h3>场上羁绊</h3>
-      <div id="team-search-box">
-        <div class="team-search-row">
-          <input type="text" id="team-search-input" placeholder="搜索角色、装备或羁绊…" autocomplete="off">
-          <button id="team-search-btn" title="搜索">🔍</button>
-        </div>
-        <span id="team-search-result"></span>
-      </div>
-      <div id="field-bonds"></div>
-      <div id="recycle-zone" title="拖至此处删除">🗑 拖至此处删除</div>
-      <button id="clear-all-btn" title="清空全部">✕ 清空</button>
-    </div>
     <div id="slot-area">
       <div id="slot-grid">
         <div class="slot-row" id="top-row"></div>
@@ -111,9 +98,24 @@
           </div>
         </div>
         <h3 id="compendium-title">角色列表</h3>
+        <button id="compendium-header-toggle" title="切换为场上羁绊">▶</button>
+      </div>
+      <!-- Field mode content (merged from left panel) -->
+      <div id="compendium-field" style="display:none">
+        <div id="team-search-box">
+          <div class="team-search-row">
+            <input type="text" id="team-search-input" placeholder="搜索角色、装备或羁绊…" autocomplete="off">
+            <button id="team-search-btn" title="搜索">🔍</button>
+          </div>
+          <span id="team-search-result"></span>
+        </div>
+        <div id="field-bonds"></div>
       </div>
       <div id="compendium-list"></div>
       <div id="weapon-list"></div>
+      <div id="recycle-zone" title="拖至此处删除">🗑 拖至此处删除</div>
+      <button id="clear-all-btn" title="清空全部">✕ 清空</button>
+      <button id="compendium-toggle-right" title="展开图鉴">&#9664;</button>
 
     </div>
   </div>

@@ -515,17 +515,16 @@ body {
 
 .sidebar-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 6px;
-  padding: 16px 14px 10px;
-  border-bottom: 1px solid var(--border-light);
+  gap: 8px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-subtle);
 }
 .sidebar-header h2 {
   flex: 1;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
-  color: var(--text-primary);
+  color: var(--text-secondary);
 }
 #reset-btn {
   font-size: 11px;
