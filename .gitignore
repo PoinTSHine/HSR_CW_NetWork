@@ -3,3 +3,4 @@
 .reasonix/
 .claude/
 .env
+reasonix.toml

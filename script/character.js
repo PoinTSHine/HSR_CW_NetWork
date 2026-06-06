@@ -125,8 +125,38 @@
         '</div>';
       });
 
-      cardsHtml += '<div class="gallery-card chr-card">' +
-        '<div class="chr-name">' + escHtml(name) + '</div>' +
+      // Spend badge
+      var metaHtml = '';
+      var spendVal = chrSpend[name] || '';
+      if (spendVal) {
+        metaHtml += '<span class="chr-spend spend-' + escHtml(spendVal) + '">' + (spendVal === 'special' ? '特' : spendVal + '费') + '</span>';
+      }
+      // Position indicator
+      var posVal = chrPos[name] || '';
+      if (posVal) {
+        var topCls = posVal === '后台' ? 'hollow' : 'solid';
+        var botCls = posVal === '前台' ? 'hollow' : 'solid';
+        metaHtml += '<span class="chr-pos" title="' + escHtml(posVal) + '">' +
+          '<span class="pb ' + topCls + '"></span><span class="pb ' + botCls + '"></span>' +
+        '</span>';
+      }
+      // Bond tags
+      var bondsList = chrBonds[name] || [];
+      var tagsHtml = '';
+      if (bondsList.length > 0) {
+        tagsHtml = '<div class="chr-tags">';
+        bondsList.forEach(function(b) {
+          tagsHtml += '<span class="chr-bond-tag">' + escHtml(b) + '</span>';
+        });
+        tagsHtml += '</div>';
+      }
+
+      var isExpert = experts.indexOf(name) !== -1;
+      var expertClass = isExpert ? ' expert-card' : '';
+
+      cardsHtml += '<div class="gallery-card chr-card' + expertClass + '">' +
+        '<div class="chr-name"><span class="chr-name-text">' + escHtml(name) + '</span>' + metaHtml + '</div>' +
+        tagsHtml +
         '<div class="chr-roles">' + rolesHtml + '</div>' +
       '</div>';
     });

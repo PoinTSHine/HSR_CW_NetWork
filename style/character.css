@@ -13,13 +13,82 @@
 }
 
 .chr-card .chr-name {
+  margin-bottom: 6px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.chr-name-text {
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+/* Expert advisor: green name */
+.chr-card.expert-card .chr-name-text {
+  color: var(--accent-teal);
+}
+
+/* Spend badge */
+.chr-spend {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 0 6px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: bold;
+  border-width: 1px;
+  border-style: solid;
+  vertical-align: middle;
+}
+
+/* Position indicator */
+.chr-pos {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.chr-pos .pb {
+  width: 8px;
+  height: 4px;
+  border-radius: 1px;
+  display: block;
+}
+
+.chr-pos .pb.solid {
+  background: var(--accent-primary);
+  border: 1px solid var(--accent-primary-active);
+}
+
+.chr-pos .pb.hollow {
+  background: transparent;
+  border: 1.5px solid var(--accent-primary);
+}
+
+/* Bond tags */
+.chr-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
   margin-bottom: 8px;
 }
 
-.chr-card .chr-name {
-  font-size: 15px;
-  font-weight: bold;
-  color: var(--text-primary);
+.chr-bond-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--surface-neumorph);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  color: var(--accent-primary);
+  transition: border-color var(--transition-fast);
+  cursor: default;
+}
+
+.chr-bond-tag:hover {
+  border-color: var(--accent-primary);
 }
 
 .chr-roles {
