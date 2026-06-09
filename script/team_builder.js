@@ -631,6 +631,8 @@
 
   function switchCompendiumMode(mode) {
     dismissWeaponInfoPopup();
+    // 记录切换前的模式，用于从场上羁绊回退
+    var prevMode = window.__compendiumMode;
     window.__compendiumMode = mode;
     compendiumTitle.textContent = COMPENDIUM_TITLES[mode];
     compendiumMenu.querySelectorAll('.menu-item').forEach(item => {
@@ -652,15 +654,22 @@
     if (compendiumHeaderToggle) {
       if (mode === 'field') {
         compendiumHeaderToggle.innerHTML = '◀';
-        compendiumHeaderToggle.title = '切换为角色列表';
+        var prev = window.__prevCompendiumMode || 'character';
+        compendiumHeaderToggle.title = '切换为' + (COMPENDIUM_TITLES[prev] || '列表');
       } else {
         compendiumHeaderToggle.innerHTML = '▶';
         compendiumHeaderToggle.title = '切换为场上羁绊';
       }
       compendiumHeaderToggle.style.display = '';
     }
-    // 场上羁绊时隐藏角色/装备切换按钮
-    compendiumNavBtn.style.display = mode === 'field' ? 'none' : '';
+    // 通过下拉菜单从场上羁绊切换到其他列表时，更新记录
+    if (prevMode === 'field' && mode !== 'field') {
+      window.__prevCompendiumMode = mode;
+    }
+    // 场上羁绊时隐藏角色/装备切换按钮（保持占位防止标题栏高度变化）
+    compendiumNavBtn.style.visibility = mode === 'field' ? 'hidden' : '';
+    compendiumNavBtn.style.pointerEvents = mode === 'field' ? 'none' : '';
+    if (mode === 'field') compendiumMenu.classList.remove('open');
   }
 
   compendiumNavBtn.addEventListener('click', (e) => {
@@ -1895,14 +1904,23 @@
     window.dispatchEvent(new Event('resize'));
   });
 
-  // Header toggle — 在"角色列表"和"场上羁绊"之间切换
+  // Header toggle — 在"角色/装备列表"和"场上羁绊"之间切换
   const compendiumHeaderToggle = document.getElementById('compendium-header-toggle');
   compendiumHeaderToggle.addEventListener('click', () => {
     var current = window.__compendiumMode || 'character';
-    var next = current === 'character' ? 'field' : 'character';
-    switchCompendiumMode(next);
-    compendiumHeaderToggle.innerHTML = next === 'field' ? '◀' : '▶';
-    compendiumHeaderToggle.title = next === 'field' ? '切换为角色列表' : '切换为场上羁绊';
+    if (current === 'field') {
+      // 回到切换前的列表
+      var prev = window.__prevCompendiumMode || 'character';
+      switchCompendiumMode(prev);
+      compendiumHeaderToggle.innerHTML = '▶';
+      compendiumHeaderToggle.title = '切换为场上羁绊';
+    } else {
+      // 记录当前列表，切换到场上羁绊
+      window.__prevCompendiumMode = current;
+      switchCompendiumMode('field');
+      compendiumHeaderToggle.innerHTML = '◀';
+      compendiumHeaderToggle.title = '切换为角色列表';
+    }
   });
 
   // ===== Init =====
