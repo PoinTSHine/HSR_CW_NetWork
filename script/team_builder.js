@@ -626,50 +626,22 @@
   const compendiumMenu = document.getElementById('compendium-menu');
   const compendiumNavBtn = document.getElementById('compendium-nav-btn');
   const compendiumTitle = document.getElementById('compendium-title');
-  const COMPENDIUM_TITLES = { field: '场上羁绊', character: '角色列表', weapon: '装备列表' };
-  const compendiumField = document.getElementById('compendium-field');
+  const COMPENDIUM_TITLES = { character: '角色列表', weapon: '装备列表' };
 
   function switchCompendiumMode(mode) {
     dismissWeaponInfoPopup();
-    // 记录切换前的模式，用于从场上羁绊回退
-    var prevMode = window.__compendiumMode;
     window.__compendiumMode = mode;
     compendiumTitle.textContent = COMPENDIUM_TITLES[mode];
-    compendiumMenu.querySelectorAll('.menu-item').forEach(item => {
+    compendiumMenu.querySelectorAll('.menu-item').forEach(function(item) {
       item.classList.toggle('active', item.getAttribute('data-panel') === mode);
     });
-    // Hide all panels first
-    compendiumField.style.display = 'none';
-    compendiumList.style.display = 'none';
-    weaponList.style.display = 'none';
-    // Show the selected panel
-    if (mode === 'field') {
-      compendiumField.style.display = 'flex';
-    } else if (mode === 'weapon') {
+    if (mode === 'weapon') {
+      compendiumList.style.display = 'none';
       weaponList.style.display = '';
     } else {
       compendiumList.style.display = '';
+      weaponList.style.display = 'none';
     }
-    // Sync the header toggle button state
-    if (compendiumHeaderToggle) {
-      if (mode === 'field') {
-        compendiumHeaderToggle.innerHTML = '◀';
-        var prev = window.__prevCompendiumMode || 'character';
-        compendiumHeaderToggle.title = '切换为' + (COMPENDIUM_TITLES[prev] || '列表');
-      } else {
-        compendiumHeaderToggle.innerHTML = '▶';
-        compendiumHeaderToggle.title = '切换为场上羁绊';
-      }
-      compendiumHeaderToggle.style.display = '';
-    }
-    // 通过下拉菜单从场上羁绊切换到其他列表时，更新记录
-    if (prevMode === 'field' && mode !== 'field') {
-      window.__prevCompendiumMode = mode;
-    }
-    // 场上羁绊时隐藏角色/装备切换按钮（保持占位防止标题栏高度变化）
-    compendiumNavBtn.style.visibility = mode === 'field' ? 'hidden' : '';
-    compendiumNavBtn.style.pointerEvents = mode === 'field' ? 'none' : '';
-    if (mode === 'field') compendiumMenu.classList.remove('open');
   }
 
   compendiumNavBtn.addEventListener('click', (e) => {
@@ -1783,9 +1755,7 @@
     });
   })();
 
-  // ===== Left Panel Toggle =====
-  // No separate left panel anymore — it's merged into compendium panel's "field" mode.
-  // Left panel effective width is always 0 for compendium width calculation.
+  // Left panel was removed — effective width is always 0.
   function getLeftPanelEffectiveWidth() {
     return 0;
   }
@@ -1904,24 +1874,60 @@
     window.dispatchEvent(new Event('resize'));
   });
 
-  // Header toggle — 在"角色/装备列表"和"场上羁绊"之间切换
-  const compendiumHeaderToggle = document.getElementById('compendium-header-toggle');
-  compendiumHeaderToggle.addEventListener('click', () => {
-    var current = window.__compendiumMode || 'character';
-    if (current === 'field') {
-      // 回到切换前的列表
-      var prev = window.__prevCompendiumMode || 'character';
-      switchCompendiumMode(prev);
-      compendiumHeaderToggle.innerHTML = '▶';
-      compendiumHeaderToggle.title = '切换为场上羁绊';
-    } else {
-      // 记录当前列表，切换到场上羁绊
-      window.__prevCompendiumMode = current;
-      switchCompendiumMode('field');
-      compendiumHeaderToggle.innerHTML = '◀';
-      compendiumHeaderToggle.title = '切换为角色列表';
+  // ===== Floating Field-Bonds Window =====
+  var fbw = document.getElementById('field-bonds-window');
+  var fbwBall = document.getElementById('fbw-ball');
+  var fbwClose = document.getElementById('fbw-close');
+  var fbwHeader = fbw ? fbw.querySelector('.fbw-header') : null;
+  if (fbw && fbwBall) {
+    function openFbw() {
+      fbw.classList.remove('fbw-collapsed');
+      fbwBall.style.display = 'none';
     }
-  });
+    function closeFbw() {
+      fbw.classList.add('fbw-collapsed');
+      fbwBall.style.display = 'flex';
+    }
+    fbwBall.addEventListener('click', openFbw);
+    if (fbwClose) fbwClose.addEventListener('click', closeFbw);
+
+    // Dragging
+    if (fbwHeader) {
+      fbwHeader.addEventListener('mousedown', function(e) {
+        if (e.target === fbwClose) return;
+        var rect = fbw.getBoundingClientRect();
+        var offX = e.clientX - rect.left;
+        var offY = e.clientY - rect.top;
+        fbw.style.left = rect.left + 'px';
+        fbw.style.top = rect.top + 'px';
+        fbw.style.transform = 'none';
+        fbw.style.transition = 'none';
+        document.body.style.userSelect = 'none';
+        function onMove(e2) {
+          var newLeft = e2.clientX - offX;
+          var newTop = e2.clientY - offY;
+          // Clamp to viewport
+          var fbwW = fbw.offsetWidth;
+          var fbwH = fbw.offsetHeight;
+          if (newLeft < 0) newLeft = 0;
+          if (newTop < 0) newTop = 0;
+          if (newLeft + fbwW > window.innerWidth) newLeft = window.innerWidth - fbwW;
+          if (newTop + fbwH > window.innerHeight) newTop = window.innerHeight - fbwH;
+          fbw.style.left = newLeft + 'px';
+          fbw.style.top = newTop + 'px';
+        }
+        function onUp() {
+          document.removeEventListener('mousemove', onMove);
+          document.removeEventListener('mouseup', onUp);
+          document.body.style.userSelect = '';
+          fbw.style.transition = '';
+        }
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+        e.preventDefault();
+      });
+    }
+  }
 
   // ===== Init =====
   weaponList.style.display = 'none';

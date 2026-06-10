@@ -98,10 +98,21 @@
           </div>
         </div>
         <h3 id="compendium-title">角色列表</h3>
-        <button id="compendium-header-toggle" title="切换为场上羁绊">▶</button>
       </div>
-      <!-- Field mode content (merged from left panel) -->
-      <div id="compendium-field" style="display:none">
+      <div id="compendium-list"></div>
+      <div id="weapon-list"></div>
+      <div id="recycle-zone" title="拖至此处删除">🗑 拖至此处删除</div>
+      <button id="clear-all-btn" title="清空全部">✕ 清空</button>
+      <button id="compendium-toggle-right" title="展开图鉴">&#9664;</button>
+
+    </div>
+    <!-- Floating field-bonds window (场上羁绊) -->
+    <div id="field-bonds-window" class="fbw-collapsed">
+      <div class="fbw-header">
+        <span class="fbw-title">场上羁绊</span>
+        <button id="fbw-close" title="关闭">✕</button>
+      </div>
+      <div class="fbw-body">
         <div id="team-search-box">
           <div class="team-search-row">
             <input type="text" id="team-search-input" placeholder="搜索角色、装备或羁绊…" autocomplete="off">
@@ -111,13 +122,9 @@
         </div>
         <div id="field-bonds"></div>
       </div>
-      <div id="compendium-list"></div>
-      <div id="weapon-list"></div>
-      <div id="recycle-zone" title="拖至此处删除">🗑 拖至此处删除</div>
-      <button id="clear-all-btn" title="清空全部">✕ 清空</button>
-      <button id="compendium-toggle-right" title="展开图鉴">&#9664;</button>
-
     </div>
+    <button id="fbw-ball" title="场上羁绊">⚡</button>
+  </div>
   </div>
     <div id="others-container">
       <div id="others-sidebar">

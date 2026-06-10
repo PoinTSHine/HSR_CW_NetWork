@@ -13,7 +13,7 @@
 
 /* ===== Sidebar ===== */
 #others-sidebar {
-  width: 160px;
+  width: 120px;
   flex-shrink: 0;
   overflow-y: auto;
   background: var(--bg-glass);
