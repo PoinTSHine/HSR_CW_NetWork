@@ -10,10 +10,6 @@
 
 可通过 `https://pointshine.github.io/HSR_CW_NetWork/` 浏览。
 
-## 功能介绍
-
-[角色星图](docs/graph.md) [图鉴一览](docs/compendium.md) [阵容摆放](docs/team-builder.md)
-
 ## 设计风格
 
 全站统一星空粒子背景（Canvas）+ 毛玻璃面板（backdrop-filter: blur）。新拟物化风格用于按钮、卡片等交互元素。
@@ -29,9 +25,9 @@
 
 顶栏标签（胶囊药丸）在三种模式间切换：
 
-- **角色星图** → [`docs/graph.md`](docs/graph.md)
-- **阵容摆放** → [`docs/team-builder.md`](docs/team-builder.md)
-- **图鉴一览** → [`docs/compendium.md`](docs/compendium.md)
+- [角色星图](docs/graph.md)
+- [阵容摆放](docs/team-builder.md)
+- [图鉴一览](docs/compendium.md)
 
 ### 界面特色
 
@@ -95,3 +91,7 @@
     ├── character.css       # 角色卡片样式（含标签样式）
     └── update.css          # 更新日志样式
 ```
+
+## 数据整理
+
+数据来源于游戏内观察与社区资源，经过整理转换成适合前端使用的格式。数据文件位于 `data/` 目录，点击查看[介绍](docs/data.md)。
