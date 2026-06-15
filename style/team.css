@@ -90,6 +90,9 @@
   background: var(--accent-gold-bg);
   color: var(--accent-gold);
 }
+.search-dropdown::-webkit-scrollbar { width: 4px; }
+.search-dropdown::-webkit-scrollbar-track { background: transparent; }
+.search-dropdown::-webkit-scrollbar-thumb { background: var(--text-disabled); border-radius: 2px; }
 
 /* ===== Field Bonds ===== */
 #field-bonds {
@@ -292,6 +295,14 @@
 .slot-card.star-hunter-card {
   box-shadow: var(--shadow-nm-sm), 0 0 12px rgba(200, 50, 60, 0.3), inset 0 0 12px rgba(200, 50, 60, 0.10), 0 0 0 2px var(--accent-red);
 }
+.card-slot.support-stick {
+  box-shadow: var(--shadow-nm-sm), 0 0 12px rgba(240, 160, 48, 0.25), inset 0 0 12px rgba(240, 160, 48, 0.08), 0 0 0 2px var(--accent-gold);
+}
+/* 应援棒 marker badge */
+.card-badge-support {
+  font-size: 12px;
+  cursor: default;
+}
 .slot-card.tracked-char.star-hunter-card,
 .slot-card.searched-char.star-hunter-card {
   box-shadow: var(--shadow-nm-sm), 0 0 12px rgba(200, 50, 60, 0.3), inset 0 0 12px rgba(200, 50, 60, 0.10), 0 0 0 2px var(--accent-pink);
@@ -397,6 +408,7 @@
   padding: 8px 12px;
   border-bottom: 1px solid var(--border-subtle);
   cursor: move;
+  -webkit-user-select: none;
   user-select: none;
 }
 .fbw-title {
@@ -422,7 +434,6 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   min-height: 0;
 }
 .fbw-body #field-bonds {
@@ -690,7 +701,6 @@
 .card-weapon-slot.filled {
   color: var(--text-secondary);
   cursor: pointer;
-  border-color: transparent;
 }
 .card-weapon-slot.filled:hover {
   border-color: var(--accent-gold);

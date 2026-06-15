@@ -479,6 +479,51 @@
   }
   window.__getMMGTier = getMMGTier;
 
+  // ===== 应援棒 Support Stick =====
+  function updateSupportStick() {
+    // Remove existing markers
+    document.querySelectorAll('.card-slot.support-stick').forEach(function(el) {
+      el.classList.remove('support-stick');
+    });
+    var markerEl = document.querySelector('.card-badge-support');
+    if (markerEl) markerEl.remove();
+
+    // Only when 开拓者·欢愉 is on the field
+    if (window.__slotCards.indexOf('开拓者·欢愉') < 0) return;
+
+    var huanYuChars = campData['欢愉'] || [];
+    var bestIdx = -1;
+    var bestCount = -1;
+    var bestOrder = -1;
+
+    for (var i = 0; i < window.__slotCards.length; i++) {
+      var ch = window.__slotCards[i];
+      if (!ch || huanYuChars.indexOf(ch) < 0) continue;
+      var weapons = window.__slotWeapons[i] || [];
+      var count = weapons.length;
+      var order = window.__slotEquipOrder[i] || 0;
+      if (count > bestCount || (count === bestCount && order > bestOrder)) {
+        bestCount = count;
+        bestOrder = order;
+        bestIdx = i;
+      }
+    }
+
+    if (bestIdx < 0) return;
+
+    var slotEl = document.querySelector('.card-slot[data-slot="' + bestIdx + '"]');
+    if (!slotEl) return;
+    slotEl.classList.add('support-stick');
+
+    var metaRow = slotEl.querySelector('.card-meta');
+    if (!metaRow) return;
+    var badge = document.createElement('span');
+    badge.className = 'card-badge card-badge-support';
+    badge.textContent = '🎉';
+    badge.title = '应援棒 — 欢愉应援王';
+    metaRow.appendChild(badge);
+  }
+
   function refreshWeaponState() {
     dismissWeaponInfoPopup();
     renderSlots();
@@ -853,7 +898,7 @@
         weaponSlot.classList.remove('weapon-drag-over');
         dismissMergePopups();
         const data = JSON.parse(e.dataTransfer.getData('text/plain'));
-        if (data.source === 'weapon') handleWeaponDrop(data.weapon, slotIndex);
+        if (data.source === 'weapon') { handleWeaponDrop(data.weapon, slotIndex); updateSupportStick(); }
       });
       weaponsDiv.appendChild(weaponSlot);
     }
@@ -877,7 +922,7 @@
         hackerSlot.classList.remove('weapon-drag-over');
         dismissMergePopups();
         const data = JSON.parse(e.dataTransfer.getData('text/plain'));
-        if (data.source === 'weapon') handleWeaponDrop(data.weapon, slotIndex);
+        if (data.source === 'weapon') { handleWeaponDrop(data.weapon, slotIndex); updateSupportStick(); }
       });
       weaponsDiv.appendChild(hackerSlot);
     }
@@ -1131,12 +1176,14 @@
       if (firstTop) firstTop.classList.add('energy-glass');
       if (firstBottom) firstBottom.classList.add('energy-glass');
     }
+    updateSupportStick();
   }
 
   // ===== Drop Handler =====
   function handleDrop(data, targetSlot) {
     if (data.source === 'weapon') {
       handleWeaponDrop(data.weapon, targetSlot);
+      updateSupportStick();
       return;
     }
     let char = data.char;
