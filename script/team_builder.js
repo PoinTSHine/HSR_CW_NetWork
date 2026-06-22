@@ -1928,14 +1928,66 @@
   var fbwHeader = fbw ? fbw.querySelector('.fbw-header') : null;
   if (fbw && fbwBall) {
     function openFbw() {
+      // Position window at ball's location
+      var ballRect = fbwBall.getBoundingClientRect();
+      var ballCx = ballRect.left + ballRect.width / 2;
+      var ballCy = ballRect.top + ballRect.height / 2;
       fbw.classList.remove('fbw-collapsed');
       fbwBall.style.display = 'none';
+      void fbw.offsetHeight; // force reflow to get actual size
+      var winW = fbw.offsetWidth;
+      var winH = fbw.offsetHeight;
+      var left = ballCx - winW / 2;
+      var top = ballCy - winH / 2;
+      if (left < 0) left = 0;
+      if (top < 0) top = 0;
+      if (left + winW > window.innerWidth) left = window.innerWidth - winW;
+      if (top + winH > window.innerHeight) top = window.innerHeight - winH;
+      fbw.style.left = left + 'px';
+      fbw.style.top = top + 'px';
+      fbw.style.transform = 'none';
     }
     function closeFbw() {
       fbw.classList.add('fbw-collapsed');
       fbwBall.style.display = 'flex';
     }
-    fbwBall.addEventListener('click', openFbw);
+    // Make ball draggable (click suppressed when dragged)
+    var ballMoved = false;
+    fbwBall.addEventListener('mousedown', function(e) {
+      ballMoved = false;
+      var rect = fbwBall.getBoundingClientRect();
+      var offX = e.clientX - rect.left;
+      var offY = e.clientY - rect.top;
+      fbwBall.style.position = 'fixed';
+      fbwBall.style.left = rect.left + 'px';
+      fbwBall.style.top = rect.top + 'px';
+      fbwBall.style.transition = 'none';
+      document.body.style.userSelect = 'none';
+      function onMove(e2) {
+        ballMoved = true;
+        var newLeft = e2.clientX - offX;
+        var newTop = e2.clientY - offY;
+        var bw = fbwBall.offsetWidth;
+        var bh = fbwBall.offsetHeight;
+        if (newLeft < 0) newLeft = 0;
+        if (newTop < 0) newTop = 0;
+        if (newLeft + bw > window.innerWidth) newLeft = window.innerWidth - bw;
+        if (newTop + bh > window.innerHeight) newTop = window.innerHeight - bh;
+        fbwBall.style.left = newLeft + 'px';
+        fbwBall.style.top = newTop + 'px';
+      }
+      function onUp() {
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+        document.body.style.userSelect = '';
+        fbwBall.style.transition = '';
+      }
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+      e.preventDefault();
+    });
+
+    fbwBall.addEventListener('click', function() { if (!ballMoved) openFbw(); });
     if (fbwClose) fbwClose.addEventListener('click', closeFbw);
 
     // Dragging
